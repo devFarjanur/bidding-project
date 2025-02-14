@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('bid_request_id');
             $table->decimal('proposed_price', 10, 2);
-            $table->text('details');
             $table->timestamps();
 
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
