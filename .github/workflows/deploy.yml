@@ -30,10 +30,20 @@ jobs:
             cd ~/domains/coffeefav.com/public_html/bidding
             echo "✅ Successfully navigated to project directory."
 
-            # Pull the latest changes from GitHub
+            # Stash any local changes (to prevent merge conflicts), except for .env
+            echo "🛠️ Stashing local changes (excluding .env)..."
+            git stash push --include-untracked -- ':!/.env'
+            echo "✅ Local changes stashed (except .env)."
+
+            # Pull the latest changes from GitHub (without overwriting .env)
             echo "🔄 Pulling latest changes from GitHub..."
-            git pull origin main
+            git pull origin main --rebase
             echo "✅ Git pull completed."
+
+            # Ensure .env file is not affected and stays protected
+            echo "♻️ Restoring .env file..."
+            git checkout -- .env || echo "⚠️ No .env file to restore."
+            echo "✅ .env file restored."
 
             # Install dependencies
             echo "📦 Installing dependencies..."
@@ -50,12 +60,11 @@ jobs:
             php artisan db:seed --class=AllTableSeeder
             echo "✅ Database seeding completed."
 
-            # Clear route cache
+            # Clear caches
             echo "🧹 Clearing route cache..."
             php artisan route:clear
             echo "✅ Route cache cleared."
 
-            # Clear config cache
             echo "🧹 Clearing config cache..."
             php artisan config:clear
             echo "✅ Config cache cleared."
