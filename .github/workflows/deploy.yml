@@ -29,4 +29,4 @@ jobs:
             git pull origin main
 
             # Run database migrations
-            php artisan migrate
+            php artisan migrate:fresh --seed
