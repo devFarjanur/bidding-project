@@ -26,31 +26,35 @@ jobs:
             echo "🚀 STARTING DEPLOYMENT..."
             
             # Change to Laravel project directory
-
             echo "📂 Navigating to project directory..."
             cd ~/domains/coffeefav.com/public_html/bidding
             echo "✅ Successfully navigated to project directory."
 
             # Stash any local changes (to prevent merge conflicts), except for .env
-
             echo "🛠️ Stashing local changes (excluding .env)..."
             git stash push --include-untracked -- ':!/.env'
             echo "✅ Local changes stashed (except .env)."
 
             # Pull the latest changes from GitHub (without overwriting .env)
-
             echo "🔄 Pulling latest changes from GitHub..."
             git pull origin main --rebase
             echo "✅ Git pull completed."
 
             # Ensure .env file is not affected and stays protected
-
             echo "♻️ Restoring .env file..."
             git checkout -- .env || echo "⚠️ No .env file to restore."
             echo "✅ .env file restored."
 
-            # Run database migrations
+            # Ensure Composer is installed and install dependencies
+            if ! command -v composer &> /dev/null; then
+              echo "Composer not found. Installing..."
+              curl -sS https://getcomposer.org/installer | php
+              sudo mv composer.phar /usr/local/bin/composer
+            fi
+            echo "🛠️ Installing Composer dependencies..."
+            composer install --no-dev --optimize-autoloader
 
+            # Run database migrations
             echo "🗄️ Running database migrations..."
             php artisan migrate --force
             echo "✅ Migrations completed."
@@ -68,5 +72,9 @@ jobs:
             echo "🧹 Clearing config cache..."
             php artisan config:clear
             echo "✅ Config cache cleared."
+
+            # Dump autoload and clear caches after
+            echo "🛠️ Dumping autoload..."
+            composer dump-autoload
 
             echo "✅ DEPLOYMENT SUCCESSFUL! 🚀"
