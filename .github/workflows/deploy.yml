@@ -8,23 +8,28 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Deploy to Hostinger via SSH
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: 88.223.85.174
-          username: u756062995
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          port: 65002
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
           script: |
+            # Change directory to your project
             cd ~/domains/coffeefav.com/public_html/bidding
-            git pull origin main  # Pull latest changes
-            composer install --no-plugins  # Install PHP dependencies with Composer 2
-            php artisan migrate    # Run database migrations
+
+            # Pull latest changes from Git
+            git pull origin main
+
+            # Run database migrations
+            php artisan migrate
+
+            # Optional: Clear and cache config, routes, and views
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            php artisan storage:link
-            chmod -R 775 storage bootstrap/cache
-            chown -R u756062995:u756062995 .  # Adjust file permissions (replace with correct user)
