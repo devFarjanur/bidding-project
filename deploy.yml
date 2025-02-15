@@ -1,0 +1,22 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Hostinger via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 88.223.85.174   # Replace with your Hostinger SSH IP
+          username: u756062995  # Replace with your Hostinger SSH username
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: 65002
+          script: |
+            cd ~/domains/coffeefav.com/public_html/bidding
+            ./deploy.sh
