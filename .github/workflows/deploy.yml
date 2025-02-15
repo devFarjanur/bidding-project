@@ -29,7 +29,8 @@ jobs:
             git pull origin main
 
             # Run database migrations
-            php artisan migrate:fresh --seed
+            php artisan migrate
+            php artisan db:seed --class=AllTableSeeder
             php artisan route:clear
             php artisan config:clear
 

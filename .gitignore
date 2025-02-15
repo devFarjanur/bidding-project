@@ -21,3 +21,10 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Ignore everything in the public folder
+# /public/*
+
+# Except for index.php and .htaccess
+!/public/index.php
+!/public/.htaccess
