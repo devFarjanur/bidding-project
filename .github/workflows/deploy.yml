@@ -3,7 +3,7 @@ name: Deploy to Hostinger
 on:
   push:
     branches:
-      - main
+      - main  # Change to your main branch name
 
 jobs:
   deploy:
@@ -15,8 +15,16 @@ jobs:
         with:
           host: 88.223.85.174   # Replace with your Hostinger SSH IP
           username: u756062995  # Replace with your Hostinger SSH username
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}  # Correct SSH key reference
           port: 65002
           script: |
             cd ~/domains/coffeefav.com/public_html/bidding
-            ./deploy.sh
+            git pull origin main  # Pull latest changes
+            composer install       # Install PHP dependencies
+            php artisan migrate    # Run database migrations
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan storage:link
+            chmod -R 775 storage bootstrap/cache
+            chown -R www-data:www-data . # Adjust file permissions
