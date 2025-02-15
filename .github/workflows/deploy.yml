@@ -20,7 +20,7 @@ jobs:
           host: ${{ secrets.HOST }}  # Server address (add this secret)
           username: ${{ secrets.USERNAME }}  # SSH username (e.g., root)
           key: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH private key (add this secret)
-          port: 22  # Default SSH port
+          port: 65002  # Default SSH port
           script: |
             # Change to your Laravel project directory
             cd ~/domains/coffeefav.com/public_html/bidding
