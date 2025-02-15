@@ -49,12 +49,6 @@ jobs:
             git checkout -- .env || echo "⚠️ No .env file to restore."
             echo "✅ .env file restored."
 
-            # Install dependencies
-
-            # echo "📦 Installing dependencies..."
-            # composer install --no-interaction --prefer-dist --optimize-autoloader
-            # echo "✅ Dependencies installed."
-
             # Run database migrations
 
             echo "🗄️ Running database migrations..."
