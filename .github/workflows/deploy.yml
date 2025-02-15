@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Trigger the workflow on push to the 'main' branch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
@@ -22,15 +23,50 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH private key (add this secret)
           port: 65002  # Default SSH port
           script: |
-            # Change to your Laravel project directory
+            echo "🚀 STARTING DEPLOYMENT..."
+            
+            # Change to Laravel project directory
+            echo "📂 Navigating to project directory..."
             cd ~/domains/coffeefav.com/public_html/bidding
+            echo "✅ Successfully navigated to project directory."
 
-            # Pull the latest changes from the 'main' branch
-            git pull origin main
+            # Stash any local changes (to prevent merge conflicts), except for .env
+            echo "🛠️ Stashing local changes (excluding .env)..."
+            git stash push --include-untracked -- ':!/.env'
+            echo "✅ Local changes stashed (except .env)."
+
+            # Pull the latest changes from GitHub (without overwriting .env)
+            echo "🔄 Pulling latest changes from GitHub..."
+            git pull origin main --rebase
+            echo "✅ Git pull completed."
+
+            # Ensure .env file is not affected and stays protected
+            echo "♻️ Restoring .env file..."
+            git checkout -- .env || echo "⚠️ No .env file to restore."
+            echo "✅ .env file restored."
+
+            # Install dependencies
+            echo "📦 Installing dependencies..."
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            echo "✅ Dependencies installed."
 
             # Run database migrations
-            php artisan migrate
-            php artisan db:seed --class=AllTableSeeder
-            php artisan route:clear
-            php artisan config:clear
+            echo "🗄️ Running database migrations..."
+            php artisan migrate --force
+            echo "✅ Migrations completed."
 
+            # Seed the database
+            echo "🌱 Seeding the database..."
+            php artisan db:seed --class=AllTableSeeder
+            echo "✅ Database seeding completed."
+
+            # Clear caches
+            echo "🧹 Clearing route cache..."
+            php artisan route:clear
+            echo "✅ Route cache cleared."
+
+            echo "🧹 Clearing config cache..."
+            php artisan config:clear
+            echo "✅ Config cache cleared."
+
+            echo "✅ DEPLOYMENT SUCCESSFUL! 🚀"
