@@ -45,15 +45,6 @@ jobs:
             git checkout -- .env || echo "⚠️ No .env file to restore."
             echo "✅ .env file restored."
 
-            # Ensure Composer is installed and install dependencies
-            if ! command -v composer &> /dev/null; then
-              echo "Composer not found. Installing..."
-              curl -sS https://getcomposer.org/installer | php
-              sudo mv composer.phar /usr/local/bin/composer
-            fi
-            echo "🛠️ Installing Composer dependencies..."
-            composer install --no-dev --optimize-autoloader
-
             # Run database migrations
             echo "🗄️ Running database migrations..."
             php artisan migrate --force
@@ -72,9 +63,5 @@ jobs:
             echo "🧹 Clearing config cache..."
             php artisan config:clear
             echo "✅ Config cache cleared."
-
-            # Dump autoload and clear caches after
-            echo "🛠️ Dumping autoload..."
-            composer dump-autoload
 
             echo "✅ DEPLOYMENT SUCCESSFUL! 🚀"
