@@ -55,6 +55,8 @@ jobs:
             php artisan db:seed --class=AllTableSeeder
             echo "✅ Database seeding completed."
 
+            composer install
+
             # Clear caches
             echo "🧹 Clearing route cache..."
             php artisan route:clear
