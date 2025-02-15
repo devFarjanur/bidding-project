@@ -1,22 +1,32 @@
-name: Deploy to Hostinger
+name: Deploy Laravel Project
 
 on:
   push:
     branches:
-      - main
-
+      - main  # Trigger the workflow on push to the 'main' branch
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
-      - name: Deploy to Hostinger via SSH
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      # Step 2: Set up SSH and deploy
+      - name: Set up SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: 88.223.85.174   # Replace with your Hostinger SSH IP
-          username: u756062995  # Replace with your Hostinger SSH username
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          port: 65002
+          host: ${{ secrets.HOST }}  # Server address (add this secret)
+          username: ${{ secrets.USERNAME }}  # SSH username (e.g., root)
+          key: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH private key (add this secret)
+          port: 65002  # Default SSH port
           script: |
+            # Change to your Laravel project directory
             cd ~/domains/coffeefav.com/public_html/bidding
-            ./deploy.sh
+
+            # Pull the latest changes from the 'main' branch
+            git pull origin main
+
+            # Run database migrations
+            php artisan migrate:fresh --seed
