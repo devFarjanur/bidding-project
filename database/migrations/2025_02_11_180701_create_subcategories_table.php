@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('subcatgories', function (Blueprint $table) {
+        Schema::create('subcategories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('category_id');
@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->integer('status')->default(0);
             $table->timestamps();
 
-            $table->foreign('vendor_id')->references('id')->on('vednors')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
