@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Trigger the workflow on push to the 'main' branch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
@@ -22,14 +23,41 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH private key (add this secret)
           port: 65002  # Default SSH port
           script: |
-            # Change to your Laravel project directory
+            echo "🚀 STARTING DEPLOYMENT..."
+            
+            # Change to Laravel project directory
+            echo "📂 Navigating to project directory..."
             cd ~/domains/coffeefav.com/public_html/bidding
+            echo "✅ Successfully navigated to project directory."
 
-            # Pull the latest changes from the 'main' branch
+            # Pull the latest changes from GitHub
+            echo "🔄 Pulling latest changes from GitHub..."
             git pull origin main
+            echo "✅ Git pull completed."
+
+            # Install dependencies
+            echo "📦 Installing dependencies..."
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            echo "✅ Dependencies installed."
 
             # Run database migrations
-            php artisan migrate:fresh --seed
-            php artisan route:clear
-            php artisan config:clear
+            echo "🗄️ Running database migrations..."
+            php artisan migrate --force
+            echo "✅ Migrations completed."
 
+            # Seed the database
+            echo "🌱 Seeding the database..."
+            php artisan db:seed --class=AllTableSeeder
+            echo "✅ Database seeding completed."
+
+            # Clear route cache
+            echo "🧹 Clearing route cache..."
+            php artisan route:clear
+            echo "✅ Route cache cleared."
+
+            # Clear config cache
+            echo "🧹 Clearing config cache..."
+            php artisan config:clear
+            echo "✅ Config cache cleared."
+
+            echo "✅ DEPLOYMENT SUCCESSFUL! 🚀"
