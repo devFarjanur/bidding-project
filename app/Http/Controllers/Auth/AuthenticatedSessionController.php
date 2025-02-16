@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,12 +25,26 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+            return redirect()->back()->with([
+                'message' => 'Login Invalid. Please try again.',
+                'alert-type' => 'error',
+            ]);
+        }
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $url = match ($request->user()->role) {
+            'admin' => 'admin/dashboard',
+            'user' => '/',
+        };
+
+        return redirect()->intended($url)->with([
+            'message' => 'Login successfully.',
+            'alert-type' => 'info',
+        ]);
     }
+
 
     /**
      * Destroy an authenticated session.
