@@ -1,208 +1,68 @@
-@extends('admin.admin_dashboard')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('admin')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="NobleUI">
+    <meta name="keywords"
+        content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <title>Admin Panel - Forever Cure Pharma</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/core/core.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/fonts/feather-font/css/iconfont.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/demo1/style.css') }}">
+    <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.png') }}" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+</head>
 
-
-    <div class="page-content">
-
-        <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-            <div>
-                <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
-            </div>
-            <div class="d-flex align-items-center flex-wrap text-nowrap">
-                <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
-                    <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i
-                            data-feather="calendar" class="text-primary"></i></span>
-                    <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date"
-                        data-input>
-                </div>
-            </div>
+<body>
+    <div class="main-wrapper">
+        @include('admin.sidebar')
+        <div class="page-wrapper">
+            @include('admin.header')
+            @yield('admin')
+            @include('admin.footer')
         </div>
-
-        <div class="row">
-            <div class="col-12 col-xl-12 stretch-card">
-                <div class="row flex-grow-1">
-                    <!-- Total Types of Products Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Types of Products</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalProducts }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Orders Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Orders</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalOrders }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Pending Orders Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Pending Orders</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalPendingOrders }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Processing Orders Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Processing Orders</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalProcessingOrders }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Shipped Orders Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Shipped Orders</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalShippedOrders }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Delivered Orders Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Delivered Orders</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalDeliveredOrders }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Cancelled Orders Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Cancelled Orders</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalCancelledOrders }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- Total Returned Orders Card -->
-                    <div class="col-md-3 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <h6 class="card-title mb-0">Total Returned Orders</h6>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-md-12 col-xl-5">
-                                        <h3 class="mb-2">{{ $totalReturnedOrders }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-baseline mb-2">
-                            <h6 class="card-title mb-0">Recent Orders</h6>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="pt-0">Order Id</th>
-                                        <th class="pt-0">Customer</th>
-                                        <th class="pt-0">Product</th>
-                                        <th class="pt-0">Amount</th>
-                                        <th class="pt-0">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($recentOrders as $order)
-                                        <tr>
-                                            <td>{{ $order->order_number }}</td>
-                                            <td>{{ $order->user->firstname }} {{ $order->user->lastname }}</td>
-                                            <td>
-                                                @foreach ($order->items as $item)
-                                                    {{ $item->product->name }} (x{{ $item->quantity }})<br>
-                                                @endforeach
-                                            </td>
-                                            <td>{{ $order->items->sum('total_price') }}</td>
-                                            <td>{{ ucfirst($order->status) }}</td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5">No recent orders available.</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
     </div>
 
+    <script src="{{ asset('backend/assets/vendors/core/core.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/vendors/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/template.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/dashboard-dark.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-@endsection
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
+
+</body>
+
+</html>
