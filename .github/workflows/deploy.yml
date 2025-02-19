@@ -8,8 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
-
-
+    
     steps:
       # Step 1: Checkout repository
       - name: Checkout repository
