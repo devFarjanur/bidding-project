@@ -99,6 +99,4 @@ class AdminService
             ->where('status', 3)
             ->get();
     }
-
-
 }
