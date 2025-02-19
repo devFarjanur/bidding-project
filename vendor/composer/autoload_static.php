@@ -609,6 +609,7 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'App\\Http\\Controllers\\CustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomerController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\SslCommerzPaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/SslCommerzPaymentController.php',
+        'App\\Http\\Middleware\\RoleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/RoleMiddleware.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Models\\Bid' => __DIR__ . '/../..' . '/app/Models/Bid.php',

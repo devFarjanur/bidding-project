@@ -31,3 +31,14 @@ if (!function_exists('flash_info')) {
         session()->flash('alert-type', 'info');
     }
 }
+
+if (!function_exists('notify')) {
+    function notify($message, $type = 'info')
+    {
+        return [
+            'message' => $message,
+            'alert-type' => in_array($type, ['success', 'error', 'warning', 'info']) ? $type : 'info',
+        ];
+    }
+}
+

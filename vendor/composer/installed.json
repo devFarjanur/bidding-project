@@ -1617,17 +1617,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.42.1",
-            "version_normalized": "11.42.1.0",
+            "version": "v11.43.0",
+            "version_normalized": "11.43.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8"
+                "reference": "70760d976486310b11d8e487e873077db069e77a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ff392f42f6c55cc774ce75553a11c6b031da67f8",
-                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/70760d976486310b11d8e487e873077db069e77a",
+                "reference": "70760d976486310b11d8e487e873077db069e77a",
                 "shasum": ""
             },
             "require": {
@@ -1783,7 +1783,7 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^7.0).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^7.0)."
             },
-            "time": "2025-02-12T20:58:18+00:00",
+            "time": "2025-02-18T15:37:56+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1916,17 +1916,17 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.20.0",
-            "version_normalized": "1.20.0.0",
+            "version": "v1.21.0",
+            "version_normalized": "1.21.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "53072e8ea22213a7ed168a8a15b96fbb8b82d44b"
+                "reference": "531fa0871fbde719c51b12afa3a443b8f4e4b425"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/53072e8ea22213a7ed168a8a15b96fbb8b82d44b",
-                "reference": "53072e8ea22213a7ed168a8a15b96fbb8b82d44b",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/531fa0871fbde719c51b12afa3a443b8f4e4b425",
+                "reference": "531fa0871fbde719c51b12afa3a443b8f4e4b425",
                 "shasum": ""
             },
             "require": {
@@ -1934,18 +1934,18 @@
                 "ext-mbstring": "*",
                 "ext-tokenizer": "*",
                 "ext-xml": "*",
-                "php": "^8.1.0"
+                "php": "^8.2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.66.0",
-                "illuminate/view": "^10.48.25",
-                "larastan/larastan": "^2.9.12",
-                "laravel-zero/framework": "^10.48.25",
+                "friendsofphp/php-cs-fixer": "^3.68.5",
+                "illuminate/view": "^11.42.0",
+                "larastan/larastan": "^3.0.4",
+                "laravel-zero/framework": "^11.36.1",
                 "mockery/mockery": "^1.6.12",
-                "nunomaduro/termwind": "^1.17.0",
+                "nunomaduro/termwind": "^2.3",
                 "pestphp/pest": "^2.36.0"
             },
-            "time": "2025-01-14T16:20:53+00:00",
+            "time": "2025-02-18T03:18:57+00:00",
             "bin": [
                 "builds/pint"
             ],
@@ -4387,17 +4387,17 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.0.1",
-            "version_normalized": "2.0.1.0",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "72e51f7c32c5aef7c8b462195b8c599b11199893"
+                "reference": "51087f87dcce2663e1fed4dfd4e56eccd580297e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/72e51f7c32c5aef7c8b462195b8c599b11199893",
-                "reference": "72e51f7c32c5aef7c8b462195b8c599b11199893",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/51087f87dcce2663e1fed4dfd4e56eccd580297e",
+                "reference": "51087f87dcce2663e1fed4dfd4e56eccd580297e",
                 "shasum": ""
             },
             "require": {
@@ -4414,7 +4414,7 @@
                 "phpunit/phpunit": "^9.6",
                 "symfony/process": "^5.2"
             },
-            "time": "2025-02-13T12:25:43+00:00",
+            "time": "2025-02-17T20:25:51+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -4431,7 +4431,7 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.0.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.0.2"
             },
             "install-path": "../phpstan/phpdoc-parser"
         },

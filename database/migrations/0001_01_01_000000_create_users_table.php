@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('profile_image')->nullable();
             $table->enum('role', ['customer', 'vendor', 'admin'])->default('customer');
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

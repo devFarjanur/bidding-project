@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('business_name');
             $table->text('description')->nullable();
             $table->string('location')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

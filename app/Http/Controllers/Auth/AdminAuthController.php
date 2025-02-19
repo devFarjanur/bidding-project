@@ -7,33 +7,11 @@ use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class AdminAuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            $user = Auth::user();  // Get the authenticated user
-
-            if ($user) {  // Check if user is authenticated
-                if ($user->isAdmin() && request()->routeIs('vendor.*', 'customer.*')) {
-                    flash_error('Unauthorized access');
-                    abort(403, 'Unauthorized Access');
-                }
-                if ($user->isVendor() && request()->routeIs('admin.*', 'customer.*')) {
-                    flash_error('Unauthorized access');
-                    abort(403, 'Unauthorized Access');
-                }
-                if ($user->isCustomer() && request()->routeIs('admin.*', 'vendor.*')) {
-                    flash_error('Unauthorized access');
-                    abort(403, 'Unauthorized Access');
-                }
-            }
-
-            return $next($request);
-        });
-    }
-
     public function adminLogin()
     {
         return view('admin.admin_login');
@@ -41,99 +19,133 @@ class AdminAuthController extends Controller
 
     public function adminLoginPost(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-            if ($user) { // Check if the user is authenticated
-                flash_success('Login successful');
-
-                if ($user->isAdmin()) {
-                    return redirect()->route('admin.dashboard');
-                } elseif ($user->isVendor()) {
-                    return redirect()->route('vendor.dashboard');
-                } elseif ($user->isCustomer()) {
-                    return redirect()->route('customer.dashboard');
+        try {
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                $user = Auth::user();
+                if ($user && $user->isAdmin()) {
+                    return redirect()->route('admin.dashboard')->with(notify('Login successfully', 'success'));
+                } else {
+                    Auth::logout();
+                    session()->flash('error', 'You are not authorized to access this area');
+                    return redirect()->route('admin.login');
                 }
             }
+            session()->flash('error', 'Invalid credentials');
+            return redirect()->back();
+        } catch (Exception $e) {
+            Log::error('Admin login error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred, please try again later.');
+            return back()->withInput();
         }
-
-        flash_error('Invalid credentials');
-        return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
 
     public function adminLogout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        flash_success('Logout successful');
-        return redirect()->route('admin.login');
-    }
-
-    public function AdminDashboard()
-    {
-        return view('admin.admin_dashboard');
-    }
-
-    public function AdminProfile()
-    {
-        $id = Auth::user()->id;
-        $profileData = User::find($id);
-        return view('admin.admin_profile_view', compact('profileData'));
-    }
-
-    public function AdminProfileStore(Request $request)
-    {
-        $id = Auth::user()->id;
-        $data = User::find($id);
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->phone = $request->phone;
-
-        if ($request->file('photo')) {
-            $file = $request->file('photo');
-            @unlink(public_path('upload/admin_images/' . $data->photo));
-            $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('upload/admin_images'), $filename);
-            $data->photo = $filename;
+        try {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            session()->flash('success', 'Logout successful');
+            return redirect()->route('admin.login');
+        } catch (Exception $e) {
+            Log::error('Admin logout error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred, please try again later.');
+            return redirect()->route('admin.dashboard');
         }
-
-        $data->save();
-        flash_success('Admin Profile Updated Successfully');
-        return redirect()->back();
     }
 
-    public function AdminChangePassword()
+    public function adminDashboard()
     {
-        $id = Auth::user()->id;
-        $profileData = User::find($id);
-        return view('admin.admin_change_password', compact('profileData'));
+        try {
+            return view('admin.admin_dashboard');
+        } catch (Exception $e) {
+            Log::error('Admin dashboard error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while loading the dashboard.');
+            return redirect()->route('admin.login');
+        }
     }
 
-    public function AdminUpdatePassword(Request $request)
+    public function adminProfile()
     {
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|confirmed',
-        ]);
+        try {
+            $id = Auth::user()->id;
+            $profileData = User::find($id);
+            return view('admin.admin_profile_view', compact('profileData'));
+        } catch (Exception $e) {
+            Log::error('Admin profile error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while loading your profile.');
+            return redirect()->route('admin.dashboard');
+        }
+    }
 
-        if (!Hash::check($request->old_password, auth()->user()->password)) {
-            flash_error('Old Password does not match');
+    public function adminProfileStore(Request $request)
+    {
+        try {
+            $id = Auth::user()->id;
+            $data = User::find($id);
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->phone = $request->phone;
+
+            if ($request->file('photo')) {
+                $file = $request->file('photo');
+                @unlink(public_path('upload/admin_images/' . $data->photo));
+                $filename = date('YmdHi') . $file->getClientOriginalName();
+                $file->move(public_path('upload/admin_images'), $filename);
+                $data->photo = $filename;
+            }
+
+            $data->save();
+            session()->flash('success', 'Admin Profile Updated Successfully');
+            return redirect()->back();
+        } catch (Exception $e) {
+            Log::error('Admin profile update error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while updating your profile.');
             return back();
         }
+    }
 
-        User::whereId(auth()->user()->id)->update([
-            'password' => Hash::make($request->new_password),
-        ]);
+    public function adminChangePassword()
+    {
+        try {
+            $id = Auth::user()->id;
+            $profileData = User::find($id);
+            return view('admin.admin_change_password', compact('profileData'));
+        } catch (Exception $e) {
+            Log::error('Admin change password error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while loading the change password page.');
+            return redirect()->route('admin.dashboard');
+        }
+    }
 
-        flash_success('Password Changed Successfully');
-        return back();
+    public function adminUpdatePassword(Request $request)
+    {
+        try {
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required|confirmed',
+            ]);
+
+            if (!Hash::check($request->old_password, auth()->user()->password)) {
+                session()->flash('error', 'Old Password does not match');
+                return back();
+            }
+
+            User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+
+            session()->flash('success', 'Password Changed Successfully');
+            return back();
+        } catch (Exception $e) {
+            Log::error('Admin password update error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred while changing the password.');
+            return back();
+        }
     }
 }

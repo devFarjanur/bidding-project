@@ -21,6 +21,7 @@ return array(
     'App\\Http\\Controllers\\CustomerController' => $baseDir . '/app/Http/Controllers/CustomerController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\SslCommerzPaymentController' => $baseDir . '/app/Http/Controllers/SslCommerzPaymentController.php',
+    'App\\Http\\Middleware\\RoleMiddleware' => $baseDir . '/app/Http/Middleware/RoleMiddleware.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
     'App\\Models\\Bid' => $baseDir . '/app/Models/Bid.php',

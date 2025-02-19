@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/demo1/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.png') }}" />
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Toastr CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
@@ -42,7 +45,7 @@
 
     <script>
         @if (Session::has('message'))
-            var type = "{{ Session::get('alert-type', 'info') }}"
+            var type = "{{ Session::get('alert-type', 'info') }}";
             switch (type) {
                 case 'info':
                     toastr.info(" {{ Session::get('message') }} ");
