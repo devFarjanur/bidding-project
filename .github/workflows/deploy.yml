@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main  # Trigger the workflow on push to the 'main' branch
-
 jobs:
   deploy:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
@@ -48,7 +47,8 @@ jobs:
 
             # Run database migrations
             echo "🗄️ Running database migrations..."
-            php artisan migrate:fresh
+            # php artisan migrate:fresh
+            php artisan migrate --force
             echo "✅ Migrations completed."
 
             # Seed the database
