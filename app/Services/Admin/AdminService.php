@@ -3,6 +3,7 @@
 namespace App\Services\Admin;
 
 use App\Models\Bidrequest;
+use App\Models\Category;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Client\Request;
@@ -113,6 +114,46 @@ class AdminService
         return $vendorReject;
     }
 
+    public function categoryList()
+    {
+        return Category::get();
+    }
+
+    public function findCategory($id)
+    {
+        return Category::findOrFail($id);
+    }
+
+    public function activeCategory()
+    {
+        return Category::where('status', 1)
+            ->get();
+    }
+
+    public function deactiveCategory()
+    {
+        return Category::where('status', 2)
+            ->get();
+    }
+
+    public function updateToActiveCategory(Request $request, $id)
+    {
+        $findCategory = $this->findCategory($id);
+        $activeCategory = Category::update([
+            'status' => 1
+        ]);
+        return $activeCategory;
+    }
+
+    public function updateToDeactiveCategory(Request $request, $id)
+    {
+        $findCategory = $this->findCategory($id);
+        $deactiveCategory = Category::update([
+            'status' => 2
+        ]);
+        return $deactiveCategory;
+    }
+
     public function pendingBid()
     {
         return BidRequest::with(['vendor', 'bidRequest'])
@@ -133,5 +174,7 @@ class AdminService
             ->where('status', 3)
             ->get();
     }
+
+
 
 }

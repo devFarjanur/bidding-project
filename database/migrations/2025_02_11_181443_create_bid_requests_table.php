@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->text('description');
             $table->decimal('target_price', 10, 2)->nullable();
             $table->string('image')->nullable();
-            $table->integer('status')->default(1);
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
