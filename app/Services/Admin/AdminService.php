@@ -90,7 +90,7 @@ class AdminService
     public function updateToActiveVendor(Request $request, $id)
     {
         $vendor = $this->findVendor($id);
-        $vendorActive = Vendor::update([
+        $vendorActive = $vendor->update([
             'status' => 1
         ]);
         return $vendorActive;
@@ -99,7 +99,7 @@ class AdminService
     public function updateToDeactiveVendor(Request $request, $id)
     {
         $vendor = $this->findVendor($id);
-        $vendorDeactive = Vendor::update([
+        $vendorDeactive = $vendor->update([
             'status' => 2
         ]);
         return $vendorDeactive;
@@ -108,7 +108,7 @@ class AdminService
     public function updateToRejectVendor(Request $request, $id)
     {
         $vendor = $this->findVendor($id);
-        $vendorReject = Vendor::update([
+        $vendorReject = $vendor->update([
             'status' => 3
         ]);
         return $vendorReject;
@@ -139,7 +139,7 @@ class AdminService
     public function updateToActiveCategory(Request $request, $id)
     {
         $findCategory = $this->findCategory($id);
-        $activeCategory = Category::update([
+        $activeCategory = $findCategory->update([
             'status' => 1
         ]);
         return $activeCategory;
@@ -148,7 +148,7 @@ class AdminService
     public function updateToDeactiveCategory(Request $request, $id)
     {
         $findCategory = $this->findCategory($id);
-        $deactiveCategory = Category::update([
+        $deactiveCategory = $findCategory->update([
             'status' => 2
         ]);
         return $deactiveCategory;
