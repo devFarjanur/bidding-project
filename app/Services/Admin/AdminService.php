@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin;
 
+use App\Models\Bidrequest;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Client\Request;
@@ -39,37 +40,22 @@ class AdminService
 
     public function updateToActiveCustomer(Request $request, $id)
     {
-        try {
-            $customer = $this->findCustomer($id);
-            $customer->update(['status' => 1]);
-
-            return redirect()->back()->with('success', 'Customer activated successfully.');
-        } catch (Exception $e) {
-            Log::error('An error occurred while updating customer status', [
-                'customer_id' => $id,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
-
-            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
-        }
+        $customer = $this->findCustomer($id);
+        $updateActive = $customer->update(['status' => 1]);
+        return $updateActive;
     }
 
     public function updateToDeactiveCustomer(Request $request, $id)
     {
-        try {
-            $customer = $this->findCustomer($id);
-            $customer->update(['status' => 2]);
+        $customer = $this->findCustomer($id);
+        $updateDeactive = $customer->update(['status' => 2]);
+        return $updateDeactive;
+    }
 
-            return redirect()->back()->with('success', 'Customer deactivated successfully.');
-        } catch (Exception $e) {
-            Log::error('An error occurred while updating customer status', [
-                'customer_id' => $id,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
-            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
-        }
+    public function findVendor($id)
+    {
+        return Vendor::with('user')
+            ->findOrFail($id);
     }
 
     public function pendingVendor()
@@ -99,4 +85,39 @@ class AdminService
             ->where('status', 3)
             ->get();
     }
+
+    public function updateToActiveVendor(Request $request, $id)
+    {
+        $vendor = $this->findVendor($id);
+        $vendorActive = Vendor::update([
+            'status' => 1
+        ]);
+        return $vendorActive;
+    }
+
+    public function updateToDeactiveVendor(Request $request, $id)
+    {
+        $vendor = $this->findVendor($id);
+        $vendorDeactive = Vendor::update([
+            'status' => 2
+        ]);
+        return $vendorDeactive;
+    }
+
+    public function updateToRejectVendor(Request $request, $id)
+    {
+        $vendor = $this->findVendor($id);
+        $vendorReject = Vendor::update([
+            'status' => 3
+        ]);
+        return $vendorReject;
+    }
+
+    public function pendingBid()
+    {
+        return BidRequest::with(['vendor', 'bidRequest'])
+            ->where('status', 0)
+            ->get();
+    }
+
 }

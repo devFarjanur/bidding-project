@@ -6,5 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bid extends Model
 {
-    //
+
+
+
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id');
+    }
+
+    public function bidRequest()
+    {
+        return $this->belongsTo(BidRequest::class, 'bid_request_id');
+    }
 }

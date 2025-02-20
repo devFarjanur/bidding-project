@@ -19,6 +19,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+.env
 
 # Ignore everything in the public folder
 # /public/*
