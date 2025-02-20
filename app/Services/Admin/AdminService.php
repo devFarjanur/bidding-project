@@ -120,4 +120,18 @@ class AdminService
             ->get();
     }
 
+    public function acceptBid()
+    {
+        return BidRequest::with(['vendor', 'bidRequest'])
+            ->where('status', 1)
+            ->get();
+    }
+
+    public function rejectBid()
+    {
+        return BidRequest::with(['vendor', 'bidRequest'])
+            ->where('status', 3)
+            ->get();
+    }
+
 }
