@@ -1,17 +1,37 @@
-    public function updateToActiveCustomer()
-    {
-        try {
-            $customer = $this->findCustomer($id);
-            $customer->update(['status' => 1]);
+public function updateToActiveCustomer()
+{
+try {
+$customer = $this->findCustomer($id);
+$customer->update(['status' => 1]);
 
-            return redirect()->back()->with('success', 'Customer activated successfully.');
-        } catch (Exception $e) {
-            Log::error('An error occurred while updating customer status', [
-                'customer_id' => $id,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
+return redirect()->back()->with('success', 'Customer activated successfully.');
+} catch (Exception $e) {
+Log::error('An error occurred while updating customer status', [
+'customer_id' => $id,
+'error' => $e->getMessage(),
+'trace' => $e->getTraceAsString(),
+]);
+
+return redirect()->back()->with('error', 'Something went wrong. Please try again.');
+}
+}
+
+
+try {
+
+} catch (Exception $e) {
+Log::error('Admin login error: ' . $e->getMessage());
+session()->flash('error', 'An error occurred, please try again later.');
+return back()->withInput();
+}
+
+try {
+            $vendor = $this->findVendor($id);
+            $vendorReject = $vendor->update([
+                'status' => 3
             ]);
-
-            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
         }
-    }

@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,5 +35,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('profile-store', [AdminAuthController::class, 'adminProfileStore'])->name('admin.profile.store');
     Route::get('change-password', [AdminAuthController::class, 'adminChangePassword'])->name('admin.change.password');
     Route::post('update-password', [AdminAuthController::class, 'adminUpdatePassword'])->name('admin.update.password');
+});
+
+
+Route::get('/test-log', function () {
+    try {
+        throw new Exception('Test exception log');
+    } catch (Exception $e) {
+        Log::error('Test error log: ' . $e->getMessage());
+    }
+
+    return 'Check your log file';
 });
 

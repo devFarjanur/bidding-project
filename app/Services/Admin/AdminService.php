@@ -4,6 +4,8 @@ namespace App\Services\Admin;
 
 use App\Models\Bidrequest;
 use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\Subcatgory;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Client\Request;
@@ -41,16 +43,26 @@ class AdminService
 
     public function updateToActiveCustomer(Request $request, $id)
     {
-        $customer = $this->findCustomer($id);
-        $updateActive = $customer->update(['status' => 1]);
-        return $updateActive;
+        try {
+            $customer = $this->findCustomer($id);
+            $updateActive = $customer->update(['status' => 1]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function updateToDeactiveCustomer(Request $request, $id)
     {
-        $customer = $this->findCustomer($id);
-        $updateDeactive = $customer->update(['status' => 2]);
-        return $updateDeactive;
+        try {
+            $customer = $this->findCustomer($id);
+            $updateDeactive = $customer->update(['status' => 2]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function findVendor($id)
@@ -89,29 +101,44 @@ class AdminService
 
     public function updateToActiveVendor(Request $request, $id)
     {
-        $vendor = $this->findVendor($id);
-        $vendorActive = $vendor->update([
-            'status' => 1
-        ]);
-        return $vendorActive;
+        try {
+            $vendor = $this->findVendor($id);
+            $vendorActive = $vendor->update([
+                'status' => 1
+            ]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function updateToDeactiveVendor(Request $request, $id)
     {
-        $vendor = $this->findVendor($id);
-        $vendorDeactive = $vendor->update([
-            'status' => 2
-        ]);
-        return $vendorDeactive;
+        try {
+            $vendor = $this->findVendor($id);
+            $vendorDeactive = $vendor->update([
+                'status' => 2
+            ]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function updateToRejectVendor(Request $request, $id)
     {
-        $vendor = $this->findVendor($id);
-        $vendorReject = $vendor->update([
-            'status' => 3
-        ]);
-        return $vendorReject;
+        try {
+            $vendor = $this->findVendor($id);
+            $vendorReject = $vendor->update([
+                'status' => 3
+            ]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function categoryList()
@@ -138,20 +165,83 @@ class AdminService
 
     public function updateToActiveCategory(Request $request, $id)
     {
-        $findCategory = $this->findCategory($id);
-        $activeCategory = $findCategory->update([
-            'status' => 1
-        ]);
-        return $activeCategory;
+        try {
+            $findCategory = $this->findCategory($id);
+            $activeCategory = $findCategory->update([
+                'status' => 1
+            ]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function updateToDeactiveCategory(Request $request, $id)
     {
-        $findCategory = $this->findCategory($id);
-        $deactiveCategory = $findCategory->update([
-            'status' => 2
-        ]);
-        return $deactiveCategory;
+        try {
+            $findCategory = $this->findCategory($id);
+            $deactiveCategory = $findCategory->update([
+                'status' => 2
+            ]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
+    }
+
+    public function subcateGoryList()
+    {
+        return Subcategory::with('category')
+            ->get();
+    }
+
+    public function findSubcategory($id)
+    {
+        return Subcategory::find($id);
+    }
+
+    public function activeSubcategory()
+    {
+        return Subcategory::with('category')
+            ->where('status', 1)
+            ->get();
+    }
+
+    public function deactiveSubcategory()
+    {
+        return Subcategory::with('category')
+            ->where('status', 2)
+            ->get();
+    }
+
+    public function updateToActiveSubcategory(Request $request, $id)
+    {
+        try {
+            $findSubcategory = $this->findSubcategory($id);
+            $activeSubcategory = $findSubcategory->update([
+                'status' => 1
+            ]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
+    }
+
+    public function updateToDeactiveSubcategory(Request $request, $id)
+    {
+        try {
+            $findSubcategory = $this->findSubcategory($id);
+            $deactiveSubcategory = $findSubcategory->update([
+                'status' => 2
+            ]);
+            return redirect()->back()->with(notify('Update successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function pendingBid()
@@ -174,7 +264,4 @@ class AdminService
             ->where('status', 3)
             ->get();
     }
-
-
-
 }
