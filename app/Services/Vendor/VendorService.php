@@ -25,14 +25,17 @@ class VendorService
             ->get();
     }
 
+    public function deactiveCategory()
+    {
+        return Category::where('status', 2)
+        ->get();
+    }
+
     public function activeSubcategory()
     {
         return Subcategory::with('category')
             ->where('status', 1)
             ->get();
     }
-
-    
-
 
 }
