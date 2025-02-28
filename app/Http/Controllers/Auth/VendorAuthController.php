@@ -3,87 +3,105 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vendor;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
-class AdminAuthController extends Controller
+class VendorAuthController extends Controller
 {
-    public function adminLogin()
+    public function vendorLogin()
     {
-        return view('admin.admin-login');
+        return view('vendor.vednor-login');
     }
 
-    public function adminLoginPost(Request $request)
+    public function vendorRegistration()
+    {
+        return view('vendor.vendor.vendor-registration');
+    }
+
+    public function vendorLoginPost(Request $request)
     {
         try {
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
+
             $credentials = $request->only('email', 'password');
+
             if (Auth::attempt($credentials)) {
                 $user = Auth::user();
-                if ($user && $user->isAdmin()) {
-                    return redirect()->route('admin.dashboard')->with(notify('Login successfully', 'success'));
+
+                if ($user->isVendor()) {
+                    $vendor = Vendor::where('user_id', $user->id)->first();
+
+                    if ($vendor && $vendor->status == 1) {
+                        return redirect()->route('vendor.dashboard')->with(notify('Login successfully', 'success'));
+                    } else {
+                        Auth::logout();
+                        session()->flash('error', 'Your account is inactive. Please contact support.');
+                        return redirect()->route('vendor.login');
+                    }
                 } else {
                     Auth::logout();
-                    session()->flash('error', 'You are not authorized to access this area');
-                    return redirect()->route('admin.login');
+                    session()->flash('error', 'You are not authorized to access this area.');
+                    return redirect()->route('vendor.login');
                 }
             }
+
             session()->flash('error', 'Invalid credentials');
             return redirect()->back();
         } catch (Exception $e) {
-            Log::error('Admin login error: ' . $e->getMessage());
+            Log::error('Vendor login error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred, please try again later.');
             return back()->withInput();
         }
     }
 
-    public function adminLogout(Request $request)
+    public function vendorLogout(Request $request)
     {
         try {
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
             session()->flash('success', 'Logout successful');
-            return redirect()->route('admin.login');
+            return redirect()->route('vendor.login');
         } catch (Exception $e) {
-            Log::error('Admin logout error: ' . $e->getMessage());
+            Log::error('Vendor logout error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred, please try again later.');
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('vendor.dashboard');
         }
     }
 
-    public function adminDashboard()
+    public function vendorDashboard()
     {
         try {
-            return view('admin.admin-dashboard');
+            return view('vendor.vendor-dashboard');
         } catch (Exception $e) {
-            Log::error('Admin dashboard error: ' . $e->getMessage());
+            Log::error('vendor dashboard error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while loading the dashboard.');
-            return redirect()->route('admin.login');
+            return redirect()->route('vendor.login');
         }
     }
 
-    public function adminProfile()
+    public function vendorProfile()
     {
         try {
             $id = Auth::user()->id;
             $profileData = User::find($id);
-            return view('admin.admin-profile-view', compact('profileData'));
+            return view('vednor.vendor-profile-view', compact('profileData'));
         } catch (Exception $e) {
-            Log::error('Admin profile error: ' . $e->getMessage());
+            Log::error('Vendor profile error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while loading your profile.');
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('vendor.dashboard');
         }
     }
 
-    public function adminProfileStore(Request $request)
+    public function vendorProfileStore(Request $request)
     {
         try {
             $id = Auth::user()->id;
@@ -101,29 +119,29 @@ class AdminAuthController extends Controller
             }
 
             $data->save();
-            session()->flash('success', 'Admin Profile Updated Successfully');
+            session()->flash('success', 'Vendor Profile Updated Successfully');
             return redirect()->back();
         } catch (Exception $e) {
-            Log::error('Admin profile update error: ' . $e->getMessage());
+            Log::error('Vendor profile update error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while updating your profile.');
             return back();
         }
     }
 
-    public function adminChangePassword()
+    public function vendorChangePassword()
     {
         try {
             $id = Auth::user()->id;
             $profileData = User::find($id);
-            return view('admin.admin-change-password', compact('profileData'));
+            return view('vendor.vendor-change-password', compact('profileData'));
         } catch (Exception $e) {
-            Log::error('Admin change password error: ' . $e->getMessage());
+            Log::error('vendor change password error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while loading the change password page.');
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('vendor.dashboard');
         }
     }
 
-    public function adminUpdatePassword(Request $request)
+    public function vendorUpdatePassword(Request $request)
     {
         try {
             $request->validate([
@@ -143,7 +161,7 @@ class AdminAuthController extends Controller
             session()->flash('success', 'Password Changed Successfully');
             return back();
         } catch (Exception $e) {
-            Log::error('Admin password update error: ' . $e->getMessage());
+            Log::error('Vendor password update error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while changing the password.');
             return back();
         }
