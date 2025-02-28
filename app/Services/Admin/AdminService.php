@@ -193,7 +193,7 @@ class AdminService
 
     public function subcateGoryList()
     {
-        return Subcategory::with('category')
+        return Subcategory::with(['vendor', 'category'])
             ->get();
     }
 
@@ -202,16 +202,16 @@ class AdminService
         return Subcategory::find($id);
     }
 
-    public function activeSubcategory()
+    public function activeSubcategory() 
     {
-        return Subcategory::with('category')
+        return Subcategory::with(['vendor', 'category'])
             ->where('status', 1)
             ->get();
     }
 
     public function deactiveSubcategory()
     {
-        return Subcategory::with('category')
+        return Subcategory::with(['vendor', 'category'])
             ->where('status', 2)
             ->get();
     }
