@@ -27,11 +27,11 @@
 
 <body>
     <div class="main-wrapper">
-        @include('admin.sidebar')
+        @include('vendor.sidebar')
         <div class="page-wrapper">
-            @include('admin.header')
-            @yield('admin')
-            @include('admin.footer')
+            @include('vendor.header')
+            @yield('vendor')
+            @include('vendor.footer')
         </div>
     </div>
 
