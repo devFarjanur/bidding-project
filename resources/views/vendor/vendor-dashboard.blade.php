@@ -1,6 +1,6 @@
-@extends('admin.index')
+@extends('vendor.index')
 
-@section('admin')
+@section('vendor')
     <div class="page-content">
 
         <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">

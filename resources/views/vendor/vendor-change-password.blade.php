@@ -1,5 +1,5 @@
-@extends('admin.index')
-@section('admin')
+@extends('vendor.index')
+@section('vendor')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -49,7 +49,7 @@
 
 				<h6 class="card-title">Admin Change Password</h6>
 
-				<form method="POST" action="{{ route('admin.update.password') }}" class="forms-sample" enctype="multipart/form-data">
+				<form method="POST" action="{{ route('vendor.update.password') }}" class="forms-sample" enctype="multipart/form-data">
                   @csrf
 
                   <div class="mb-3">
