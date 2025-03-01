@@ -10,7 +10,7 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>Admin Login</title>
+    <title>Vendor Login</title>
 
     <style type="text/css">
         .authlogin-side-wrapper {
@@ -55,9 +55,10 @@
                                 </div>
                                 <div class="col-md-8 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="#" class="noble-ui-logo logo-light d-block mb-2">Forever
-                                            Cure<span> Pharma</span></a>
-                                        <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
+                                        <a href="#" class="noble-ui-logo logo-light d-block mb-2">Add
+                                            Family<span>Bidding Website</span></a>
+                                        <h5 class="text-muted fw-normal mb-4">Welcome back Vendor! Log in to your
+                                            account.</h5>
 
                                         <!-- Display validation errors -->
                                         @if ($errors->any())
@@ -80,7 +81,7 @@
                                         @endif
 
                                         <form class="forms-sample" method="POST"
-                                            action="{{ route('admin.login.post') }}">
+                                            action="{{ route('vendor.login.post') }}">
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email address</label>
