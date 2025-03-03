@@ -29,6 +29,12 @@ class AdminController extends Controller
         return view('admin.vendor.vendor-request-list', compact('requestVendor'));
     }
 
+    public function vendorList()
+    {
+        $vendors = $this->adminService->vendor();
+        return view('admin.vendor.vendor-list', compact('vendors'));
+    }
+
     public function vendorActiveList()
     {
         $activeVendor = $this->adminService->activeVendor();
@@ -57,6 +63,12 @@ class AdminController extends Controller
     {
         $subcategory = $this->adminService->subcateGoryList();
         return view('admin.subcategory.subcategory-list', compact('subcategory'));
+    }
+
+    public function bidList()
+    {
+        $bids = $this->adminService->bidList();
+        return view('admin.bid.bid-list', compact('bids'));
     }
 
     public function acceptBidList()

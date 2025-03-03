@@ -65,6 +65,11 @@ class AdminService
         }
     }
 
+    public function vendor()
+    {
+        return Vendor::with('user')->get();
+    }
+
     public function findVendor($id)
     {
         return Vendor::with('user')
@@ -202,7 +207,7 @@ class AdminService
         return Subcategory::find($id);
     }
 
-    public function activeSubcategory() 
+    public function activeSubcategory()
     {
         return Subcategory::with(['vendor', 'category'])
             ->where('status', 1)
@@ -242,6 +247,11 @@ class AdminService
             Log::error('error: ' . $e->getMessage());
             return redirect()->back()->with(notify('Failed', 'error'));
         }
+    }
+
+    public function bidList()
+    {
+        return Bidrequest::with(['vendor', 'bidRequest'])->get();
     }
 
     public function pendingBid()

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\VendorAuthController;
 use App\Http\Controllers\ProfileController;
@@ -25,17 +26,35 @@ require __DIR__ . '/auth.php';
 
 
 
-Route::get('admin-login', [AdminAuthController::class, 'adminLogin'])->name('admin.login');
-Route::post('admin-login-post', [AdminAuthController::class, 'adminLoginPost'])->name('admin.login.post');
+Route::get('admin/login', [AdminAuthController::class, 'adminLogin'])->name('admin.login');
+Route::post('admin/login-post', [AdminAuthController::class, 'adminLoginPost'])->name('admin.login.post');
 
 // Admin Dashboard (protected route)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('dashboard', [AdminAuthController::class, 'adminDashboard'])->name('admin.dashboard');
-    Route::get('logout', [AdminAuthController::class, 'adminLogout'])->name('admin.logout');
-    Route::get('profile', [AdminAuthController::class, 'adminProfile'])->name('admin.profile');
-    Route::post('profile-store', [AdminAuthController::class, 'adminProfileStore'])->name('admin.profile.store');
-    Route::get('change-password', [AdminAuthController::class, 'adminChangePassword'])->name('admin.change.password');
-    Route::post('update-password', [AdminAuthController::class, 'adminUpdatePassword'])->name('admin.update.password');
+    Route::get('admin/dashboard', [AdminAuthController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('admin/logout', [AdminAuthController::class, 'adminLogout'])->name('admin.logout');
+    Route::get('admin/profile', [AdminAuthController::class, 'adminProfile'])->name('admin.profile');
+    Route::post('admin/profile-store', [AdminAuthController::class, 'adminProfileStore'])->name('admin.profile.store');
+    Route::get('admin/change-password', [AdminAuthController::class, 'adminChangePassword'])->name('admin.change.password');
+    Route::post('admin/update-password', [AdminAuthController::class, 'adminUpdatePassword'])->name('admin.update.password');
+    // customer
+    Route::get('admin/customer-list', [AdminController::class, 'customerList'])->name('admin.customer.list');
+    // vendor
+    Route::get('admin/vendor-request', [AdminController::class, 'vendorRequestList'])->name('vendor.request.list');
+    Route::get('admin/vendor-list', [AdminController::class, 'vendorLIst'])->name('vendor.list');
+    Route::get('admin/vendor-active', [AdminController::class, 'vendorActiveList'])->name('vendor.active.list');
+    Route::get('admin/vendor-inactive', [AdminController::class, 'vendorInactiveList'])->name('vendor.incative.list');
+    Route::get('admin/vendor-reject', [AdminController::class, 'vendorRejectList'])->name('vendor.reject.list');
+    // category
+    Route::get('admin/category-list', [AdminController::class, 'categoryList'])->name('category.list');
+    // subcategory
+    Route::get('admin/subcategory-list', [AdminController::class, 'subcategoryList'])->name('subcategory.list');
+    //bid
+    Route::get('admin/bid-list', [AdminController::class, 'bidList'])->name('bid.list');
+    Route::get('admin/bid-request-pending', [AdminController::class, 'pendingBidList'])->name('pending.bid.list');
+    Route::get('admin/accept-bid', [AdminController::class, 'acceptBidList'])->name('accept.bid.list');
+    
+
 });
 
 
@@ -48,7 +67,7 @@ Route::get('vendor-registration-post', [VendorAuthController::class, 'vendorRegi
 
 // Vendor Dashboard (protected route)
 Route::middleware(['auth', 'role:vendor'])->group(function () {
-    Route::get('dashboard', [VendorAuthController::class, 'vendorDashboard'])->name('vendor.dashboard');
+    Route::get('vendor-dashboard', [VendorAuthController::class, 'vendorDashboard'])->name('vendor.dashboard');
     Route::get('logout', [VendorAuthController::class, 'vendorLogout'])->name('vendor.logout');
     Route::get('profile', [VendorAuthController::class, 'vendorProfile'])->name('vendor.profile');
     Route::post('profile-store', [VendorAuthController::class, 'vendorProfileStore'])->name('vendor.profile.store');
