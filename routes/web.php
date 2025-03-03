@@ -53,6 +53,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/bid-list', [AdminController::class, 'bidList'])->name('bid.list');
     Route::get('admin/bid-request-pending', [AdminController::class, 'pendingBidList'])->name('pending.bid.list');
     Route::get('admin/accept-bid', [AdminController::class, 'acceptBidList'])->name('accept.bid.list');
+    Route::get('admin/reject-bid', [AdminController::class, 'rejectBidList'])->name('reject.bid.list');
     
 
 });
