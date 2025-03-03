@@ -3,8 +3,9 @@
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('admin.customer.list') }}">Customer</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Customer List</li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.vendor.request.list') }}">
+                        Vendor request List</a></li>
             </ol>
         </nav>
 
@@ -25,13 +26,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($customers as $index => $customer)
+                                    @foreach ($requestVendor as $index => $vendor)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $customer->name ?? '--' }}</td>
-                                            <td>{{ $customer->phone ?? '--' }}</td>
-                                            <td>{{ $customer->email ?? '--' }}</td>
-                                            <td>{{ $customer->phone ?? '--' }}</td>
+                                            <td>{{ $vendor->user->name ?? '--' }}</td>
+                                            <td>{{ $customer->user->phone ?? '--' }}</td>
+                                            <td>{{ $customer->user->email ?? '--' }}</td>
+                                            <td>{{ $customer->user->phone ?? '--' }}</td>
                                             <td>
                                                 @if ($customer->role == 'customer')
                                                     {{ 'Customer' }}
