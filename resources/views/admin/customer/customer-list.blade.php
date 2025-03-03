@@ -37,17 +37,22 @@
                                                 @if ($customer->role == 'customer')
                                                     {{ 'Customer' }}
                                                 @endif
+                                            </td>
                                             <td>
                                                 @if ($customer->status == 1)
                                                     <a href="" class="bage bage-success">Active</a>
-                                                @else
+                                                @elseif($customer->status == 2)
                                                     <a href="" class="bage bage-danger">Inactive</a>
                                                 @endif
                                             </td>
                                             <td>
                                                 <a href="" class="btn btn-primary">View</a>
                                                 <a href="" class="btn btn-secondary">Edit</a>
-                                                <a href="" class="bage bage-danger">Inactive</a>
+                                                @if ($cat->status == 1)
+                                                    <a href="" class="btn btn-secondary">Inactive</a>
+                                                @elseif($cat->status == 2)
+                                                    <a href="" class="btn btn-success">Active</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

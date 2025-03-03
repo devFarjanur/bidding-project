@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.vendor.request.list') }}">
-                        Vendor request List</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.vendor.reject.list') }}">
+                        Vendor Reject List</a></li>
             </ol>
         </nav>
 
@@ -50,8 +50,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">Accept</a>
-                                                <a href="" class="btn btn-danger">Reject</a>
+                                                <a href="" class="btn btn-primary">view</a>
                                             </td>
                                         </tr>
                                     @endforeach

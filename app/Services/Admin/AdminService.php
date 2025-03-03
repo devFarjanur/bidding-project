@@ -67,7 +67,9 @@ class AdminService
 
     public function vendor()
     {
-        return Vendor::with('user')->get();
+        return Vendor::with('user')
+            ->whereIn('status', [1, 2])
+            ->get();
     }
 
     public function findVendor($id)
