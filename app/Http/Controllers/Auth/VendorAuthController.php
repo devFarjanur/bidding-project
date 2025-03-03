@@ -15,12 +15,7 @@ class VendorAuthController extends Controller
 {
     public function vendorLogin()
     {
-        return view('vendor.vednor-login');
-    }
-
-    public function vendorRegistration()
-    {
-        return view('vendor.vendor.vendor-registration');
+        return view('vendor.vendor-login');
     }
 
     public function vendorLoginPost(Request $request)
@@ -62,6 +57,25 @@ class VendorAuthController extends Controller
         }
     }
 
+
+    public function vendorRegistration()
+    {
+        return view('vendor.vendor-registration');
+    }
+
+    public function vendorRegistrationPost(Request $request)
+    {
+        try {
+
+            session()->flash('success', 'Registration successful');
+            return redirect()->route('vendor.login');
+        } catch (Exception $e) {
+            Log::error('Vendor registration error: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred, please try again later.');
+            return redirect()->route('vendor.login');
+        }
+    }
+
     public function vendorLogout(Request $request)
     {
         try {
@@ -93,7 +107,7 @@ class VendorAuthController extends Controller
         try {
             $id = Auth::user()->id;
             $profileData = User::find($id);
-            return view('vednor.vendor-profile-view', compact('profileData'));
+            return view('vendor.vendor-profile-view', compact('profileData'));
         } catch (Exception $e) {
             Log::error('Vendor profile error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while loading your profile.');

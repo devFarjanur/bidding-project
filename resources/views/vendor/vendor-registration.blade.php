@@ -81,7 +81,7 @@
                                         @endif
 
                                         <form class="forms-sample" method="POST"
-                                            action="{{ route('vendor.login.post') }}">
+                                            action="{{ route('vendor.registration.post') }}">
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email address</label>
