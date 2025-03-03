@@ -72,7 +72,6 @@ class AllTableSeeder extends Seeder
                 'description' => $faker->paragraph,
                 'target_price' => $faker->randomFloat(2, 100, 1000),
                 'image' => $faker->imageUrl(),
-                'status' => rand(0, 2),
             ]);
         }
 
