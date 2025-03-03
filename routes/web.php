@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\VendorAuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Vendor\VendorController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 
@@ -40,22 +41,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // customer
     Route::get('admin/customer-list', [AdminController::class, 'customerList'])->name('admin.customer.list');
     // vendor
-    Route::get('admin/vendor-request', [AdminController::class, 'vendorRequestList'])->name('vendor.request.list');
-    Route::get('admin/vendor-list', [AdminController::class, 'vendorLIst'])->name('vendor.list');
-    Route::get('admin/vendor-active', [AdminController::class, 'vendorActiveList'])->name('vendor.active.list');
-    Route::get('admin/vendor-inactive', [AdminController::class, 'vendorInactiveList'])->name('vendor.incative.list');
-    Route::get('admin/vendor-reject', [AdminController::class, 'vendorRejectList'])->name('vendor.reject.list');
+    Route::get('admin/vendor-request', [AdminController::class, 'vendorRequestList'])->name('admin.vendor.request.list');
+    Route::get('admin/vendor-list', [AdminController::class, 'vendorLIst'])->name('admin.vendor.list');
+    Route::get('admin/vendor-active', [AdminController::class, 'vendorActiveList'])->name('admin.vendor.active.list');
+    Route::get('admin/vendor-inactive', [AdminController::class, 'vendorInactiveList'])->name('admin.vendor.incative.list');
+    Route::get('admin/vendor-reject', [AdminController::class, 'vendorRejectList'])->name('admin.vendor.reject.list');
     // category
-    Route::get('admin/category-list', [AdminController::class, 'categoryList'])->name('category.list');
+    Route::get('admin/category-list', [AdminController::class, 'categoryList'])->name('admin.category.list');
     // subcategory
-    Route::get('admin/subcategory-list', [AdminController::class, 'subcategoryList'])->name('subcategory.list');
+    Route::get('admin/subcategory-list', [AdminController::class, 'subcategoryList'])->name('admin.subcategory.list');
     //bid
-    Route::get('admin/bid-list', [AdminController::class, 'bidList'])->name('bid.list');
-    Route::get('admin/bid-request-pending', [AdminController::class, 'pendingBidList'])->name('pending.bid.list');
-    Route::get('admin/accept-bid', [AdminController::class, 'acceptBidList'])->name('accept.bid.list');
-    Route::get('admin/reject-bid', [AdminController::class, 'rejectBidList'])->name('reject.bid.list');
-    
-
+    Route::get('admin/bid-list', [AdminController::class, 'bidList'])->name('admin.bid.list');
+    Route::get('admin/bid-request-pending', [AdminController::class, 'pendingBidList'])->name('admin.pending.bid.list');
+    Route::get('admin/accept-bid', [AdminController::class, 'acceptBidList'])->name('admin.accept.bid.list');
+    Route::get('admin/reject-bid', [AdminController::class, 'rejectBidList'])->name('admin.reject.bid.list');
 });
 
 
@@ -68,12 +67,23 @@ Route::get('vendor-registration-post', [VendorAuthController::class, 'vendorRegi
 
 // Vendor Dashboard (protected route)
 Route::middleware(['auth', 'role:vendor'])->group(function () {
-    Route::get('vendor-dashboard', [VendorAuthController::class, 'vendorDashboard'])->name('vendor.dashboard');
-    Route::get('logout', [VendorAuthController::class, 'vendorLogout'])->name('vendor.logout');
-    Route::get('profile', [VendorAuthController::class, 'vendorProfile'])->name('vendor.profile');
-    Route::post('profile-store', [VendorAuthController::class, 'vendorProfileStore'])->name('vendor.profile.store');
-    Route::get('change-password', [VendorAuthController::class, 'vendorChangePassword'])->name('vendor.change.password');
-    Route::post('update-password', [VendorAuthController::class, 'vendorUpdatePassword'])->name('vendor.update.password');
+    Route::get('vendor/dashboard', [VendorAuthController::class, 'vendorDashboard'])->name('vendor.dashboard');
+    Route::get('vendor/logout', [VendorAuthController::class, 'vendorLogout'])->name('vendor.logout');
+    Route::get('vendor/profile', [VendorAuthController::class, 'vendorProfile'])->name('vendor.profile');
+    Route::post('vendor/profile-store', [VendorAuthController::class, 'vendorProfileStore'])->name('vendor.profile.store');
+    Route::get('vendor/change-password', [VendorAuthController::class, 'vendorChangePassword'])->name('vendor.change.password');
+    Route::post('vendor/update-password', [VendorAuthController::class, 'vendorUpdatePassword'])->name('vendor.update.password');
+    // customer
+    Route::get('vendor/customer-list', [VendorController::class, 'customerList'])->name('vendor.customer.list');
+    //Category
+    Route::get('vendor/category-list', [VendorController::class, 'categoryList'])->name('vendor.category.list');
+    // subcategory
+    Route::get('vendor/subcategory-list', [VendorController::class, 'subcategoryList'])->name('vendor.subcategory.list');
+    Route::get('vendor/add-subcategory', [VendorController::class, 'addSubcategory'])->name('vendor.add.subcategory');
+    // bid
+    Route::get('vendor/bid-request', [VendorController::class, 'bidRequestList'])->name('vendor.bid.request.list');
+    Route::get('vendor/bid-request/details/{id}', [VendorController::class, 'bidRequestDetails'])->name('vendor.bid.request.details');
+    Route::get('vendor/accept-bid', [VendorController::class, 'acceptBid'])->name('vendor.accept.bid');
 });
 
 

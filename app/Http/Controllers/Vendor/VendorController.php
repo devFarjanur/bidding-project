@@ -52,4 +52,10 @@ class VendorController extends Controller
         $bid = $this->vendorService->bidFind($id);
         return view('vendor.bid.vendor-bid-submit', compact('bidRequest', 'bid'));
     }
+
+    public function acceptBid()
+    {
+        $acceptBid = $this->vendorService->acceptBid();
+        return view('vendor.bid.vendor-accept-bid-list', compact('acceptBid'));
+    }
 }

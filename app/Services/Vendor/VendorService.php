@@ -7,6 +7,7 @@ use App\Models\BidRequest;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class VendorService
 {
@@ -35,7 +36,9 @@ class VendorService
 
     public function subcategory()
     {
-        return Subcategory::with(['vendor', 'category'])->get();
+        return Subcategory::with(['vendor', 'category'])
+            ->where('vendor_id', auth::id())
+            ->get();
     }
 
     public function activeSubcategory()
@@ -63,5 +66,13 @@ class VendorService
         return Bid::with(['vendor', 'bidRequest'])
             ->where('bid_request_id', $id)
             ->findOrFail($id);
+    }
+
+    public function acceptBid()
+    {
+        return Bid::with(['vendor', 'bidRequest'])
+        ->where('vendor_id', auth::id())
+        ->where('status', 1)
+        ->get();
     }
 }

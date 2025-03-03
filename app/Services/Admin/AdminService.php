@@ -271,7 +271,7 @@ class AdminService
     public function rejectBid()
     {
         return BidRequest::with(['vendor', 'bidRequest'])
-            ->where('status', 3)
+            ->where('status', 2)
             ->get();
     }
 }
