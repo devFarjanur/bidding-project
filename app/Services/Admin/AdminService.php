@@ -253,26 +253,26 @@ class AdminService
 
     public function bidList()
     {
-        return Bidrequest::with(['vendor', 'bidRequest'])->get();
+        return Bidrequest::with(['customer', 'subcategory'])->get();
     }
 
     public function pendingBid()
     {
-        return BidRequest::with(['vendor', 'bidRequest'])
+        return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 0)
             ->get();
     }
 
     public function acceptBid()
     {
-        return BidRequest::with(['vendor', 'bidRequest'])
+        return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 1)
             ->get();
     }
 
     public function rejectBid()
     {
-        return BidRequest::with(['vendor', 'bidRequest'])
+        return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 2)
             ->get();
     }
