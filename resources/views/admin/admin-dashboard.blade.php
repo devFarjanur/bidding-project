@@ -1,5 +1,4 @@
 @extends('admin.index')
-
 @section('admin')
     <div class="page-content">
 

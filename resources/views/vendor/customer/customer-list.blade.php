@@ -1,11 +1,11 @@
-@extends('admin.index')
-@section('admin')
+@extends('vendor.index')
+@section('vendor')
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.vendor.reject.list') }}">
-                        Vendor Reject List</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('vendor.customer.list') }}">
+                        Customer List</a></li>
             </ol>
         </nav>
 
@@ -27,30 +27,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($requestVendor as $index => $vendor)
+                                    @foreach ($customers as $index => $customer)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $vendor->user->name ?? '--' }}</td>
-                                            <td>{{ $vendor->user->phone ?? '--' }}</td>
-                                            <td>{{ $vendor->user->email ?? '--' }}</td>
+                                            <td>{{ $customer->name ?? '--' }}</td>
+                                            <td>{{ $customer->phone ?? '--' }}</td>
+                                            <td>{{ $customer->email ?? '--' }}</td>
                                             <td>
-                                                @if ($vendor->user->role == 'vendor')
-                                                    {{ 'Vendor' }}
+                                                @if ($customer->role == 'customer')
+                                                    {{ 'Customer' }}
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($vendor->status == 0)
-                                                    <a href="" class="badge bg-warning text-dark">Pending</a>
-                                                @elseif($vendor->status == 1)
-                                                    <a href="" class="badge bg-success">Active</a>
-                                                @elseif($vendor->status == 2)
-                                                    <a href="" class="badge bg-secondary">Inactive</a>
-                                                @elseif($vendor->status == 3)
-                                                    <a href="" class="badge bg-danger">Reject</a>
+                                                @if ($customer->status == 1)
+                                                    <a href="" class="bage bage-success">Active</a>
+                                                @elseif($customer->status == 2)
+                                                    <a href="" class="bage bage-danger">Inactive</a>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">view</a>
+                                                <a href="" class="btn btn-primary">View</a>
                                             </td>
                                         </tr>
                                     @endforeach

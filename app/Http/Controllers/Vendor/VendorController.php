@@ -19,8 +19,8 @@ class VendorController extends Controller
 
     public function customerList()
     {
-        $customer = $this->vendorService->customer();
-        return view('vendor.customer.customer-list', compact('customer'));
+        $customers = $this->vendorService->customer();
+        return view('vendor.customer.customer-list', compact('customers'));
     }
 
     public function categoryList()

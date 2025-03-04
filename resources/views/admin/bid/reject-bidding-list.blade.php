@@ -1,4 +1,4 @@
-@extends('admin.admin-dashboard')
+@extends('admin.index')
 @section('admin')
     <div class="page-content">
         <nav class="page-breadcrumb">
