@@ -277,6 +277,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
+     * @property int $status
      * @property string|null $image
      * @property float|null $target_price
      * @property string $description
@@ -291,6 +292,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|BidRequest whereDescription($value)
      * @method static \Illuminate\Database\Eloquent\Builder|BidRequest whereTargetPrice($value)
      * @method static \Illuminate\Database\Eloquent\Builder|BidRequest whereImage($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|BidRequest whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder|BidRequest whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|BidRequest whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|BidRequest newModelQuery()

@@ -25,7 +25,7 @@ class AllTableSeeder extends Seeder
                 'password' => Hash::make('123456789'),
                 'role' => $faker->randomElement(['admin', 'customer', 'vendor']),  // Random role
                 'profile_image' => $faker->imageUrl(),
-                'status' => rand(0, 2),
+                'status' => rand(1, 2),
             ]);
         }
 
@@ -34,12 +34,13 @@ class AllTableSeeder extends Seeder
             DB::table('categories')->insert([
                 'name' => $faker->word,
                 'image' => $faker->imageUrl(),
-                'status' => rand(0, 2),  // Random status
+                'status' => rand(1, 2),  // Random status
             ]);
         }
 
         // Generate 30 vendors with fake data
         $categoryIds = DB::table('categories')->pluck('id')->toArray();
+
         for ($i = 0; $i < 30; $i++) {
             DB::table('vendors')->insert([
                 'user_id' => $faker->randomElement($categoryIds),  // Random user ID from the 'users' table
@@ -52,18 +53,20 @@ class AllTableSeeder extends Seeder
 
         // Generate 30 subcategories with fake data
         $vendorIds = DB::table('vendors')->pluck('id')->toArray();
+      
         for ($i = 0; $i < 30; $i++) {
             DB::table('subcategories')->insert([
                 'vendor_id' => $faker->randomElement($vendorIds),
                 'category_id' => $faker->randomElement($categoryIds),
                 'name' => $faker->word,
                 'image' => $faker->imageUrl(),
-                'status' => rand(0, 2),
+                'status' => rand(1, 2),
             ]);
         }
 
         // Generate 30 bid_requests with fake data
         $customerIds = DB::table('users')->where('role', 'customer')->pluck('id')->toArray();
+        
         $subcategoryIds = DB::table('subcategories')->pluck('id')->toArray();
         for ($i = 0; $i < 30; $i++) {
             DB::table('bid_requests')->insert([
@@ -72,6 +75,7 @@ class AllTableSeeder extends Seeder
                 'description' => $faker->paragraph,
                 'target_price' => $faker->randomFloat(2, 100, 1000),
                 'image' => $faker->imageUrl(),
+                'status' => rand(0, 2),
             ]);
         }
 
@@ -83,6 +87,7 @@ class AllTableSeeder extends Seeder
                 'vendor_id' => $faker->randomElement($vendorIds),
                 'bid_request_id' => $faker->randomElement($bidRequestIds),
                 'proposed_price' => $faker->randomFloat(2, 100, 1000),
+                'status' => rand(0, 2),
             ]);
         }
     }
