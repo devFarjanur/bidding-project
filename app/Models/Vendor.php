@@ -15,8 +15,8 @@ class Vendor extends Model
         'status',
     ];
 
-    public function vendor()
+    public function user()
     {
-        return $this->belongsTo(vendor::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

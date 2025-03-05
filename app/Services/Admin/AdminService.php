@@ -80,28 +80,28 @@ class AdminService
 
     public function pendingVendor()
     {
-        return Vendor::with('vendor')
+        return Vendor::with('user')
             ->where('status', 0)
             ->get();
     }
 
     public function activeVendor()
     {
-        return Vendor::with('vendor')
+        return Vendor::with('user')
             ->where('status', 1)
             ->get();
     }
 
     public function deactiveVendor()
     {
-        return Vendor::with('vendor')
+        return Vendor::with('user')
             ->where('status', 2)
             ->get();
     }
 
     public function rejectVendor()
     {
-        return Vendor::with('vendor')
+        return Vendor::with('user')
             ->where('status', 3)
             ->get();
     }

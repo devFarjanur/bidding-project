@@ -27,7 +27,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($requestVendor as $index => $vendor)
+                                    @foreach ($rejectVendor as $index => $vendor)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $vendor->user->name ?? '--' }}</td>
