@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('vendor.bid.request.list') }}">
-                        Accept Bid List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Accept Bid List</li>
             </ol>
         </nav>
 
@@ -39,13 +39,13 @@
                                             <td>{{ $bid->proposed_price ?? '--' }}</td>
                                             <td>
                                                 @if ($bid->status == 0)
-                                                    <a href="" class="badge bg-warning text-dark">Pending</a>
+                                                    <a href="" class="badge bg-warning text-dark">Bid Pending</a>
                                                 @elseif($bid->status == 1)
-                                                    <a href="" class="badge bg-success">Active</a>
+                                                    <a href="" class="badge bg-warning">Bid Processing</a>
                                                 @elseif($bid->status == 2)
-                                                    <a href="" class="badge bg-secondary">Inactive</a>
+                                                    <a href="" class="badge bg-success">Bid Compeleted</a>
                                                 @elseif($bid->status == 3)
-                                                    <a href="" class="badge bg-danger">Reject</a>
+                                                    <a href="" class="badge bg-danger">Bid End</a>
                                                 @endif
                                             </td>
                                             <td>

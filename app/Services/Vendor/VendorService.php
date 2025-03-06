@@ -73,7 +73,7 @@ class VendorService
     {
         return Bid::with(['vendor', 'bidRequest'])
         ->where('vendor_id', auth::id())
-        ->where('status', 1)
+        ->where('status', 2)
         ->get();
     }
 }

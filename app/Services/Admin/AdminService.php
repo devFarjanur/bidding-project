@@ -263,17 +263,24 @@ class AdminService
             ->get();
     }
 
-    public function acceptBid()
+    public function processingBid()
     {
         return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 1)
             ->get();
     }
 
-    public function rejectBid()
+    public function acceptBid()
     {
         return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 2)
+            ->get();
+    }
+
+    public function rejectBid()
+    {
+        return BidRequest::with(['customer', 'subcategory'])
+            ->where('status', 3)
             ->get();
     }
 }

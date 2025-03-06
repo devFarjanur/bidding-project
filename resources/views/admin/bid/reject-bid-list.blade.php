@@ -39,13 +39,15 @@
                                             <td>{{ $bid->target_price ?? '--' }}</td>
                                             <td>
                                                 @if ($bid->status == 0)
-                                                    <a href="" class="badge bg-warning text-dark">Pending</a>
+                                                    <a href="" class="badge bg-warning text-dark">Bid Pending</a>
                                                 @elseif($bid->status == 1)
-                                                    <a href="" class="badge bg-success">Active</a>
+                                                    <a href="" class="badge bg-warning">Bid Processing</a>
                                                 @elseif($bid->status == 2)
-                                                    <a href="" class="badge bg-secondary">Inactive</a>
+                                                    <a href="" class="badge bg-success">Bid Compeleted</a>
                                                 @elseif($bid->status == 3)
-                                                    <a href="" class="badge bg-danger">Reject</a>
+                                                    <a href="" class="badge bg-danger">Bid End</a>
+                                                @elseif ($bid->status == 4)
+                                                    <a href="" class="badge bg-secondary">Bid Not Accepted</a>
                                                 @endif
                                             </td>
                                             <td>
