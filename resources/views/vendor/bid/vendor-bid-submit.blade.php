@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('vendor.bid.request.details') }}">
-                        Bid Submit</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Bid Submit</li>
             </ol>
         </nav>
 
@@ -13,49 +13,48 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        {{-- <div class="table-responsive">
-                            <table id="dataTableExample" class="table table-hover text-center">
-                                <thead>
-                                    <tr>
-                                        <th>SL</th>
-                                        <th>Image</th>
-                                        <th>Category</th>
-                                        <th>Subcategory</th>
-                                        <th>Target Price</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($pendingBid as $index => $bid)
-                                        <tr>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>
-                                                <img src="{{ asset($bid->image) }}" alt="Product Image"
-                                                    style="width: 50px; height: 50px;">
-                                            </td>
-                                            <th>{{ $bid->category->name ?? '--' }}</th>
-                                            <th>{{ $bid->subcategory->name ?? '--' }}</th>
-                                            <td>{{ $bid->target_price ?? '--' }}</td>
-                                            <td>
-                                                @if ($bid->status == 0)
-                                                    <a href="" class="badge bg-warning text-dark">Pending</a>
-                                                @elseif($bid->status == 1)
-                                                    <a href="" class="badge bg-success">Active</a>
-                                                @elseif($bid->status == 2)
-                                                    <a href="" class="badge bg-secondary">Inactive</a>
-                                                @elseif($bid->status == 3)
-                                                    <a href="" class="badge bg-danger">Reject</a>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="" class="btn btn-primary">View</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                        <h4 class="card-title">Bid Details</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    {{-- <th>Order Number:</th>
+                                    <td>{{ $order->order_number }}</td> --}}
+                                </tr>
+                                <tr>
+                                    {{-- <th>Customer Name:</th>
+                                    <td>{{ $order->user->firstname }} {{ $order->user->lastname }}</td> --}}
+                                </tr>
+                                <tr>
+                                    {{-- <th>Address:</th>
+                                    <td>
+                                        {{ $order->address->division }},
+                                        {{ $order->address->city }},
+                                        {{ $order->address->road_no }},
+                                        {{ $order->address->house_no }}
+                                    </td> --}}
+                                </tr>
+                                <tr>
+                                    {{-- <th>Total Price:</th>
+                                    <td>{{ $order->total_price }}</td> --}}
+                                </tr>
+                                <tr>
+                                    {{-- <th>Payment Method:</th>
+                                    <td>{{ $order->payment_method }}</td> --}}
+                                </tr>
+                                <tr>
+                                    {{-- <th>Order Date:</th>
+                                    <td>{{ $order->created_at->format('Y-m-d') }}</td> --}}
+                                </tr>
+                                <tr>
+                                    {{-- <th>Status:</th>
+                                    <td>{{ ucfirst($order->status) }}</td> --}}
+                                </tr>
+                                <tr>
+                                    {{-- <th>Payment Status:</th>
+                                    <td>{{ ucfirst($order->payment_status) }}</td> --}}
+                                </tr>
                             </table>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

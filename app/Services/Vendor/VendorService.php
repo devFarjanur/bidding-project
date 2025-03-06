@@ -66,14 +66,14 @@ class VendorService
     {
         return Bid::with(['vendor', 'bidRequest'])
             ->where('bid_request_id', $id)
-            ->findOrFail($id);
+            ->firstOrFail();
     }
 
     public function acceptBid()
     {
         return Bid::with(['vendor', 'bidRequest'])
-        ->where('vendor_id', auth::id())
-        ->where('status', 2)
-        ->get();
+            ->where('vendor_id', auth::id())
+            ->where('status', 2)
+            ->get();
     }
 }

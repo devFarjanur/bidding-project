@@ -49,7 +49,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">View</a>
+                                                <a href="{{ route('vendor.bid.request.details', $bid->id) }}" class="btn btn-primary">View</a>
                                             </td>
                                         </tr>
                                     @endforeach
