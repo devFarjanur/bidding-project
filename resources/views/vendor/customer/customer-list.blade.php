@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('vendor.customer.list') }}">
-                        Customer List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Customer List</li>
             </ol>
         </nav>
 
@@ -40,13 +40,18 @@
                                             </td>
                                             <td>
                                                 @if ($customer->status == 1)
-                                                    <a href="" class="bage bage-success">Active</a>
+                                                    <span class="badge badge-success">Active</span>
                                                 @elseif($customer->status == 2)
-                                                    <a href="" class="bage bage-danger">Inactive</a>
+                                                    <span class="badge badge-danger">Inactive</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">View</a>
+                                                <a href="" class="btn btn-primary btn-sm">View</a>
+                                                @if ($customer->status == 1)
+                                                    <a href="" class="btn btn-warning btn-sm">Inactive</a>
+                                                @elseif($customer->status == 2)
+                                                    <a href="" class="btn btn-success btn-sm">Active</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

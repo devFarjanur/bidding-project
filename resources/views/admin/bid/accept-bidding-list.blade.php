@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.accept.bid.list') }}">
-                        Accept Bid List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Accept Bid List</li>
             </ol>
         </nav>
 
@@ -27,7 +27,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($bids as $index => $bid)
+                                    @foreach ($acceptBid as $index => $bid)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>
@@ -49,7 +49,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">View</a>
+                                                <a href="" class="btn btn-primary btn-sm">View</a>
                                                 {{-- @if ($bid->status == 1)
                                                     <a href="" class="btn btn-secondary">Inactive</a>
                                                 @elseif($bid->status == 2)

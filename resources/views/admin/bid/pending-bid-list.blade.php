@@ -49,7 +49,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">View</a>
+                                                <a href="" class="btn btn-primary btn-sm">View</a>
                                                 {{-- @if ($bid->status == 1)
                                                     <a href="" class="btn btn-secondary">Inactive</a>
                                                 @elseif($bid->status == 2)

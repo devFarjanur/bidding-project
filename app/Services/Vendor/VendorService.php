@@ -51,6 +51,7 @@ class VendorService
     public function bidRequest()
     {
         return BidRequest::with(['customer', 'subcategory'])
+            ->where('status', 0)
             ->orderBy('id', 'desc')
             ->paginate(10);
     }

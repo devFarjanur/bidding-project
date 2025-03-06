@@ -1371,7 +1371,7 @@ namespace App\Models {
      * @property string $business_name
      * @property int $user_id
      * @property int $id
-     * @property-read \App\Models\Vendor $vendor
+     * @property-read \App\Models\User $user
      * @method static \Illuminate\Database\Eloquent\Builder|Vendor whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Vendor whereUserId($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Vendor whereBusinessName($value)

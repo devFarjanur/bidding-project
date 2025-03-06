@@ -1,11 +1,11 @@
 @extends('vendor.index')
-@section('vednor')
+@section('vendor')
     <div class="page-content">
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('vendor.category.list') }}">
-                        Category List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Category List</li>
             </ol>
         </nav>
 
@@ -42,11 +42,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">Edit</a>
+                                                <a href="" class="btn btn-info btn-sm">Edit</a>
                                                 @if ($cat->status == 1)
-                                                    <a href="" class="btn btn-secondary">Inactive</a>
+                                                    <a href="" class="btn btn-warning btn-sm">Inactive</a>
                                                 @elseif($cat->status == 2)
-                                                    <a href="" class="btn btn-success">Active</a>
+                                                    <a href="" class="btn btn-success btn-sm">Active</a>
                                                 @endif
                                             </td>
                                         </tr>

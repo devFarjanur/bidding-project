@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('vendor.bid.request.list') }}">
-                        Bid Request List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Bid Request List</li>
             </ol>
         </nav>
 

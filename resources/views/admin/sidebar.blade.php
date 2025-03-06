@@ -63,9 +63,8 @@
                     <span class="link-title">Rejected Vendors</span>
                 </a>
             </li>
+
             <li class="nav-item nav-category">Category Management</li>
-
-
             <li class="nav-item">
                 <a href="{{ route('admin.category.list') }}" class="nav-link">
                     <i class="link-icon" data-feather="layers"></i>
@@ -108,7 +107,7 @@
             </li>
             <li class="nav-item nav-category">Message</li>
             <li class="nav-item">
-                <a href="{{ url('pages/apps/chat.html') }}" class="nav-link">
+                <a href="" class="nav-link">
                     <i class="link-icon" data-feather="message-square"></i>
                     <span class="link-title">Chat</span>
                 </a>

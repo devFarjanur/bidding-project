@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.reject.bid.list') }}">
-                        Reject Bid List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Reject Bid List</li>
             </ol>
         </nav>
 
@@ -49,7 +49,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">View</a>
+                                                <a href="" class="btn btn-primary btn-sm">View</a>
                                                 {{-- @if ($bid->status == 1)
                                                     <a href="" class="btn btn-secondary">Inactive</a>
                                                 @elseif($bid->status == 2)

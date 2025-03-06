@@ -49,7 +49,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // category
     Route::get('admin/category-list', [AdminController::class, 'categoryList'])->name('admin.category.list');
     // subcategory
-    Route::get('admin/subcategory-list', [AdminController::class, 'subcategoryList'])->name('admin.subcategory.list');
+    Route::get('admin/sub-list', [AdminController::class, 'subcategoryList'])->name('admin.subcategory.list');
     //bid
     Route::get('admin/bid-list', [AdminController::class, 'bidList'])->name('admin.bid.list');
     Route::get('admin/bid-request-pending', [AdminController::class, 'pendingBidList'])->name('admin.pending.bid.list');
@@ -58,11 +58,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 
-Route::get('vendor-login', [VendorAuthController::class, 'vendorLogin'])->name('vendor.login');
-Route::post('vendor-login-post', [VendorAuthController::class, 'vendorLoginPost'])->name('vendor.login.post');
+Route::get('vendor/login', [VendorAuthController::class, 'vendorLogin'])->name('vendor.login');
+Route::post('vendor/login/post', [VendorAuthController::class, 'vendorLoginPost'])->name('vendor.login.post');
 
-Route::get('vendor-registration', [VendorAuthController::class, 'vendorRegistration'])->name('vendor.registration');
-Route::get('vendor-registration-post', [VendorAuthController::class, 'vendorRegistrationPost'])->name('vendor.registration.post');
+Route::get('vendor/registration', [VendorAuthController::class, 'vendorRegistration'])->name('vendor.registration');
+Route::get('vendor/registration/post', [VendorAuthController::class, 'vendorRegistrationPost'])->name('vendor.registration.post');
 
 
 // Vendor Dashboard (protected route)
@@ -78,7 +78,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     //Category
     Route::get('vendor/category-list', [VendorController::class, 'categoryList'])->name('vendor.category.list');
     // subcategory
-    Route::get('vendor/subcategory-list', [VendorController::class, 'subcategoryList'])->name('vendor.subcategory.list');
+    Route::get('vendor/sub-list', [VendorController::class, 'subcategoryList'])->name('vendor.subcategory.list');
     Route::get('vendor/add-subcategory', [VendorController::class, 'addSubcategory'])->name('vendor.add.subcategory');
     // bid
     Route::get('vendor/bid-request', [VendorController::class, 'bidRequestList'])->name('vendor.bid.request.list');

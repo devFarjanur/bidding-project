@@ -4,8 +4,8 @@
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.subcategory.list') }}">
-                        Subcategory List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Subcategory List</li>
             </ol>
         </nav>
 
@@ -49,11 +49,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">Edit</a>
+                                                <a href="" class="btn btn-info btn-sm">Edit</a>
                                                 @if ($sub->status == 1)
-                                                    <a href="" class="btn btn-secondary">Inactive</a>
+                                                    <a href="" class="btn btn-warning btn-sm">Inactive</a>
                                                 @elseif($sub->status == 2)
-                                                    <a href="" class="btn btn-success">Active</a>
+                                                    <a href="" class="btn btn-success btn-sm">Active</a>
                                                 @endif
                                             </td>
                                         </tr>
