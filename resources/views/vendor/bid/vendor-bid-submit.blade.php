@@ -13,33 +13,24 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Bid Details</h4>
-                        <div class="table-responsive">
+                        <h4 class="card-title">Bid Detaisls</h4>
+                        <div class="">
                             <table class="table">
                                 <tr>
-                                    {{-- <th>Order Number:</th>
-                                    <td>{{ $order->order_number }}</td> --}}
+                                    <th>Customer Name:</th>
+                                    <td>{{ $bid->bidRequest->customer->name ?? '--' }}</td>
                                 </tr>
                                 <tr>
-                                    {{-- <th>Customer Name:</th>
-                                    <td>{{ $order->user->firstname }} {{ $order->user->lastname }}</td> --}}
+                                    <th>Description:</th>
+                                    <td>{{ $bid->bidRequest->description ?? '--' }}</td>
                                 </tr>
                                 <tr>
-                                    {{-- <th>Address:</th>
-                                    <td>
-                                        {{ $order->address->division }},
-                                        {{ $order->address->city }},
-                                        {{ $order->address->road_no }},
-                                        {{ $order->address->house_no }}
-                                    </td> --}}
+                                    <th>Category:</th>
+                                    <td>{{ $bid->bidRequest->subcategory->category->name ?? '--' }}</td>
                                 </tr>
                                 <tr>
-                                    {{-- <th>Total Price:</th>
-                                    <td>{{ $order->total_price }}</td> --}}
-                                </tr>
-                                <tr>
-                                    {{-- <th>Payment Method:</th>
-                                    <td>{{ $order->payment_method }}</td> --}}
+                                    <th>Subcategory:</th>
+                                    <td>{{ $bid->bidRequest->subcategory->name ?? '--' }}</td>
                                 </tr>
                                 <tr>
                                     {{-- <th>Order Date:</th>
