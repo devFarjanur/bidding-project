@@ -3,25 +3,26 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\VendorAuthController;
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Vendor\VendorController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__ . '/auth.php';
 
@@ -85,6 +86,74 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('vendor/bid-request/details/{id}', [VendorController::class, 'bidRequestDetails'])->name('vendor.bid.request.details');
     Route::get('vendor/accept-bid', [VendorController::class, 'acceptBid'])->name('vendor.accept.bid');
 });
+
+
+
+
+
+
+
+
+
+Route::get('/', [CustomerController::class, 'CustomerIndex'])->name('customer.index');
+Route::get('/bid-request', [CustomerController::class, 'CustomerProduct'])->name('customer.product');
+// Route::get('/categories/{id}', [CustomerController::class, 'CustomerCategoryProduct'])->name('customer.category.product');
+// Route::get('/product/{id}', [CustomerController::class, 'CustomerProductDetials'])->name('customer.product.details');
+// Route::get('/about-us', [CustomerController::class, 'CustomerAbout'])->name('customer.about');
+// Route::get('/contact', [CustomerController::class, 'CustomerContact'])->name('customer.contact');
+// Route::get('/wishlist', [CustomerController::class, 'CustomerWishList'])->name('customer.wishlist');
+// Route::get('/cart', [CustomerController::class, 'CustomerCart'])->name('customer.cart');
+
+
+// Route::get('/order/success/{orderNumber}', [CustomerController::class, 'OrderSuccess'])->name('order.success');
+
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/checkout', [CustomerController::class, 'CustomerCheckout'])->name('customer.checkout');
+//     Route::post('/checkout/addresses/add', [CustomerController::class, 'addAddress'])->name('address.add');
+//     Route::put('/checkout/addresses/edit/{id}', [CustomerController::class, 'editAddress'])->name('address.edit');
+//     Route::delete('/checkout/addresses/delete/{id}', [CustomerController::class, 'deleteAddress'])->name('address.delete');
+//     Route::post('/order', [CustomerController::class, 'OrderStore'])->name('order.store');
+//     Route::patch('/order/{order}/status', [CustomerController::class, 'updateStatus'])->name('order.updateStatus');
+//     Route::patch('/order/{order}/payment-status', [CustomerController::class, 'updatePaymentStatus'])->name('order.updatePaymentStatus');
+//     Route::get('/invoice', [CustomerController::class, 'CustomerInvoice'])->name('customer.invoice');
+//     Route::get('/myaccount', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
+//     Route::post('/update-profile', [CustomerController::class, 'updateProfile'])->name('update.profile');
+//     Route::post('/change-password', [CustomerController::class, 'changePassword'])->name('change.password');
+//     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+//     Route::post('/wishlist/stock', [CustomerController::class, 'getProductStock'])->name('wishlist.stock');
+// });
+
+
+// // SSLCOMMERZ Start
+// Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+// Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+// Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+// Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+// Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+
+// Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+// Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+// Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+// //SSLCOMMERZ END
+
+
+// Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+// Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+// Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+// Route::post('/register', [RegisteredUserController::class, 'store']);
+
+
+
+
+
+
+
+
+
 
 
 Route::get('/test-log', function () {
