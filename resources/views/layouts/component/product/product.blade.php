@@ -24,7 +24,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="col-xl-9">
                 <div class="shop-grid">
                     <div class="row g-4 justify-content-center">
