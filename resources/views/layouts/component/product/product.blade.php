@@ -37,40 +37,52 @@
                                 method="POST" class="profile-form" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-4">
-                                    <div class="col-sm-6">
+                                    <div class="file-upload text-center rounded-3 mb-5">
+                                        <input name="photo" type="file" class="form-control" id="image"
+                                            autocomplete="off">
+                                        <img id="showImage" class="img-fluid" src="{{ url('upload/no_image.jpg') }}"
+                                            alt="profile">
+                                        <p class="text-dark fw-bold mb-2 mt-3">Drop your files here or <a href="#"
+                                                class="text-primary">browse</a></p>
+                                    </div>
+                                    <div class="col-12">
                                         <div class="label-input-field">
-                                            <label>First Name</label>
-                                            <input type="text" name="firstname" id="firstname" />
+                                            <label>About Description:</label>
+                                            <textarea class="form-control" placeholder="Type here" type="text" name="description" rows="5"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
-                                            <label>Last Name</label>
-                                            <input type="text" name="lastname" id="lastname" />
+                                            <label>Category</label>
+                                            <select class="form-control" name="category_id"
+                                                aria-label="Category select">
+                                                <option value="" selected disabled>Select Category
+                                                </option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
-                                            <label>Phone/Mobile</label>
-                                            <input type="tel" name="phone" id="phone" />
+                                            <label>Subcategory</label>
+                                            <select class="form-control" name="subcategory_id"
+                                                aria-label="Subcategory select">
+                                                <option value="" selected disabled>Select Subcategory
+                                                </option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
-                                            <label>Email Address</label>
-                                            <input type="email" name="email" id="email" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="label-input-field">
-                                            <label>Birthday</label>
-                                            <input type="date" name="birthday" id="birthday" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="label-input-field">
-                                            <label>User Name</label>
-                                            <input type="text" name="username" id="username" />
+                                            <label>Price</label>
+                                            <input class="form-control" type="number" name="price" id="price" placeholder="Price" />
                                         </div>
                                     </div>
                                 </div>
@@ -83,5 +95,3 @@
         </div>
     </div>
 </section>
-
-
