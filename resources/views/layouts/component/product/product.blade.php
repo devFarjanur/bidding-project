@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- Shop Grid Section Start -->
 <section class="gshop-gshop-grid pt-10">
     <div class="container">
@@ -24,19 +25,19 @@
                         </ul>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="col-xl-9">
                 <div class="shop-grid">
                     <div class="row g-4 justify-content-center">
-                        <div class="update-profile bg-white py-5 px-4">
-                            <h6 class="mb-4">Bid request</h6>
+                        <div class="update-profile bg-white py-5 px-5">
+                            <h3 class="mt-3 mb-5">Bid request</h3>
                             <form
                                 action="
                                 {{-- {{ route('update.profile') }} --}}
                                  "
                                 method="POST" class="profile-form" enctype="multipart/form-data">
                                 @csrf
-                                <div class="row g-4">
+                                <div class="row g-4 px-4">
                                     <div class="file-upload text-center rounded-3 mb-5">
                                         <input name="photo" type="file" class="form-control" id="image"
                                             autocomplete="off">
@@ -82,11 +83,14 @@
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>Price</label>
-                                            <input class="form-control" type="number" name="price" id="price" placeholder="Price" />
+                                            <input class="form-control" type="number" name="price" id="price"
+                                                placeholder="Price" />
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-6">Bid Request</button>
+                                <div class="text-center mb-3">
+                                    <button type="submit" class="btn btn-primary mt-5">Bid Request</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -95,3 +99,16 @@
         </div>
     </div>
 </section>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#image').change(function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+</script>

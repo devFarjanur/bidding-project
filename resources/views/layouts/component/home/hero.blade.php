@@ -17,10 +17,10 @@
                                 </p>
                                 <a
                                     href="
-                                {{-- {{ route('customer.product') }} --}}
+                                {{ route('customer.product') }}
                                  ">
                                     <button type="button" class="search-filter__btn">
-                                        <span class="search-filter__btn-text"> Shop Now </span>
+                                        <span class="search-filter__btn-text"> Bid Now </span>
                                         <span class="search-filter__btn-icon">
                                             <i class="fas fa-arrow-right"></i>
                                         </span>

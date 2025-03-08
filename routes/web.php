@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\VendorAuthController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProfileController;
@@ -91,12 +92,21 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
 
 
 
-
+Route::get('/login', [CustomerAuthController::class, 'customerLogin'])->name('login');
+Route::post('/login', [CustomerAuthController::class, 'customerLoginStore'])->name('login.store');
+Route::get('/register', [CustomerAuthController::class, 'customerRegister'])->name('register');
+Route::post('/register', [CustomerAuthController::class, 'customerRegisterStore'])->name('register.store');
 
 
 
 Route::get('/', [CustomerController::class, 'CustomerIndex'])->name('customer.index');
 Route::get('/bid-request', [CustomerController::class, 'CustomerProduct'])->name('customer.product');
+
+Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::get('/my-account', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
+    Route::post('/logout', [CustomerAuthController::class, 'customerLogout'])->name('customer.logout');
+});
+
 // Route::get('/categories/{id}', [CustomerController::class, 'CustomerCategoryProduct'])->name('customer.category.product');
 // Route::get('/product/{id}', [CustomerController::class, 'CustomerProductDetials'])->name('customer.product.details');
 // Route::get('/about-us', [CustomerController::class, 'CustomerAbout'])->name('customer.about');

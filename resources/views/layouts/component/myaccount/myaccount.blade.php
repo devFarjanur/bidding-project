@@ -10,7 +10,9 @@
                     alt="avatar" class="img-fluid" />
             </div>
             <div class="profile-inf-right">
-                <h4 class="mb-2">{{ $profileData->firstname }} {{ $profileData->lastname }}</h4>
+                <h4 class="mb-2">
+                    {{ $profileData->name }}
+                </h4>
                 <div class="info-meta d-flex align-items-center gap-2 gap-md-4 fs-xs flex-wrap">
                     <span>
                         <i class="fa-solid fa-phone me-2"></i>
@@ -39,9 +41,10 @@
                         </span>
                         <div>
                             <h4 class="mb-1">
-                                {{ $totalOrders }}
+                                10
+                                {{-- {{ $totalOrders }} --}}
                             </h4>
-                            <span>Total Orders</span>
+                            <span>Total Bids</span>
                         </div>
                     </div>
 
@@ -67,8 +70,11 @@
                             </svg>
                         </span>
                         <div>
-                            <h4 class="mb-1">{{ $ordersPending }}</h4>
-                            <span>Pending Orders</span>
+                            <h4 class="mb-1">
+                                15
+                                {{-- {{ $ordersPending }} --}}
+                            </h4>
+                            <span>Pending Bids</span>
                         </div>
                     </div>
 
@@ -93,8 +99,11 @@
                             </svg>
                         </span>
                         <div>
-                            <h4 class="mb-1">{{ $ordersProcessing }}</h4>
-                            <span>Order Processing</span>
+                            <h4 class="mb-1">
+                                15
+                                {{-- {{ $ordersProcessing }} --}}
+                            </h4>
+                            <span>Bids Processing</span>
                         </div>
                     </div>
 
@@ -116,8 +125,11 @@
                             </svg>
                         </span>
                         <div>
-                            <h4 class="mb-1">{{ $ordersShipped }}</h4>
-                            <span>Total Shipped</span>
+                            <h4 class="mb-1">
+                                10
+                                {{-- {{ $ordersShipped }} --}}
+                            </h4>
+                            <span>Total Bids Shipped</span>
                         </div>
                     </div>
 
@@ -154,8 +166,11 @@
                             </svg>
                         </span>
                         <div>
-                            <h4 class="mb-1">{{ $ordersDelivered }}</h4>
-                            <span>Total Delivered</span>
+                            <h4 class="mb-1">
+                                10
+                                {{-- {{ $ordersDelivered }} --}}
+                            </h4>
+                            <span>Total Bids Delivered</span>
                         </div>
                     </div>
 
@@ -180,8 +195,11 @@
                             </svg>
                         </span>
                         <div>
-                            <h4 class="mb-1">{{ $ordersCancelled }}</h4>
-                            <span>Cancelled Orders</span>
+                            <h4 class="mb-1">
+                                0
+                                {{-- {{ $ordersCancelled }} --}}
+                            </h4>
+                            <span>Cancelled Bids</span>
                         </div>
                     </div>
 
@@ -206,8 +224,11 @@
                             </svg>
                         </span>
                         <div>
-                            <h4 class="mb-1">{{ $ordersReturned }}</h4>
-                            <span>Returned Orders</span>
+                            <h4 class="mb-1">
+                                10
+                                {{-- {{ $ordersReturned }} --}}
+                            </h4>
+                            <span>Returned Bids</span>
                         </div>
                     </div>
 
@@ -253,7 +274,7 @@
                                             fill="#212B36" />
                                     </svg>
                                 </span>
-                                Order History
+                                Bid History
                             </a>
                         </li>
                         <li>
@@ -304,8 +325,9 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a href="{{ route('customer.logout') }}"
+                                {{-- onclick="event.preventDefault(); document.getElementById('logout-form').submit();" --}}
+                                >
                                 <span class="me-2">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -346,14 +368,17 @@
 
                                         <!-- Display User Info once -->
                                         <div class="address">
-                                            <p class="text-dark fw-bold mb-1">{{ $profileData->firstname }}
-                                                {{ $profileData->lastname }}
+                                            <p class="text-dark fw-bold mb-1">
+                                                {{-- {{ $profileData->firstname }}
+                                                {{ $profileData->lastname }} --}}
                                             </p>
-                                            <p class="mb-0">{{ $profileData->phone }}</p>
+                                            <p class="mb-0">
+                                                {{-- {{ $profileData->phone }} --}}
+                                            </p>
                                         </div>
 
                                         <!-- Loop through all addresses and display them -->
-                                        @foreach ($shippingAddresses as $address)
+                                        {{-- @foreach ($shippingAddresses as $address)
                                             <div class="address mt-4">
                                                 <p class="text-uppercase fw-medium mb-1">Address
                                                     {{ $loop->iteration }}</p>
@@ -363,7 +388,7 @@
                                                     {{ $address->house_no }}
                                                 </p>
                                             </div>
-                                        @endforeach
+                                        @endforeach --}}
                                     </div>
                                 </div>
                             </div>
@@ -384,7 +409,7 @@
                                         <th>Total Price</th>
                                         <th>Order Status</th>
                                     </tr>
-                                    @foreach ($orders as $order)
+                                    {{-- @foreach ($orders as $order)
                                         <tr>
                                             <td>{{ $order->order_number }}</td>
                                             <td>
@@ -397,7 +422,7 @@
                                             <td class="text-secondary">{{ $order->total_price }}</td>
                                             <td>{{ $order->status }}</td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </table>
                             </div>
                         </div>
@@ -416,14 +441,17 @@
 
                                         <!-- Display User Info once -->
                                         <div class="address">
-                                            <p class="text-dark fw-bold mb-1">{{ $profileData->firstname }}
-                                                {{ $profileData->lastname }}
+                                            <p class="text-dark fw-bold mb-1">
+                                                {{-- {{ $profileData->firstname }}
+                                                {{ $profileData->lastname }} --}}
                                             </p>
-                                            <p class="mb-0">{{ $profileData->phone }}</p>
+                                            <p class="mb-0">
+                                                {{-- {{ $profileData->phone }} --}}
+                                            </p>
                                         </div>
 
                                         <!-- Loop through all addresses and display them -->
-                                        @foreach ($shippingAddresses as $address)
+                                        {{-- @foreach ($shippingAddresses as $address)
                                             <div class="address mt-4">
                                                 <p class="text-uppercase fw-medium mb-1">Address
                                                     {{ $loop->iteration }}</p>
@@ -433,7 +461,7 @@
                                                     {{ $address->house_no }}
                                                 </p>
                                             </div>
-                                        @endforeach
+                                        @endforeach --}}
                                     </div>
                                 </div>
                             </div>
@@ -444,8 +472,11 @@
                     <div class="tab-pane fade" id="update-profile">
                         <div class="update-profile bg-white py-5 px-4">
                             <h6 class="mb-4">Update Profile</h6>
-                            <form action="{{ route('update.profile') }}" method="POST" class="profile-form"
-                                enctype="multipart/form-data">
+                            <form
+                                action="
+                            {{-- {{ route('update.profile') }} --}}
+                             "
+                                method="POST" class="profile-form" enctype="multipart/form-data">
                                 @csrf
                                 <div class="file-upload text-center rounded-3 mb-5">
                                     <input name="photo" type="file" class="form-control" id="image"
@@ -458,44 +489,47 @@
                                 <div class="row g-4">
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
-                                            <label>First Name</label>
+                                            <label>Name</label>
                                             <input type="text" name="firstname" id="firstname"
-                                                value="{{ $profileData->firstname }}" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="label-input-field">
-                                            <label>Last Name</label>
-                                            <input type="text" name="lastname" id="lastname"
-                                                value="{{ $profileData->lastname }}" />
+                                                value="
+                                                {{ $profileData->name }}
+                                                 " />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>Phone/Mobile</label>
                                             <input type="tel" name="phone" id="phone"
-                                                value="{{ $profileData->phone }}" />
+                                                value="
+                                                {{-- {{ $profileData->phone }} --}}
+                                                 " />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>Email Address</label>
                                             <input type="email" name="email" id="email"
-                                                value="{{ $profileData->email }}" />
+                                                value="
+                                                {{-- {{ $profileData->email }} --}}
+                                                 " />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>Birthday</label>
                                             <input type="date" name="birthday" id="birthday"
-                                                value="{{ $profileData->birthday }}" />
+                                                value="
+                                                {{-- {{ $profileData->birthday }} --}}
+                                                 " />
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>User Name</label>
                                             <input type="text" name="username" id="username"
-                                                value="{{ $profileData->username }}" />
+                                                value="
+                                                {{-- {{ $profileData->username }} --}}
+                                                 " />
                                         </div>
                                     </div>
                                 </div>

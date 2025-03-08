@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\User;
 use App\Services\Customer\CustomerService;
 use App\Services\Image\ImageService;
 use App\Services\Vendor\VendorService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -30,6 +32,55 @@ class CustomerController extends Controller
     {
         $categories = Category::get();
         return view('layouts.pages.product', compact('categories'));
+    }
+
+    public function CustomerAbout()
+    {
+        $categories = Category::get();
+        return view('layouts.pages.about', compact('categories'));
+    }
+
+
+    public function CustomerMyaccount()
+    {
+        $id = Auth::user()->id; // Get the authenticated user ID
+        $profileData = User::findOrFail($id); // Get the user profile data
+        $categories = Category::get(); // Get all categories with their products
+
+        // Fetch all addresses of the logged-in user
+        // $shippingAddresses = Address::where('user_id', $id)->get();
+
+        // Fetch only the user's orders with associated items and products
+        // $orders = Order::where('user_id', $id)->with('items.product')->get();
+
+        // Total number of orders for this user
+        // $totalOrders = $orders->count();
+
+        // Count orders by status for the logged-in user
+        // $ordersPending = $orders->where('status', Order::STATUS_PENDING)->count();
+        // $ordersDelivered = $orders->where('status', Order::STATUS_DELIVERED)->count();
+        // $ordersReturned = $orders->where('status', Order::STATUS_RETURNED)->count();
+        // $ordersProcessing = $orders->where('status', Order::STATUS_PROCESSING)->count();
+        // $ordersShipped = $orders->where('status', Order::STATUS_SHIPPED)->count();
+        // $ordersCancelled = $orders->where('status', Order::STATUS_CANCELLED)->count();
+
+        // Pass all data to the view
+        return view(
+            'layouts.pages.myaccount',
+            compact(
+                // 'orders',
+                // 'shippingAddresses',
+                'profileData',
+                'categories'
+                // 'ordersPending',
+                // 'ordersProcessing',
+                // 'ordersShipped',
+                // 'ordersDelivered',
+                // 'ordersCancelled',
+                // 'ordersReturned',
+                // 'totalOrders'
+            )
+        );
     }
 
 
@@ -71,11 +122,6 @@ class CustomerController extends Controller
 
     // // ------------------ about page
 
-    // public function CustomerAbout()
-    // {
-    //     $categories = Category::with('products')->get();
-    //     return view('layouts.pages.about', compact('categories'));
-    // }
 
     // // ------------------- contact page
 
@@ -224,47 +270,7 @@ class CustomerController extends Controller
     // // ----------------------- customer account page  
 
 
-    // public function CustomerMyaccount()
-    // {
-    //     $id = Auth::user()->id; // Get the authenticated user ID
-    //     $profileData = User::findOrFail($id); // Get the user profile data
-    //     $categories = Category::with('products')->get(); // Get all categories with their products
 
-    //     // Fetch all addresses of the logged-in user
-    //     $shippingAddresses = Address::where('user_id', $id)->get();
-
-    //     // Fetch only the user's orders with associated items and products
-    //     $orders = Order::where('user_id', $id)->with('items.product')->get();
-
-    //     // Total number of orders for this user
-    //     $totalOrders = $orders->count();
-
-    //     // Count orders by status for the logged-in user
-    //     $ordersPending = $orders->where('status', Order::STATUS_PENDING)->count();
-    //     $ordersDelivered = $orders->where('status', Order::STATUS_DELIVERED)->count();
-    //     $ordersReturned = $orders->where('status', Order::STATUS_RETURNED)->count();
-    //     $ordersProcessing = $orders->where('status', Order::STATUS_PROCESSING)->count();
-    //     $ordersShipped = $orders->where('status', Order::STATUS_SHIPPED)->count();
-    //     $ordersCancelled = $orders->where('status', Order::STATUS_CANCELLED)->count();
-
-    //     // Pass all data to the view
-    //     return view(
-    //         'layouts.pages.myaccount',
-    //         compact(
-    //             'orders',
-    //             'shippingAddresses',
-    //             'profileData',
-    //             'categories',
-    //             'ordersPending',
-    //             'ordersProcessing',
-    //             'ordersShipped',
-    //             'ordersDelivered',
-    //             'ordersCancelled',
-    //             'ordersReturned',
-    //             'totalOrders'
-    //         )
-    //     );
-    // }
 
 
 
