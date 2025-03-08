@@ -8,17 +8,15 @@
                         <div class="row">
                             <div class="col-md-8 col-lg-6 col-xxl-5">
                                 <span class="hero-6__subtitle d-inline-block mb-2">
-                                    Genuine 100% Organic Products
+                                    100% Verified & Secure Bidding Platform
                                 </span>
-                                <h1 class="hero-6__title mb-4">Medical Products For Your Family</h1>
+                                <h1 class="hero-6__title mb-4">Authentic & Fair Bidding Experience</h1>
                                 <p class="hero-6__para fs-18 mb-10">
-                                    Assertively target market-driven intellectual capital with worldwide human
-                                    capital holistic.
+                                    Our Secure & Transparent Bidding Solutions provide a reliable platform where users
+                                    can confidently place bids and achieve the best results with trust and integrity.
                                 </p>
-
-
-
-                                <a href="
+                                <a
+                                    href="
                                 {{-- {{ route('customer.product') }} --}}
                                  ">
                                     <button type="button" class="search-filter__btn">
