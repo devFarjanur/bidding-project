@@ -28,7 +28,7 @@
 
 
     <!-- Title -->
-    <title>Forever Cure Pharma</title>
+    <title>Bidding Website</title>
 
     <!-- Build:css -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/demo1/main.css') }}">
