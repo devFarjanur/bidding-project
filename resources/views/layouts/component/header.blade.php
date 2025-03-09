@@ -148,7 +148,7 @@
                                 @else
                                     <li class="has-submenu mt-3">
                                         <div>
-                                            <a href="{{-- {{ route('customer.contact') }} --}}" class="btn text-white px-4 py-2"
+                                            <a href="{{ route('login') }}" class="btn text-white px-4 py-2"
                                                 style="background-color: #00B6A9; font-size: 16px; border-radius: 5px;">
                                                 Login <span class="ms-1 fs-xs float-end"></span>
                                             </a>

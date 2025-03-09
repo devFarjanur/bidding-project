@@ -34,7 +34,7 @@
                                                 <img src="{{ asset($bid->image) }}" alt="Product Image"
                                                     style="width: 50px; height: 50px;">
                                             </td>
-                                            <th>{{ $bid->category->name ?? '--' }}</th>
+                                            <th>{{ $bid->subcategory->category->name ?? '--' }}</th>
                                             <th>{{ $bid->subcategory->name ?? '--' }}</th>
                                             <td>{{ $bid->target_price ?? '--' }}</td>
                                             <td>

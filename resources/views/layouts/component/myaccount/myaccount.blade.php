@@ -205,31 +205,46 @@
                     <!-- Order History Tab -->
                     <div class="tab-pane fade" id="bid-history">
                         <div class="recent-orders bg-white rounded py-5">
-                            <h6 class="mb-4 px-4">Recent Orders</h6>
+                            <h6 class="mb-4 px-4">Bid History</h6>
                             <div class="table-responsive">
                                 <table class="order-history-table table">
                                     <tr>
-                                        <th>Order Number#</th>
-                                        <th>Product Name</th>
-                                        <th>Placed on</th>
-                                        <th>Method</th>
-                                        <th>Total Price</th>
-                                        <th>Order Status</th>
+                                        <th>SL</th>
+                                        <th>Image</th>
+                                        <th>Category</th>
+                                        <th>Subcategory</th>
+                                        <th>Target Price</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
-                                    {{-- @foreach ($orders as $order)
+                                    @foreach ($bidHistory as $index => $bid)
                                         <tr>
-                                            <td>{{ $order->order_number }}</td>
+                                            <td>{{ $index + 1 }}</td>
                                             <td>
-                                                @foreach ($order->items as $item)
-                                                    {{ $item->product->name }} (x{{ $item->quantity }})<br>
-                                                @endforeach
+                                                <img src="{{ asset($bid->image) }}" alt="Product Image"
+                                                    style="width: 50px; height: 50px;">
                                             </td>
-                                            <td>{{ $order->created_at->format('d/m/Y') }}</td>
-                                            <td>{{ $order->payment_method }}</td>
-                                            <td class="text-secondary">{{ $order->total_price }}</td>
-                                            <td>{{ $order->status }}</td>
+                                            <th>{{ $bid->subcategory->category->name ?? '--' }}</th>
+                                            <th>{{ $bid->subcategory->name ?? '--' }}</th>
+                                            <td>{{ $bid->target_price ?? '--' }}</td>
+                                            <td>
+                                                @if ($bid->status == 0)
+                                                    <a href="" class="badge bg-warning text-dark">Bid
+                                                        Pending</a>
+                                                @elseif($bid->status == 1)
+                                                    <a href="" class="badge bg-warning">Bid Processing</a>
+                                                @elseif($bid->status == 2)
+                                                    <a href="" class="badge bg-success">Bid Compeleted</a>
+                                                @elseif($bid->status == 3)
+                                                    <a href="" class="badge bg-danger">Bid End</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn text-white px-4 py-2"
+                                                    style="background-color: #00B6A9; font-size: 16px; border-radius: 5px;">View</a>
+                                            </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -242,27 +257,45 @@
                             <div class="table-responsive">
                                 <table class="order-history-table table">
                                     <tr>
-                                        <th>Order Number#</th>
-                                        <th>Product Name</th>
-                                        <th>Placed on</th>
-                                        <th>Method</th>
-                                        <th>Total Price</th>
-                                        <th>Order Status</th>
+                                        <th>Bid Number#</th>
+                                        <th>Image</th>
+                                        <th>Category</th>
+                                        <th>Subcategory</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
-                                    {{-- @foreach ($orders as $order)
-                                                            <tr>
-                                                                <td>{{ $order->order_number }}</td>
-                                                                <td>
-                                                                    @foreach ($order->items as $item)
-                                                                        {{ $item->product->name }} (x{{ $item->quantity }})<br>
-                                                                    @endforeach
-                                                                </td>
-                                                                <td>{{ $order->created_at->format('d/m/Y') }}</td>
-                                                                <td>{{ $order->payment_method }}</td>
-                                                                <td class="text-secondary">{{ $order->total_price }}</td>
-                                                                <td>{{ $order->status }}</td>
-                                                            </tr>
-                                                        @endforeach --}}
+                                    @foreach ($bidTrack as $index => $bid)
+                                        <tr>
+                                            <td>{{ $bid->bid_number }}</td>
+                                            <td>
+                                                <img src="{{ asset($bid->image) }}" alt="Product Image"
+                                                    style="width: 50px; height: 50px;">
+                                            </td>
+                                            <th>{{ $bid->category->name ?? '--' }}</th>
+                                            <th>{{ $bid->subcategory->name ?? '--' }}</th>
+                                            <td>{{ $bid->price ?? '--' }}</td>
+                                            <td>
+                                                @if ($bid->status == 0)
+                                                    <a href="" class="badge bg-warning text-dark">Pending</a>
+                                                @elseif($bid->status == 1)
+                                                    <a href="" class="badge bg-warning">Processing</a>
+                                                @elseif($bid->status == 2)
+                                                    <a href="" class="badge bg-success">Shipped</a>
+                                                @elseif($bid->status == 3)
+                                                    <a href="" class="badge bg-danger">Delivered</a>
+                                                @elseif($bid->status == 4)
+                                                    <a href="" class="badge bg-danger">Cancel</a>
+                                                @elseif($bid->status == 5)
+                                                    <a href="" class="badge bg-danger">Returned</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn text-white px-4 py-2"
+                                                    style="background-color: #00B6A9; font-size: 16px; border-radius: 5px;">View</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -283,11 +316,10 @@
                                         <!-- Display User Info once -->
                                         <div class="address">
                                             <p class="text-dark fw-bold mb-1">
-                                                {{-- {{ $profileData->firstname }}
-                                                {{ $profileData->lastname }} --}}
+                                                {{ $profileData->name }}
                                             </p>
                                             <p class="mb-0">
-                                                {{-- {{ $profileData->phone }} --}}
+                                                {{ $profileData->phone }}
                                             </p>
                                         </div>
 

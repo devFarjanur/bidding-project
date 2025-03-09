@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\BidRequest;
+use App\Models\BidTrack;
 use App\Models\Category;
 use App\Models\User;
 use App\Services\Customer\CustomerService;
@@ -28,7 +30,7 @@ class CustomerController extends Controller
         return view('layouts.pages.home', compact('categories'));
     }
 
-        public function CustomerProduct()
+    public function CustomerProduct()
     {
         $categories = Category::get();
         return view('layouts.pages.product', compact('categories'));
@@ -46,6 +48,14 @@ class CustomerController extends Controller
         $id = Auth::user()->id;
         $profileData = User::findOrFail($id);
         $categories = Category::get();
+
+        $bidHistory = BidRequest::with(['customer', 'subcategory'])
+            ->where('customer_id', $id)
+            ->get();
+        
+        $bidTrack = BidTrack::with(['vendor', 'customer', 'bidrequest'])
+        ->where('customer_id', $id)
+        ->get();
 
         // Fetch all addresses of the logged-in user
         // $shippingAddresses = Address::where('user_id', $id)->get();
@@ -71,7 +81,9 @@ class CustomerController extends Controller
                 // 'orders',
                 // 'shippingAddresses',
                 'profileData',
-                'categories'
+                'categories',
+                'bidHistory',
+                'bidTrack'
                 // 'ordersPending',
                 // 'ordersProcessing',
                 // 'ordersShipped',
