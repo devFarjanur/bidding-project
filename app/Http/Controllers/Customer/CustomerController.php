@@ -43,9 +43,9 @@ class CustomerController extends Controller
 
     public function CustomerMyaccount()
     {
-        $id = Auth::user()->id; // Get the authenticated user ID
-        $profileData = User::findOrFail($id); // Get the user profile data
-        $categories = Category::get(); // Get all categories with their products
+        $id = Auth::user()->id;
+        $profileData = User::findOrFail($id);
+        $categories = Category::get();
 
         // Fetch all addresses of the logged-in user
         // $shippingAddresses = Address::where('user_id', $id)->get();
