@@ -85,7 +85,9 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     // bid
     Route::get('vendor/bid-request', [VendorController::class, 'bidRequestList'])->name('vendor.bid.request.list');
     Route::get('vendor/bid-request/details/{id}', [VendorController::class, 'bidRequestDetails'])->name('vendor.bid.request.details');
+    Route::get('vendor/bid-submit', [VendorController::class, 'submitBid'])->name('vendor.submit.bid');
     Route::get('vendor/accept-bid', [VendorController::class, 'acceptBid'])->name('vendor.accept.bid');
+
 });
 
 

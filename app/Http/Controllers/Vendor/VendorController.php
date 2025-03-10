@@ -49,8 +49,8 @@ class VendorController extends Controller
     public function bidRequestDetails($id)
     {
         $bidRequest = $this->vendorService->bidRequestFind($id);
-        $bid = $this->vendorService->bidFind($id);
-        return view('vendor.bid.vendor-bid-submit', compact('bidRequest', 'bid'));
+        $bids = $this->vendorService->bidFind($id);
+        return view('vendor.bid.vendor-bid-submit', compact('bidRequest', 'bids'));
     }
 
     // public function bidRequestDetails()

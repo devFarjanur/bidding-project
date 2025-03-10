@@ -18,37 +18,110 @@
                             <table class="table">
                                 <tr>
                                     <th>Customer Name:</th>
-                                    <td>{{ $bid->bidRequest->customer->name ?? '--' }}</td>
+                                    <td>{{ $bidRequest->customer->name ?? '--' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Description:</th>
-                                    <td>{{ $bid->bidRequest->description ?? '--' }}</td>
+                                    <td>{{ $bidRequest->description ?? '--' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Category:</th>
-                                    <td>{{ $bid->bidRequest->subcategory->category->name ?? '--' }}</td>
+                                    <td>{{ $bidRequest->subcategory->category->name ?? '--' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Subcategory:</th>
-                                    <td>{{ $bid->bidRequest->subcategory->name ?? '--' }}</td>
+                                    <td>{{ $bidRequest->subcategory->name ?? '--' }}</td>
                                 </tr>
                                 <tr>
-                                    {{-- <th>Order Date:</th>
-                                    <td>{{ $order->created_at->format('Y-m-d') }}</td> --}}
+                                    <th>Target Price:</th>
+                                    <td>{{ $bidRequest->target_price }}</td>
                                 </tr>
                                 <tr>
-                                    {{-- <th>Status:</th>
-                                    <td>{{ ucfirst($order->status) }}</td> --}}
+                                    <th>Image:</th>
+                                    <td><img src="{{ asset('upload/admin_images/' . $bidRequest->image) }}" alt="Bid Image"
+                                            class="img-thumbnail" style="max-width: 250px;"></td>
                                 </tr>
-                                <tr>
-                                    {{-- <th>Payment Status:</th>
-                                    <td>{{ ucfirst($order->payment_status) }}</td> --}}
-                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">Submit Bid</h4>
+
+                        <form method="POST" action="{{ route('vendor.submit.bid') }}" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="mb-3">
+                                <label for="bid" class="form-label">Your Bid Price (TK):</label>
+                                <input id="bid" class="form-control" name="proposed_price"
+                                    placeholder="Enter your bid price" type="text">
+                            </div>
+
+                            <input class="btn btn-primary" type="submit" value="Submit Bid">
+                        </form>
+                    </div>
+
+
+                    <div class="card-body">
+                        <h4 class="card-title">All Vendor's Bid</h4>
+
+                        <form method="POST" action="{{ route('vendor.submit.bid') }}" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="mb-3">
+                                <label for="bid" class="form-label">Your Bid Price (TK):</label>
+                                <input id="bid" class="form-control" name="proposed_price"
+                                    placeholder="Enter your bid price" type="text">
+                            </div>
+
+                            <input class="btn btn-primary" type="submit" value="Submit Bid">
+                        </form>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="dataTableExample" class="table table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>Vendor</th>
+                                        <th>Bid Price (TK)</th>
+                                        <th>Bid Status</th>
+                                        <th>Submitted At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($bids as $index => $bid)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <th>{{ $bid->vendor->name ?? '--' }}</th>
+                                            <th>{{ $bid->proposed_price ?? '--' }}</th>
+                                            <td>
+                                                @if ($bid->status == 0)
+                                                    <a href="" class="badge bg-warning text-dark">Bid Pending</a>
+                                                @elseif($bid->status == 1)
+                                                    <a href="" class="badge bg-warning">Bid Processing</a>
+                                                @elseif($bid->status == 2)
+                                                    <a href="" class="badge bg-success">Bid Compeleted</a>
+                                                @elseif($bid->status == 3)
+                                                    <a href="" class="badge bg-danger">Bid End</a>
+                                                @elseif($bid->status == 4)
+                                                    <a href="" class="badge bg-success">Bid Accepted</a>
+                                                @elseif($bid->status == 5)
+                                                    <a href="" class="badge bg-danger">Bid Rejected</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('vendor.bid.request.details', $bid->id) }}"
+                                                    class="btn btn-primary">View</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

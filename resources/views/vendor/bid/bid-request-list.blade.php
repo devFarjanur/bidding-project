@@ -46,10 +46,15 @@
                                                     <a href="" class="badge bg-success">Bid Compeleted</a>
                                                 @elseif($bid->status == 3)
                                                     <a href="" class="badge bg-danger">Bid End</a>
+                                                @elseif($bid->status == 4)
+                                                    <a href="" class="badge bg-success">Bid Accepted</a>
+                                                @elseif($bid->status == 5)
+                                                    <a href="" class="badge bg-danger">Bid Rejected</a>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('vendor.bid.request.details', $bid->id) }}" class="btn btn-primary">View</a>
+                                                <a href="{{ route('vendor.bid.request.details', $bid->id) }}"
+                                                    class="btn btn-primary">View</a>
                                             </td>
                                         </tr>
                                     @endforeach
