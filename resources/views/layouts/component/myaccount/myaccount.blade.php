@@ -135,7 +135,12 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('customer.logout') }}" {{-- onclick="event.preventDefault(); document.getElementById('logout-form').submit();" --}}>
+                            <form id="logout-form" action="{{ route('customer.logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+                            <a href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <span class="me-2">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

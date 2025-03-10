@@ -31,11 +31,8 @@
                     <div class="row g-4 justify-content-center">
                         <div class="update-profile bg-white py-5 px-5">
                             <h3 class="mt-3 mb-5">Bid request</h3>
-                            <form
-                                action="
-                                {{-- {{ route('update.profile') }} --}}
-                                 "
-                                method="POST" class="profile-form" enctype="multipart/form-data">
+                            <form action="{{ route('customer.bid.request') }}" method="POST" class="profile-form"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-4 px-4">
                                     <div class="file-upload text-center rounded-3 mb-5">
@@ -55,7 +52,7 @@
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>Category</label>
-                                            <select class="form-control" name="category_id"
+                                            {{-- <select class="form-control" name="category_id"
                                                 aria-label="Category select">
                                                 <option value="" selected disabled>Select Category
                                                 </option>
@@ -63,13 +60,19 @@
                                                     <option value="{{ $category->id }}">
                                                         {{ $category->name }}</option>
                                                 @endforeach
+                                            </select> --}}
+                                            <select class="form-control" name="category_id" id="category_select">
+                                                <option value="" selected disabled>Select Category</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="label-input-field">
                                             <label>Subcategory</label>
-                                            <select class="form-control" name="subcategory_id"
+                                            {{-- <select class="form-control" name="subcategory_id"
                                                 aria-label="Subcategory select">
                                                 <option value="" selected disabled>Select Subcategory
                                                 </option>
@@ -77,6 +80,9 @@
                                                     <option value="{{ $category->id }}">
                                                         {{ $category->name }}</option>
                                                 @endforeach
+                                            </select> --}}
+                                            <select class="form-control" name="subcategory_id" id="subcategory_select">
+                                                <option value="" selected disabled>Select Subcategory</option>
                                             </select>
                                         </div>
                                     </div>
@@ -109,6 +115,34 @@
                 $('#showImage').attr('src', e.target.result);
             }
             reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#category_select').on('change', function() {
+            var category_id = $(this).val();
+
+            if (category_id) {
+                $.ajax({
+                    url: "{{ url('/get-subcategories') }}/" + category_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#subcategory_select').html(
+                            '<option value="" selected disabled>Select Subcategory</option>'
+                        );
+                        $.each(data, function(key, value) {
+                            $('#subcategory_select').append('<option value="' +
+                                value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#subcategory_select').html(
+                    '<option value="" selected disabled>Select Subcategory</option>');
+            }
         });
     });
 </script>

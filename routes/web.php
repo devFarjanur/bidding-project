@@ -103,8 +103,11 @@ Route::post('/register', [CustomerAuthController::class, 'customerRegisterStore'
 
 Route::get('/', [CustomerController::class, 'CustomerIndex'])->name('customer.index');
 Route::get('/bid-request', [CustomerController::class, 'CustomerProduct'])->name('customer.product');
+Route::get('/get-subcategories/{category_id}', [CustomerController::class, 'getSubcategories'])->name('get.subcategories');
+
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::post('/bid-request-store', [CustomerController::class, 'customerBidRequest'])->name('customer.bid.request');
     Route::get('/my-account', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
     Route::post('/logout', [CustomerAuthController::class, 'customerLogout'])->name('customer.logout');
 });

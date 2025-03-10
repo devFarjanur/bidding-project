@@ -64,7 +64,7 @@ class CustomerAuthController extends Controller
             $request->session()->invalidate();
             $request->session()->regenerateToken();
             session()->flash('success', 'Logout successful');
-            return redirect()->route('login');
+            return redirect()->route('customer.index');
         } catch (Exception $e) {
             Log::error('Customer logout error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred, please try again later.');

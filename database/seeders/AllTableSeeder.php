@@ -66,11 +66,12 @@ class AllTableSeeder extends Seeder
 
         // Generate 30 bid_requests with fake data
         $customerIds = DB::table('users')->where('role', 'customer')->pluck('id')->toArray();
-        
+        $categoryIds = DB::table('categories')->pluck('id')->toArray();
         $subcategoryIds = DB::table('subcategories')->pluck('id')->toArray();
         for ($i = 0; $i < 30; $i++) {
             DB::table('bid_requests')->insert([
                 'customer_id' => $faker->randomElement($customerIds),
+                'category_id' => $faker->randomElement($categoryIds),
                 'subcategory_id' => $faker->randomElement($subcategoryIds),
                 'description' => $faker->paragraph,
                 'target_price' => $faker->randomFloat(2, 100, 1000),

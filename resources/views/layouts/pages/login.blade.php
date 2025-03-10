@@ -5,6 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Meta -->
     <meta name="description"
@@ -32,6 +34,8 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/demo1/main.css') }}">
     <!-- Endbuild -->
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
 </head>
 
 <body>
@@ -52,7 +56,8 @@
                                     <img src="{{ asset('backend/assets/images/logo.png') }}" alt="logo">
                                 </a>
                             </div>
-                            <h2 class="mb-4 h3">Hey there! <br>Welcome back <span class="text-secondary">Bidding Website</span></h2>
+                            <h2 class="mb-4 h3">Hey there! <br>Welcome back <span class="text-secondary">Bidding
+                                    Website</span></h2>
                             <div class="row g-3">
                                 <div class="col-sm-12">
                                     <div class="input-field">
@@ -117,6 +122,13 @@
     <script src="{{ asset('backend/assets/fontawesome/js/all.js') }}"></script>
     <!-- Your other JS files -->
 
+
+
+
+    <!-- Include cart.js file -->
+    <script src="{{ asset('backend/assets/cart.js') }}"></script>
+
+
     <!-- Build:js -->
     <script src="{{ asset('backend/assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/vendors/jquery-ui.min.js') }}"></script>
@@ -133,6 +145,34 @@
     <script src="{{ asset('backend/assets/js/vendors/typer.js') }}"></script>
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
     <!-- Endbuild -->
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
+
+
 </body>
 
 </html>

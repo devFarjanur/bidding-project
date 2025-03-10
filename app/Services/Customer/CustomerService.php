@@ -2,52 +2,60 @@
 
 namespace App\Services\Customer;
 
+use App\Models\BidRequest;
+use App\Services\Image\ImageService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+use Illuminate\Support\Facades\Log;
+
 class CustomerService
 {
-    public function sayHello()
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
     {
-        return "Hello from AdminService!";
+        $this->imageService = $imageService;
     }
 
-    public function bidCustomRequestStore(Request $request)
+    public function bidCustomerRequest(Request $request)
     {
-        if (!auth()->check()) {
-            auth()->logout();
-            \Log::info('User is not authenticated. Redirecting to login.');
-            $this->helperService->setFlashMessage($request, 'Please log in to place a bid request.', 'error');
-            return redirect()->route('customer.login');
-        }
-
         try {
-            $customer = Auth::user();
-            $existingBidRequest = BidRequest::where('customer_id', $customer->id)
-                ->where('category_id', $request->category_id)
-                ->where('subcategory_id', $request->subcategory_id)
-                ->where('bid_status', 'pending')
-                ->exists();
-
-            if ($existingBidRequest) {
-                $this->helperService->setFlashMessage($request, 'You already have a pending bid request for this product.', 'error');
-                return redirect()->back();
+            if (!Auth::check()) {
+                return redirect()->route('customer.login')->with(notify('Please log in to place a bid request.', 'error'));
             }
 
-            $imageName = $this->imageService->uploadImage($request);
-            BidRequest::create([
+            $customer = Auth::user();
+
+            $existingBid = BidRequest::where([
+                'customer_id' => $customer->id,
+            ])->where('status', 0)->first();
+
+            if ($existingBid) {
+                return redirect()->back()->with(notify('You already have a pending bid request', 'error'));
+            }
+
+            $imagePath = $this->imageService->uploadImage($request);
+            $bidRequest = BidRequest::create([
                 'customer_id' => $customer->id,
                 'description' => $request->description,
                 'category_id' => $request->category_id,
                 'subcategory_id' => $request->subcategory_id,
                 'target_price' => $request->price,
-                'type' => 'Custom Bid',
-                'image_path' => $imageName,
-                'bid_status' => 'pending',
+                'image' => $imagePath,
+                'status' => 0,
             ]);
-            $this->helperService->setFlashMessage($request, 'Your bid request has been placed successfully.', 'success');
-            return redirect()->route('customer.bid.list', $customer->id);
+
+            if (!$bidRequest) {
+                return redirect()->back()->with(notify('Failed to store bid request.', 'error'));
+            }
+
+            return redirect()->back()->with(notify('Your bid request has been placed successfully.', 'success'));
+
         } catch (Exception $e) {
-            \Log::error("Failed to place bid: " . $e->getMessage());
-            $this->helperService->setFlashMessage($request, 'Failed to place your bid request.', 'error');
-            return redirect()->back();
+            Log::error('Error placing bid request: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed to place bid request.', 'error'));
         }
     }
 }

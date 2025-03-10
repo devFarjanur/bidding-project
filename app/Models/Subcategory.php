@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subcategory extends Model
 {
-
+    protected $fillable = [
+        'vendor_id',
+        'category_id',
+        'name',
+        'image',
+        'status',
+    ];
 
     public function vendor()
     {

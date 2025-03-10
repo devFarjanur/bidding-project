@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class BidRequest extends Model
 {
-    
-
-
-
+    protected $fillable = [
+        'customer_id',
+        'category_id',
+        'subcategory_id',
+        'description',
+        'target_price',
+        'image',
+        'status',
+    ];
 
     public function customer()
     {

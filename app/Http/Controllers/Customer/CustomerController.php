@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\BidRequest;
 use App\Models\BidTrack;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\User;
 use App\Services\Customer\CustomerService;
 use App\Services\Image\ImageService;
 use App\Services\Vendor\VendorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
@@ -36,6 +40,22 @@ class CustomerController extends Controller
         return view('layouts.pages.product', compact('categories'));
     }
 
+    public function getSubcategories($category_id)
+    {
+        $subcategories = Subcategory::where('category_id', $category_id)->get();
+        return response()->json($subcategories);
+    }
+
+    public function customerBidRequest(Request $request)
+    {
+        try {
+            return $this->customerService->bidCustomerRequest($request);  // Call the service method
+        } catch (Exception $e) {
+            Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
+    }
+
     public function CustomerAbout()
     {
         $categories = Category::get();
@@ -52,10 +72,10 @@ class CustomerController extends Controller
         $bidHistory = BidRequest::with(['customer', 'subcategory'])
             ->where('customer_id', $id)
             ->get();
-        
+
         $bidTrack = BidTrack::with(['vendor', 'customer', 'bidrequest'])
-        ->where('customer_id', $id)
-        ->get();
+            ->where('customer_id', $id)
+            ->get();
 
         // Fetch all addresses of the logged-in user
         // $shippingAddresses = Address::where('user_id', $id)->get();
