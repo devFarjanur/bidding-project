@@ -7,6 +7,7 @@ use App\Models\BidRequest;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VendorService
@@ -62,11 +63,24 @@ class VendorService
             ->findOrFail($id);
     }
 
-    public function bidFind($id)
+    public function getBid($id)
     {
         return Bid::with(['vendor', 'bidRequest'])
             ->where('bid_request_id', $id)
             ->get();
+    }
+
+    public function bidSubmit(Request $request, $id)
+    {
+        $bidRequest = $this->bidRequestFind($id);
+
+        Bid::create([
+            'vendor_id' => Auth::id(),
+            'bid_request_id' => $bidRequest->id,
+            'proposed_price' => $request->proposed_price,
+        ]);
+
+        return true;
     }
 
     public function acceptBid()

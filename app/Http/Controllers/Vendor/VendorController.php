@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Services\Image\ImageService;
 use App\Services\Vendor\VendorService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\TryCatch;
 
 class VendorController extends Controller
 {
@@ -49,8 +51,19 @@ class VendorController extends Controller
     public function bidRequestDetails($id)
     {
         $bidRequest = $this->vendorService->bidRequestFind($id);
-        $bids = $this->vendorService->bidFind($id);
+        $bids = $this->vendorService->getBid($id);
         return view('vendor.bid.vendor-bid-submit', compact('bidRequest', 'bids'));
+    }
+
+    public function bidSubmit(Request $request, $id)
+    {
+        try {
+            $this->vendorService->bidSubmit($request, $id);
+            return redirect()->back()->with(notify('Bid submit successfully', 'success'));
+        } catch (\Exception $e) {
+            Log::error('Error creating expense head: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     // public function bidRequestDetails()
