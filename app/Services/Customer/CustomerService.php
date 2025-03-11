@@ -2,6 +2,7 @@
 
 namespace App\Services\Customer;
 
+use App\Models\Bid;
 use App\Models\BidRequest;
 use App\Services\Image\ImageService;
 use Illuminate\Http\Request;
@@ -22,8 +23,9 @@ class CustomerService
     public function bidCustomerRequest(Request $request)
     {
         try {
+
             if (!Auth::check()) {
-                return redirect()->route('customer.login')->with(notify('Please log in to place a bid request.', 'error'));
+                return redirect()->route('login')->with(notify('Please log in to place a bid request.', 'error'));
             }
 
             $customer = Auth::user();
@@ -57,5 +59,19 @@ class CustomerService
             Log::error('Error placing bid request: ' . $e->getMessage());
             return redirect()->back()->with(notify('Failed to place bid request.', 'error'));
         }
+    }
+
+    public function customerFindBidRequest($id)
+    {
+        return BidRequest::with(['customer', 'category', 'subcategory'])
+            ->where('customer_id', Auth::id())
+            ->findOrFail($id);
+    }
+
+    public function getBid($id)
+    {
+        return Bid::with(['vendor', 'bidRequest'])
+            ->where('bid_request_id', $id)
+            ->get();
     }
 }

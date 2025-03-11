@@ -102,13 +102,16 @@ Route::post('/register', [CustomerAuthController::class, 'customerRegisterStore'
 
 
 Route::get('/', [CustomerController::class, 'CustomerIndex'])->name('customer.index');
+Route::get('/about-us', [CustomerController::class, 'CustomerAbout'])->name('customer.about');
+Route::get('/contact', [CustomerController::class, 'CustomerContact'])->name('customer.contact');
 Route::get('/bid-request', [CustomerController::class, 'CustomerProduct'])->name('customer.product');
 Route::get('/get-subcategories/{category_id}', [CustomerController::class, 'getSubcategories'])->name('get.subcategories');
+Route::post('/bid-request-store', [CustomerController::class, 'customerBidRequest'])->name('customer.bid.request');
 
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
-    Route::post('/bid-request-store', [CustomerController::class, 'customerBidRequest'])->name('customer.bid.request');
     Route::get('/my-account', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
+    Route::get('/bid-request-details/{id}', [CustomerController::class, 'bidDetails'])->name('customer.bid.request.details');
     Route::post('/logout', [CustomerAuthController::class, 'customerLogout'])->name('customer.logout');
 });
 

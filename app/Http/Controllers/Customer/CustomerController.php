@@ -49,11 +49,19 @@ class CustomerController extends Controller
     public function customerBidRequest(Request $request)
     {
         try {
-            return $this->customerService->bidCustomerRequest($request);  // Call the service method
+            return $this->customerService->bidCustomerRequest($request);
         } catch (Exception $e) {
             Log::error('Error: ' . $e->getMessage());
             return redirect()->back()->with(notify('Failed', 'error'));
         }
+    }
+
+    public function bidDetails($id)
+    {
+        $categories = Category::get();
+        $bidRequestFind = $this->customerService->customerFindBidRequest($id);
+        $getBid = $this->customerService->getBid($id);
+        return view('layouts.pages.bid-details', compact('categories', 'bidRequestFind', 'getBid'));
     }
 
     public function CustomerAbout()
@@ -62,6 +70,11 @@ class CustomerController extends Controller
         return view('layouts.pages.about', compact('categories'));
     }
 
+    public function CustomerContact()
+    {
+        $categories = Category::get();
+        return view('layouts.pages.contact', compact('categories'));
+    }
 
     public function CustomerMyaccount()
     {

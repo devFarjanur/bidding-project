@@ -118,19 +118,13 @@
                                 </li>
 
                                 <li class="has-submenu">
-                                    <a
-                                        href="
-                                    {{-- {{ route('customer.about') }} --}}
-                                     ">About
+                                    <a href="{{ route('customer.about') }}">About
                                         Us<span class="ms-1 fs-xs float-end"></span></a>
 
                                 </li>
 
                                 <li class="has-submenu">
-                                    <a
-                                        href="
-                                    {{-- {{ route('customer.contact') }} --}}
-                                     ">Contact<span
+                                    <a href="{{ route('customer.contact') }}">Contact<span
                                             class="ms-1 fs-xs float-end"></span></a>
 
                                 </li>

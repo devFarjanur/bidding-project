@@ -245,7 +245,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn text-white px-4 py-2"
+                                                <a href="{{ route('customer.bid.request.details', $bid->id) }}"
+                                                    class="btn text-white px-4 py-2"
                                                     style="background-color: #00B6A9; font-size: 16px; border-radius: 5px;">View</a>
                                             </td>
                                         </tr>
