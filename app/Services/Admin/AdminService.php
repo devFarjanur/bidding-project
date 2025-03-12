@@ -8,7 +8,7 @@ use App\Models\Subcategory;
 use App\Models\Subcatgory;
 use App\Models\User;
 use App\Models\Vendor;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 use Illuminate\Support\Facades\Log;

@@ -9,7 +9,7 @@
                     <nav>
                         <ol class="breadcrumb justify-content-center">
                             <li class="breadcrumb-item fw-bold" aria-current="page"><a
-                                    href="{{ route('customer.bid.request.details') }}">Home</a></li>
+                                    href="{{ route('customer.index') }}">Home</a></li>
                             <li class="breadcrumb-item fw-bold" aria-current="page">Bid Request Details</li>
                         </ol>
                     </nav>

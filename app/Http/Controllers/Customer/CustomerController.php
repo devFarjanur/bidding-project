@@ -56,13 +56,25 @@ class CustomerController extends Controller
         }
     }
 
-    public function bidDetails($id)
+    public function customerBidDetails($id)
     {
         $categories = Category::get();
-        $bidRequestFind = $this->customerService->customerFindBidRequest($id);
+        $bidRequest = $this->customerService->customerFindBidRequest($id);
         $getBid = $this->customerService->getBid($id);
-        return view('layouts.pages.bid-details', compact('categories', 'bidRequestFind', 'getBid'));
+        // dd($getBid);
+        return view('layouts.pages.bid-details', compact('categories', 'bidRequest', 'getBid'));
     }
+
+    public function customerAcceptBid(Request $request, $id)
+    {
+        try {
+            return $this->customerService->acceptBid($request, $id);
+        } catch (Exception $e) {
+            Log::error('Error in Bid Acceptance: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed to accept the bid.', 'error'));
+        }
+    }
+
 
     public function CustomerAbout()
     {

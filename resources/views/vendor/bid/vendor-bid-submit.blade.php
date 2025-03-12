@@ -48,7 +48,8 @@
                     <div class="card-body">
                         <h4 class="card-title">Submit Bid</h4>
 
-                        <form method="POST" action="{{ route('vendor.submit.bid') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('vendor.submit.bid', $bidRequest->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -60,25 +61,9 @@
                             <input class="btn btn-primary" type="submit" value="Submit Bid">
                         </form>
                     </div>
-
 
                     <div class="card-body">
                         <h4 class="card-title">All Vendor's Bid</h4>
-
-                        <form method="POST" action="{{ route('vendor.submit.bid') }}" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="mb-3">
-                                <label for="bid" class="form-label">Your Bid Price (TK):</label>
-                                <input id="bid" class="form-control" name="proposed_price"
-                                    placeholder="Enter your bid price" type="text">
-                            </div>
-
-                            <input class="btn btn-primary" type="submit" value="Submit Bid">
-                        </form>
-                    </div>
-
-                    <div class="card-body">
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table table-hover text-center">
                                 <thead>
@@ -94,7 +79,7 @@
                                     @foreach ($bids as $index => $bid)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <th>{{ $bid->vendor->name ?? '--' }}</th>
+                                            <th>{{ $bid->vendor->user->name ?? '--' }}</th>
                                             <th>{{ $bid->proposed_price ?? '--' }}</th>
                                             <td>
                                                 @if ($bid->status == 0)
@@ -112,8 +97,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('vendor.bid.request.details', $bid->id) }}"
-                                                    class="btn btn-primary">View</a>
+                                                {{ $bid->created_at->format('d M, Y h:i A') }}
                                             </td>
                                         </tr>
                                     @endforeach

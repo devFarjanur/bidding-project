@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Bid extends Model
 {
 
-
+    protected $fillable = [
+        'vendor_id',
+        'bid_request_id',
+        'proposed_price',
+        'status'
+    ];
 
 
     public function vendor()

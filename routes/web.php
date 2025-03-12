@@ -44,10 +44,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/customer-list', [AdminController::class, 'customerList'])->name('admin.customer.list');
     // vendor
     Route::get('admin/vendor-request', [AdminController::class, 'vendorRequestList'])->name('admin.vendor.request.list');
+    Route::post('admin/vendor-accept/{id}', [AdminController::class, 'vendorAccept'])->name('admin.vendor.accept');
+    Route::post('admin/vendor-reject/{id}', [AdminController::class, 'vendorReject'])->name('admin.vendor.reject');
     Route::get('admin/vendor-list', [AdminController::class, 'vendorLIst'])->name('admin.vendor.list');
     Route::get('admin/vendor-active', [AdminController::class, 'vendorActiveList'])->name('admin.vendor.active.list');
     Route::get('admin/vendor-inactive', [AdminController::class, 'vendorInactiveList'])->name('admin.vendor.incative.list');
-    Route::get('admin/vendor-reject', [AdminController::class, 'vendorRejectList'])->name('admin.vendor.reject.list');
+    Route::get('admin/vendor-rejected', [AdminController::class, 'vendorRejectList'])->name('admin.vendor.reject.list');
     // category
     Route::get('admin/category-list', [AdminController::class, 'categoryList'])->name('admin.category.list');
     // subcategory
@@ -85,7 +87,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     // bid
     Route::get('vendor/bid-request', [VendorController::class, 'bidRequestList'])->name('vendor.bid.request.list');
     Route::get('vendor/bid-request/details/{id}', [VendorController::class, 'bidRequestDetails'])->name('vendor.bid.request.details');
-    Route::get('vendor/bid-submit', [VendorController::class, 'submitBid'])->name('vendor.submit.bid');
+    Route::post('vendor/bid-submit/{id}', [VendorController::class, 'bidSubmit'])->name('vendor.submit.bid');
     Route::get('vendor/accept-bid', [VendorController::class, 'acceptBid'])->name('vendor.accept.bid');
 
 });
@@ -111,7 +113,8 @@ Route::post('/bid-request-store', [CustomerController::class, 'customerBidReques
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/my-account', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
-    Route::get('/bid-request-details/{id}', [CustomerController::class, 'bidDetails'])->name('customer.bid.request.details');
+    Route::get('/bid-request-details/{id}', [CustomerController::class, 'customerBidDetails'])->name('customer.bid.details');
+    Route::post('/bid-accept-store/{id}', [CustomerController::class, 'customerAcceptBid'])->name('customer.accept.bid');
     Route::post('/logout', [CustomerAuthController::class, 'customerLogout'])->name('customer.logout');
 });
 

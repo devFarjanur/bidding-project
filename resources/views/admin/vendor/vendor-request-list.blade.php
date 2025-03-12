@@ -50,8 +50,17 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-primary">Accept</a>
-                                                <a href="" class="btn btn-danger">Reject</a>
+                                                <form action="{{ route('admin.vendor.accept', $vendor->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary">Accept</button>
+                                                </form>
+
+                                                <form action="{{ route('admin.vendor.reject', $vendor->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

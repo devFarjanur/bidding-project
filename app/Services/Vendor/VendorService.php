@@ -9,6 +9,9 @@ use App\Models\Subcategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class VendorService
 {
@@ -52,7 +55,7 @@ class VendorService
     public function bidRequest()
     {
         return BidRequest::with(['customer', 'subcategory'])
-            ->where('status', 0)
+            ->whereIn('status', [0, 1])
             ->orderBy('id', 'desc')
             ->paginate(10);
     }
@@ -72,15 +75,30 @@ class VendorService
 
     public function bidSubmit(Request $request, $id)
     {
-        $bidRequest = $this->bidRequestFind($id);
+        DB::beginTransaction();
 
-        Bid::create([
-            'vendor_id' => Auth::id(),
-            'bid_request_id' => $bidRequest->id,
-            'proposed_price' => $request->proposed_price,
-        ]);
+        try {
+            $bidRequest = $this->bidRequestFind($id);
 
-        return true;
+            Bid::create([
+                'vendor_id' => Auth::id(),
+                'bid_request_id' => $bidRequest->id,
+                'proposed_price' => $request->proposed_price,
+                'status' => 1
+            ]);
+
+            $bidRequest->update([
+                'status' => 1
+            ]);
+
+            DB::commit();
+            return true;
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Bid Accept Error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Something went wrong. Please try again.', 'error'));
+        }
     }
 
     public function acceptBid()

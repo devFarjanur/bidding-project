@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class BidTrack extends Model
 {
     
+    protected $fillable = [
+        'bid_request_id',
+        'vendor_id',
+        'customer_id',
+        'bid_number',
+        'price',
+        'status',
+    ];
 
     public function vendor()
     {

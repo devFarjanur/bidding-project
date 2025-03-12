@@ -3,6 +3,6 @@
 
 
 @include('layouts.component.biddetails.hero')
-@include('layouts.component.biddetails.hero')
+@include('layouts.component.biddetails.bid-details')
 
 @endsection

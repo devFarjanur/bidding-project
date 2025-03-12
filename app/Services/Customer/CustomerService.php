@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class CustomerService
 {
@@ -73,5 +74,35 @@ class CustomerService
         return Bid::with(['vendor', 'bidRequest'])
             ->where('bid_request_id', $id)
             ->get();
+    }
+
+    public function acceptBid(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $bidRequest = $this->customerFindBidRequest($id);
+
+            if ($bidRequest->customer_id !== auth()->id()) {
+                return redirect()->back()->with(notify('You are not authorized to view this bid request.', 'error'));
+            }
+
+            $findBid = $this->getBid($id);
+
+            $bidRequest->update(['status' => 3]);
+
+            $findBid->update(['status' => 2]);
+
+            $updatedBids = $bidRequest->bids()->where('id', '!=', $findBid->id)->update(['status' => 5]);
+            Log::info('Number of bids updated to rejected: ' . $updatedBids);
+
+            DB::commit();
+            return redirect()->back()->with(notify('Bid accepted successfully.', 'success'));
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Bid Accept Error: ' . $e->getMessage());
+
+            return redirect()->back()->with(notify('Something went wrong. Please try again.', 'error'));
+        }
     }
 }

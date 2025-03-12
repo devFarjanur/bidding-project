@@ -53,6 +53,16 @@ class AdminController extends Controller
         return view('admin.vendor.vendor-reject-list', compact('rejectVendor'));
     }
 
+    public function vendorAccept(Request $request, $id)
+    {
+        return $this->adminService->updateToActiveVendor($request, $id);
+    }
+
+    public function vendorReject(Request $request, $id)
+    {
+        return $this->adminService->updateToRejectVendor($request, $id);
+    }
+
     public function categoryList()
     {
         $category = $this->adminService->categoryList();
