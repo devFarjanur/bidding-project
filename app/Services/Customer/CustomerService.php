@@ -93,8 +93,12 @@ class CustomerService
 
             $findBid->update(['status' => 2]);
 
-            $updatedBids = $bidRequest->bids()->where('id', '!=', $findBid->id)->update(['status' => 5]);
-            Log::info('Number of bids updated to rejected: ' . $updatedBids);
+            // $updatedBids = $bidRequest->bids()->where('id', '!=', $findBid->id)->update(['status' => 5]);
+            // Log::info('Number of bids updated to rejected: ' . $updatedBids);
+
+            $updatedBids = Bid::where('bid_request_id', $bidRequest->id)
+                ->where('id', '!=', $findBid->id)
+                ->update(['status' => 5]);
 
             DB::commit();
             return redirect()->back()->with(notify('Bid accepted successfully.', 'success'));

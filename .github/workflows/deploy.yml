@@ -53,7 +53,7 @@ jobs:
 
             # Seed the database
             echo "🌱 Seeding the database..."
-            php artisan db:seed --class=AllTableSeeder
+            # php artisan db:seed --class=AllTableSeeder
             echo "✅ Database seeding completed."
 
             # Clear caches
