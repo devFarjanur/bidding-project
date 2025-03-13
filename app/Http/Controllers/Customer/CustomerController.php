@@ -65,10 +65,10 @@ class CustomerController extends Controller
         return view('layouts.pages.bid-details', compact('categories', 'bidRequest', 'getBid'));
     }
 
-    public function customerAcceptBid(Request $request, $id)
+    public function customerAcceptBid(Request $request, $bidRequestId, $bidId)
     {
         try {
-            return $this->customerService->acceptBid($request, $id);
+            return $this->customerService->acceptBid($request, $bidRequestId, $bidId);
         } catch (Exception $e) {
             Log::error('Error in Bid Acceptance: ' . $e->getMessage());
             return redirect()->back()->with(notify('Failed to accept the bid.', 'error'));

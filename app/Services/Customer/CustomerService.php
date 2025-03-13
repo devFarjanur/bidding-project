@@ -76,27 +76,23 @@ class CustomerService
             ->get();
     }
 
-    public function acceptBid(Request $request, $id)
+    public function acceptBid(Request $request, $bidRequestId, $bidId)
     {
         DB::beginTransaction();
 
         try {
-            $bidRequest = $this->customerFindBidRequest($id);
 
+            $bidRequest = $this->customerFindBidRequest($bidRequestId);
             if ($bidRequest->customer_id !== auth()->id()) {
                 return redirect()->back()->with(notify('You are not authorized to view this bid request.', 'error'));
             }
 
-            $findBid = $this->getBid($id);
-
+            $findBid = Bid::findOrFail($bidId);
             $bidRequest->update(['status' => 3]);
 
-            $findBid->update(['status' => 2]);
+            $findBid->update(['status' => 4]);
 
-            // $updatedBids = $bidRequest->bids()->where('id', '!=', $findBid->id)->update(['status' => 5]);
-            // Log::info('Number of bids updated to rejected: ' . $updatedBids);
-
-            $updatedBids = Bid::where('bid_request_id', $bidRequest->id)
+            $updatedBids = Bid::where('bid_request_id', $bidRequestId)
                 ->where('id', '!=', $findBid->id)
                 ->update(['status' => 5]);
 

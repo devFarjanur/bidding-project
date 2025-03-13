@@ -114,7 +114,7 @@ Route::post('/bid-request-store', [CustomerController::class, 'customerBidReques
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/my-account', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
     Route::get('/bid-request-details/{id}', [CustomerController::class, 'customerBidDetails'])->name('customer.bid.details');
-    Route::post('/bid-accept-store/{id}', [CustomerController::class, 'customerAcceptBid'])->name('customer.accept.bid');
+    Route::post('/bid-accept-store/{bidRequestId}/{bidId}', [CustomerController::class, 'customerAcceptBid'])->name('customer.accept.bid');
     Route::post('/logout', [CustomerAuthController::class, 'customerLogout'])->name('customer.logout');
 });
 

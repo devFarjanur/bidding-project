@@ -78,15 +78,18 @@
                                         <td>
 
                                             @if ($bid->status == 1)
-                                                <form action="{{ route('customer.accept.bid', $bid->id) }}"
-                                                    method="POST" style="display:inline;">
+                                                <form
+                                                    action="{{ route('customer.accept.bid', ['bidRequestId' => $bidRequest->id, 'bidId' => $bid->id]) }}"
+                                                    method="POST">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-sm btn-primary">Accept</button>
+
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-primary">Accept</button>
                                                 </form>
                                             @elseif($bid->status == 4)
-                                                <a href="#" class="btn btn-success">Bid Accepted</a>
+                                                <a href="#" class="btn btn-sm btn-success">Bid Accepted</a>
                                             @else
-                                                <a href="#" class="btn btn-danger">Bid Rejected</a>
+                                                <a href="#" class="btn btn-sm btn-danger">Bid Rejected</a>
                                             @endif
 
                                         </td>
