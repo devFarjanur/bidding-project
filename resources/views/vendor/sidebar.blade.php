@@ -56,6 +56,12 @@
                     <span class="link-title">Accepted Bids</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('vendor.accept.bid') }}" class="nav-link">
+                    <i class="link-icon" data-feather="navigation"></i>
+                    <span class="link-title">Bid Track</span>
+                </a>
+            </li>
             <li class="nav-item nav-category">Message</li>
             <li class="nav-item">
                 <a href="" class="nav-link">

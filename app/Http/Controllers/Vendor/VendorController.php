@@ -78,4 +78,10 @@ class VendorController extends Controller
         $acceptBid = $this->vendorService->acceptBid();
         return view('vendor.bid.vendor-accept-bid-list', compact('acceptBid'));
     }
+
+    // public function bidTrack()
+    // {
+    //     $bidTrack = $this->vendorService->bidTrack();
+    //     return view('')
+    // }
 }

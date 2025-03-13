@@ -4,6 +4,7 @@ namespace App\Services\Vendor;
 
 use App\Models\Bid;
 use App\Models\BidRequest;
+use App\Models\BidTrack;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\User;
@@ -106,6 +107,12 @@ class VendorService
         return Bid::with(['vendor', 'bidRequest'])
             ->where('vendor_id', auth::id())
             ->where('status', 2)
+            ->get();
+    }
+
+    public function bidTrack()
+    {
+        return BidTrack::with(['vendor', 'customer', 'bidRequest'])
             ->get();
     }
 }
