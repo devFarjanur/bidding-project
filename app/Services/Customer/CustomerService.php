@@ -40,7 +40,10 @@ class CustomerService
                 return redirect()->back()->with(notify('You already have a pending bid request', 'error'));
             }
 
+            // dd($request->all());
+
             $imagePath = $this->imageService->uploadImage($request);
+
             $bidRequest = BidRequest::create([
                 'customer_id' => $customer->id,
                 'description' => $request->description,

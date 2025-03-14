@@ -35,8 +35,8 @@
                                             <td>{{ $bid->bid_number }}</td>
                                             <td>{{ $bid->customer->name }}</td>
                                             <td>
-                                                <img src="{{ asset($bid->image) }}" alt="Product Image"
-                                                    style="width: 50px; height: 50px;">
+                                                <img src="{{ asset('upload/admin_images/' . $bid->image) }}"
+                                                    alt="Bid Image" class="img-fluid">
                                             </td>
                                             <th>{{ $bid->bidRequest->subcategory->category->name ?? '--' }}</th>
                                             <th>{{ $bid->bidRequest->subcategory->name ?? '--' }}</th>
@@ -57,8 +57,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="#"
-                                                    class="btn btn-primary">View</a>
+                                                <a href="#" class="btn btn-primary">View</a>
                                             </td>
                                         </tr>
                                     @endforeach

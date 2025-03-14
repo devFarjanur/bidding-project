@@ -31,8 +31,8 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>
-                                                <img src="{{ asset($bid->image) }}" alt="Product Image"
-                                                    style="width: 50px; height: 50px;">
+                                                <img src="{{ asset('upload/admin_images/' . $bid->image) }}"
+                                                alt="Category Image" class="img-fluid">
                                             </td>
                                             <th>{{ $bid->category->name ?? '--' }}</th>
                                             <th>{{ $bid->subcategory->name ?? '--' }}</th>

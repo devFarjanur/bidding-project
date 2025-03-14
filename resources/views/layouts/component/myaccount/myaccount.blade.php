@@ -188,19 +188,6 @@
                                                 {{ $profileData->phone }}
                                             </p>
                                         </div>
-
-                                        <!-- Loop through all addresses and display them -->
-                                        {{-- @foreach ($shippingAddresses as $address)
-                                            <div class="address mt-4">
-                                                <p class="text-uppercase fw-medium mb-1">Address
-                                                    {{ $loop->iteration }}</p>
-                                                <p class="mb-0">
-                                                    {{ $address->division }}, {{ $address->city }},
-                                                    Road No: {{ $address->road_no }}, House No:
-                                                    {{ $address->house_no }}
-                                                </p>
-                                            </div>
-                                        @endforeach --}}
                                     </div>
                                 </div>
                             </div>
@@ -226,8 +213,8 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>
-                                                <img src="{{ asset($bid->image) }}" alt="Product Image"
-                                                    style="width: 50px; height: 50px;">
+                                                <img src="{{ asset('upload/admin_images/' . $bid->image) }}"
+                                                    alt="Bid Image" class="img-fluid">
                                             </td>
                                             <th>{{ $bid->subcategory->category->name ?? '--' }}</th>
                                             <th>{{ $bid->subcategory->name ?? '--' }}</th>
@@ -265,8 +252,6 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>Bid Number</th>
-                                        <th>Customer Name</th>
-                                        <th>Image</th>
                                         <th>Category</th>
                                         <th>Subcategory</th>
                                         <th>Price</th>
@@ -277,11 +262,6 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $bid->bid_number }}</td>
-                                            <td>{{ $bid->customer->name }}</td>
-                                            <td>
-                                                <img src="{{ asset($bid->image) }}" alt="Product Image"
-                                                    style="width: 50px; height: 50px;">
-                                            </td>
                                             <th>{{ $bid->bidRequest->subcategory->category->name ?? '--' }}</th>
                                             <th>{{ $bid->bidRequest->subcategory->name ?? '--' }}</th>
                                             <td>{{ $bid->price ?? '--' }}</td>

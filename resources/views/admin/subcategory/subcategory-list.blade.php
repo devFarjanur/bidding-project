@@ -32,8 +32,8 @@
                                             <td>{{ $index + 1 }}</td>
                                             <th>{{ $sub->vendor->user->name ?? '--' }}</th>
                                             <td>
-                                                <img src="{{ asset($sub->image) }}" alt="Product Image"
-                                                    style="width: 50px; height: 50px;">
+                                                <img src="{{ asset('upload/admin_images/' . $sub->image) }}"
+                                                    alt="Category Image" class="img-fluid">
                                             </td>
                                             <td>{{ $sub->category->name ?? '--' }}</td>
                                             <td>{{ $sub->name ?? '--' }}</td>

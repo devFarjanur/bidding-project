@@ -12,12 +12,15 @@ class ImageService
     {
         if ($request->hasFile('image')) {
             $photo = $request->file('image');
-            $photoName = now()->format('YmdHi') . $photo->getClientOriginalName();
-            $path = public_path('upload/admin_images');
-            if (!File::exists($path)) {
-                File::makeDirectory($path, 0775, true);
+            $photoName = now()->format('YmdHi') . '_' . $photo->getClientOriginalName();
+            $path = 'upload/admin_images/';
+
+            if (!File::exists(public_path($path))) {
+                File::makeDirectory(public_path($path), 0775, true);
             }
-            $photo->move($path, $photoName);
+
+            $photo->move(public_path($path), $photoName);
+
             return $photoName;
         }
         return null;

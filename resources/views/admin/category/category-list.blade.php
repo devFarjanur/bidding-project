@@ -5,7 +5,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                        Category List</li>
+                    Category List</li>
             </ol>
         </nav>
 
@@ -28,7 +28,10 @@
                                     @foreach ($category as $index => $cat)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $cat->image ?? '--' }}</td>
+                                            <td>
+                                                <img src="{{ asset('upload/admin_images/' . $category->image) }}"
+                                                    alt="Category Image" class="img-fluid">
+                                            </td>
                                             <td>{{ $cat->name ?? '--' }}</td>
                                             <td>
                                                 @if ($cat->status == 0)

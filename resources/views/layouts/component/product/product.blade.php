@@ -36,7 +36,7 @@
                                 @csrf
                                 <div class="row g-4 px-4">
                                     <div class="file-upload text-center rounded-3 mb-5">
-                                        <input name="photo" type="file" class="form-control" id="image"
+                                        <input name="image" type="file" class="form-control" id="image"
                                             autocomplete="off">
                                         <img id="showImage" class="img-fluid" src="{{ url('upload/no_image.jpg') }}"
                                             alt="profile">
