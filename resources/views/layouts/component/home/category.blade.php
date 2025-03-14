@@ -14,7 +14,7 @@
                             </div>
                             <a href="
                             {{-- {{ route('customer.category.product', $category->id) }} --}}
-                             " class="text-dark fs-sm fw-bold d-block mt-3">{{ $category->name }}</a>
+                             " class="text-dark fs-sm fw-bold d-block mt-3">{{ $category->name }} hello</a>
                             {{-- <span class="total-count position-relative ps-3 fs-sm fw-medium doted-primary">{{ $category->products->count() }}</span> --}}
                             <a href="
                             {{-- {{ route('customer.category.product', $category->id) }} --}}
