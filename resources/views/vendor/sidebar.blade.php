@@ -57,9 +57,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('vendor.accept.bid') }}" class="nav-link">
+                <a href="{{ route('vendor.bid.track') }}" class="nav-link">
                     <i class="link-icon" data-feather="navigation"></i>
-                    <span class="link-title">Bid Track</span>
+                    <span class="link-title">Bid Track heello</span>
                 </a>
             </li>
             <li class="nav-item nav-category">Message</li>
