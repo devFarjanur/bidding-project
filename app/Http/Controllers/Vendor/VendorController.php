@@ -82,6 +82,6 @@ class VendorController extends Controller
     public function bidTrack()
     {
         $bidTrack = $this->vendorService->bidTrack();
-        return view('vendor.vendor-bid-track', compact('bidTrack'));
+        return view('vendor.bid.vendor-bid-track', compact('bidTrack'));
     }
 }

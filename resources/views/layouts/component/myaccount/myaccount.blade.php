@@ -259,11 +259,13 @@
                     <!-- Order History Tab -->
                     <div class="tab-pane fade" id="bid-track">
                         <div class="recent-orders bg-white rounded py-5">
-                            <h6 class="mb-4 px-4">Recent Orders</h6>
+                            <h6 class="mb-4 px-4">Bid Track</h6>
                             <div class="table-responsive">
                                 <table class="order-history-table table">
                                     <tr>
-                                        <th>Bid Number#</th>
+                                        <th>SL</th>
+                                        <th>Bid Number</th>
+                                        <th>Customer Name</th>
                                         <th>Image</th>
                                         <th>Category</th>
                                         <th>Subcategory</th>
@@ -273,13 +275,15 @@
                                     </tr>
                                     @foreach ($bidTrack as $index => $bid)
                                         <tr>
+                                            <td>{{ $index + 1 }}</td>
                                             <td>{{ $bid->bid_number }}</td>
+                                            <td>{{ $bid->customer->name }}</td>
                                             <td>
                                                 <img src="{{ asset($bid->image) }}" alt="Product Image"
                                                     style="width: 50px; height: 50px;">
                                             </td>
-                                            <th>{{ $bid->category->name ?? '--' }}</th>
-                                            <th>{{ $bid->subcategory->name ?? '--' }}</th>
+                                            <th>{{ $bid->bidRequest->subcategory->category->name ?? '--' }}</th>
+                                            <th>{{ $bid->bidRequest->subcategory->name ?? '--' }}</th>
                                             <td>{{ $bid->price ?? '--' }}</td>
                                             <td>
                                                 @if ($bid->status == 0)
@@ -291,14 +295,13 @@
                                                 @elseif($bid->status == 3)
                                                     <a href="" class="badge bg-danger">Delivered</a>
                                                 @elseif($bid->status == 4)
-                                                    <a href="" class="badge bg-danger">Cancel</a>
+                                                    <a href="" class="badge bg-success">Canceled</a>
                                                 @elseif($bid->status == 5)
                                                     <a href="" class="badge bg-danger">Returned</a>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn text-white px-4 py-2"
-                                                    style="background-color: #00B6A9; font-size: 16px; border-radius: 5px;">View</a>
+                                                <a href="#" class="btn btn-primary">View</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -4,6 +4,7 @@ namespace App\Services\Customer;
 
 use App\Models\Bid;
 use App\Models\BidRequest;
+use App\Models\BidTrack;
 use App\Services\Image\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,6 +93,21 @@ class CustomerService
 
             $findBid->update(['status' => 4]);
 
+            $updated = $findBid->update(['status' => 4]);
+
+            if ($updated) {
+                $bidNumber = substr(time() . rand(100, 999), -9);
+
+                BidTrack::create([
+                    'bid_request_id' => $bidRequest->id,
+                    'vendor_id' => $findBid->vendor_id,
+                    'customer_id' => auth()->id(),
+                    'bid_number' => $bidNumber,
+                    'price' => $findBid->proposed_price,
+                    'status' => 0
+                ]);
+            }
+
             $updatedBids = Bid::where('bid_request_id', $bidRequestId)
                 ->where('id', '!=', $findBid->id)
                 ->update(['status' => 5]);
@@ -105,4 +121,11 @@ class CustomerService
             return redirect()->back()->with(notify('Something went wrong. Please try again.', 'error'));
         }
     }
+
+    // public function bidTrack()
+    // {
+    //     return BidTrack::with(['vendor', 'customer', 'bidRequest'])
+    //         ->where('customer_id', Auth::id())
+    //         ->get();
+    // }
 }
