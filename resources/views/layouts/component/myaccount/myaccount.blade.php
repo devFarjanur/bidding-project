@@ -6,7 +6,7 @@
         <div
             class="account-info d-flex align-items-center gap-6 p-4 p-sm-6 bg-white rounded mb-4 flex-wrap flex-lg-nowrap">
             <div class="profile-pic bg-shade rounded">
-                <img src="{{ !empty($profileData->photo) ? url('upload/admin_images/' . $profileData->photo) : url('upload/no_image.jpg') }}"
+                <img src="{{ !empty($profileData->photo) ? asset('upload/admin_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
                     alt="avatar" class="img-fluid" />
             </div>
             <div class="profile-inf-right">

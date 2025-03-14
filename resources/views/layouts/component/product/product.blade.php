@@ -38,7 +38,7 @@
                                     <div class="file-upload text-center rounded-3 mb-5">
                                         <input name="image" type="file" class="form-control" id="image"
                                             autocomplete="off">
-                                        <img id="showImage" class="img-fluid" src="{{ url('upload/no_image.jpg') }}"
+                                        <img id="showImage" class="img-fluid" src="{{ asset('upload/no_image.jpg') }}"
                                             alt="profile">
                                         <p class="text-dark fw-bold mb-2 mt-3">Drop your files here or <a href="#"
                                                 class="text-primary">browse</a></p>
