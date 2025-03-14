@@ -7,7 +7,7 @@
             class="account-info d-flex align-items-center gap-6 p-4 p-sm-6 bg-white rounded mb-4 flex-wrap flex-lg-nowrap">
             <div class="profile-pic bg-shade rounded">
                 <img src="{{ !empty($profileData->photo) ? asset('upload/admin_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
-                    alt="avatar" class="img-fluid" />
+                    alt="avatar" class="img-fluid" /> hello
             </div>
             <div class="profile-inf-right">
                 <h4 class="mb-2">
