@@ -28,7 +28,10 @@
                                     @foreach ($category as $index => $cat)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ $cat->image ?? '--' }}</td>
+                                            <td>
+                                                <img src="{{ asset('upload/admin_images/' . $cat->image) }}"
+                                                    alt="Category Image" class="img-fluid">
+                                            </td>
                                             <td>{{ $cat->name ?? '--' }}</td>
                                             <td>
                                                 @if ($cat->status == 0)

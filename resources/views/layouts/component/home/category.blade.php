@@ -10,7 +10,7 @@
                     <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6">
                         <div class="gshop-animated-iconbox py-5 px-4 text-center border rounded-3 position-relative overflow-hidden">
                             <div class="animated-icon d-inline-flex align-items-center justify-content-center rounded-circle position-relative">
-                                <img src="{{ asset('upload/admin_images/' . $category->photo) }}" alt="Category Image" class="img-fluid">
+                                <img src="{{ asset('upload/admin_images/' . $category->image) }}" alt="Category Image" class="img-fluid">
                             </div>
                             <a href="
                             {{-- {{ route('customer.category.product', $category->id) }} --}}
