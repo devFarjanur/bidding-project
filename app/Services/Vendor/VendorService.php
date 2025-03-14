@@ -113,6 +113,7 @@ class VendorService
     public function bidTrack()
     {
         return BidTrack::with(['vendor', 'customer', 'bidRequest'])
+            ->where('vendor_id', Auth::id())
             ->get();
     }
 }
