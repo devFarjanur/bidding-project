@@ -13,6 +13,10 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h6 class="card-title">Subcategory List</h6>
+                            <a href="{{ route('vendor.add.subcategory') }}" class="btn btn-primary">Add Subcategory</a>
+                        </div>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table table-hover text-center">
                                 <thead>

@@ -13,6 +13,10 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h6 class="card-title">Category List</h6>
+                            <a href="{{ route('add.category') }}" class="btn btn-primary">Add Category</a>
+                        </div>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table table-hover text-center">
                                 <thead>
@@ -29,7 +33,7 @@
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
                                             <td>
-                                                <img src="{{ asset('upload/admin_images/' . $category->image) }}"
+                                                <img src="{{ asset('upload/admin_images/' . $cat->image) }}"
                                                     alt="Category Image" class="img-fluid">
                                             </td>
                                             <td>{{ $cat->name ?? '--' }}</td>

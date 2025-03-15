@@ -39,7 +39,13 @@ class VendorController extends Controller
 
     public function addSubcategory()
     {
-        return view('vendor.subcategory.add-subcategory');
+        $categories = $this->vendorService->activeCategory();
+        return view('vendor.subcategory.add-subcategory', compact('categories'));
+    }
+
+    public function storeSubcategory(Request $request)
+    {
+        return $this->vendorService->storeSubcategory($request);
     }
 
     public function bidRequestList()

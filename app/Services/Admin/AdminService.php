@@ -8,6 +8,7 @@ use App\Models\Subcategory;
 use App\Models\Subcatgory;
 use App\Models\User;
 use App\Models\Vendor;
+use App\Services\Image\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
@@ -15,9 +16,19 @@ use Illuminate\Support\Facades\Log;
 
 class AdminService
 {
+
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
+
     public function customer()
     {
         return User::where('role', 'customer')
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -25,6 +36,7 @@ class AdminService
     {
         return User::where('role', 'customer')
             ->status('status', 1)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -32,12 +44,14 @@ class AdminService
     {
         return User::where('role', 'customer')
             ->status('status', 2)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
     public function findCustomer($id)
     {
         return User::where('role', 'customer')
+            ->orderBy('id', 'desc')
             ->findOrFail($id);
     }
 
@@ -69,12 +83,14 @@ class AdminService
     {
         return Vendor::with('user')
             ->whereIn('status', [1, 2])
+            ->orderBy('id', 'desc')
             ->get();
     }
 
     public function findVendor($id)
     {
         return Vendor::with('user')
+            ->orderBy('id', 'desc')
             ->findOrFail($id);
     }
 
@@ -82,6 +98,7 @@ class AdminService
     {
         return Vendor::with('user')
             ->where('status', 0)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -89,6 +106,7 @@ class AdminService
     {
         return Vendor::with('user')
             ->where('status', 1)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -96,6 +114,7 @@ class AdminService
     {
         return Vendor::with('user')
             ->where('status', 2)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -103,6 +122,7 @@ class AdminService
     {
         return Vendor::with('user')
             ->where('status', 3)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -150,7 +170,25 @@ class AdminService
 
     public function categoryList()
     {
-        return Category::get();
+        return Category::orderBy('id', 'desc')->get();
+    }
+
+    public function storeCategory(Request $request)
+    {
+        try {
+
+            $imagePath = $this->imageService->uploadImage($request);
+
+            Category::create([
+                'name' => $request->name,
+                'image' => $imagePath
+            ]);
+
+            return redirect()->route('admin.category.list')->with(notify('Add successfully', 'success'));
+        } catch (Exception $e) {
+            Log::error('error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Failed', 'error'));
+        }
     }
 
     public function findCategory($id)
@@ -161,12 +199,14 @@ class AdminService
     public function activeCategory()
     {
         return Category::where('status', 1)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
     public function deactiveCategory()
     {
         return Category::where('status', 2)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -201,6 +241,7 @@ class AdminService
     public function subcateGoryList()
     {
         return Subcategory::with(['vendor', 'category'])
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -213,6 +254,7 @@ class AdminService
     {
         return Subcategory::with(['vendor', 'category'])
             ->where('status', 1)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -220,6 +262,7 @@ class AdminService
     {
         return Subcategory::with(['vendor', 'category'])
             ->where('status', 2)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -253,13 +296,16 @@ class AdminService
 
     public function bidList()
     {
-        return Bidrequest::with(['customer', 'subcategory'])->get();
+        return Bidrequest::with(['customer', 'subcategory'])
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     public function pendingBid()
     {
         return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 0)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -267,6 +313,7 @@ class AdminService
     {
         return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 1)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -274,6 +321,7 @@ class AdminService
     {
         return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 2)
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -281,6 +329,7 @@ class AdminService
     {
         return BidRequest::with(['customer', 'subcategory'])
             ->where('status', 3)
+            ->orderBy('id', 'desc')
             ->get();
     }
 }

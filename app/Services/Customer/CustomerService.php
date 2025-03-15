@@ -70,6 +70,7 @@ class CustomerService
     {
         return BidRequest::with(['customer', 'category', 'subcategory'])
             ->where('customer_id', Auth::id())
+            ->orderBy('id', 'desc')
             ->findOrFail($id);
     }
 
@@ -77,6 +78,7 @@ class CustomerService
     {
         return Bid::with(['vendor', 'bidRequest'])
             ->where('bid_request_id', $id)
+            ->orderBy('id', 'desc')
             ->get();
     }
 

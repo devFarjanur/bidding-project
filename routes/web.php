@@ -52,6 +52,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/vendor-rejected', [AdminController::class, 'vendorRejectList'])->name('admin.vendor.reject.list');
     // category
     Route::get('admin/category-list', [AdminController::class, 'categoryList'])->name('admin.category.list');
+    Route::get('admin/add-category', [AdminController::class, 'addCategory'])->name('add.category');
+    Route::post('admin/store-category', [AdminController::class, 'storeCategory'])->name('store.category');
     // subcategory
     Route::get('admin/sub-list', [AdminController::class, 'subcategoryList'])->name('admin.subcategory.list');
     //bid
@@ -84,6 +86,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     // subcategory
     Route::get('vendor/sub-list', [VendorController::class, 'subcategoryList'])->name('vendor.subcategory.list');
     Route::get('vendor/add-subcategory', [VendorController::class, 'addSubcategory'])->name('vendor.add.subcategory');
+    Route::post('vendor/store-subcategory', [VendorController::class, 'storeSubcategory'])->name('store.subcategory');
     // bid
     Route::get('vendor/bid-request', [VendorController::class, 'bidRequestList'])->name('vendor.bid.request.list');
     Route::get('vendor/bid-request/details/{id}', [VendorController::class, 'bidRequestDetails'])->name('vendor.bid.request.details');

@@ -69,6 +69,16 @@ class AdminController extends Controller
         return view('admin.category.category-list', compact('category'));
     }
 
+    public function addCategory()
+    {
+        return view('admin.category.add-category');
+    }
+
+    public function storeCategory(Request $request)
+    {
+        return $this->adminService->storeCategory($request);
+    }
+
     public function subcategoryList()
     {
         $subcategory = $this->adminService->subcateGoryList();
