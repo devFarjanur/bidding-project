@@ -67,15 +67,13 @@
             <div class="row align-items-center g-3">
                 <div class="col-lg-4">
                     <div class="copyright-text">
-                        <p class="mb-0 text-white">&copy;Farjana Rahman<a href="#"
-                                class="text-secondary">........</a></p>
+                        <p class="mb-0 text-white">&copy;copyright@addfamily.com<a href="#"
+                                class="text-secondary"></a></p>
                     </div>
                 </div>
                 <div class="col-lg-4 d-none d-lg-block">
                     <div class="logo-wrapper text-center">
-                        <a href="index.html" class="logo"><img
-                                src=" {{ asset('backend/assets/images/iconlogo.png') }}" alt="logo"
-                                class="img-fluid"></a>
+                        <a href="index.html" class="logo"></a>
                     </div>
                 </div>
    

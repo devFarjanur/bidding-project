@@ -4,13 +4,13 @@
         <div class="row g-5 g-xl-4 align-items-center">
             <div class="col-xl-6">
                 <div class="ab-left position-relative">
-                    <img src="{{ asset('backend/assets/images/about/about.png') }}" alt="image" class="img-fluid">
+                    <img src="{{ asset('backend/assets/images/about/about4.webp') }}" alt="image" class="img-fluid">
                 </div>
             </div>
             <div class="col-xl-6">
                 <div class="ab-about-right">
                     <div class="subtitle d-flex align-items-center gap-3 flex-wrap">
-                        <span class="gshop-subtitle">100% Authentic Medicine Store</span>
+                        <span class="gshop-subtitle">100% Authentic Bidding Service Website</span>
                         <span>
                             <svg width="78" height="16" viewBox="0 0 78 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -20,28 +20,34 @@
                             </svg>
                         </span>
                     </div>
-                    <h2 class="mb-4">Buy 100% Authentic Medicine From Our<br> Medicine Store</h2>
-                    <p class="mb-8">"Your health, our priority—delivering trusted medicines to your 
-                        doorstep with just a click."</p>
+                    <h2 class="mb-4">Who We Are</h2>
+                    {{-- <p class="mb-8">"Your health, our priority—delivering trusted medicines to your 
+                        doorstep with just a click."</p> --}}
                     <div class="row g-4">
                         <div class="col-md-6">
                             <div class="image-box py-6 px-4 image-box-border">
                                 <div class="icon position-relative">
-                                    <img src="{{ asset('backend/assets/images/icons/hand-icon.svg') }}" alt="hand icon" class="img-fluid">
+                                    <img src="{{ asset('backend/assets/images/icons/hand-icon.svg') }}" alt="hand icon"
+                                        class="img-fluid">
                                 </div>
                                 <h4 class="mt-3">Our Mission</h4>
-                                <p class="mb-0">To provide easy access to quality medicines and healthcare products online, ensuring 
-                                     convenience, affordability, and timely delivery for all.</p>
+                                <p class="mb-0">Our mission is to create a reliable and transparent marketplace where
+                                    customers can easily access quality services and vendors can showcase their
+                                    expertise. We aim to empower businesses and individuals by providing a platform that
+                                    fosters trust, efficiency, and convenience.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="image-box py-6 px-4 image-box-border">
                                 <div class="icon position-relative">
-                                    <img src="{{ asset('backend/assets/images/icons/hand-icon.svg') }}" alt="hand icon" class="img-fluid">
-                                </div> 
+                                    <img src="{{ asset('backend/assets/images/icons/hand-icon.svg') }}" alt="hand icon"
+                                        class="img-fluid">
+                                </div>
                                 <h4 class="mt-3">Our Vision</h4>
-                                <p class="mb-0">To provide convenient, reliable, and accessible healthcare by delivering quality
-                                     medicines online to customers' doorsteps.</p>
+                                <p class="mb-0">We envision a world where finding the right vendor is effortless and
+                                    efficient. By continuously improving our platform, we strive to make professional
+                                    services more accessible, transparent, and user-friendly.
+                                </p>
                             </div>
                         </div>
                     </div>
