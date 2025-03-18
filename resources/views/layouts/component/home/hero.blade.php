@@ -10,10 +10,11 @@
                                 <span class="hero-6__subtitle d-inline-block mb-2">
                                     100% Verified & Secure Bidding Platform
                                 </span>
-                                <h1 class="hero-6__title mb-4">Authentic & Fair Bidding Experience</h1>
+                                <h1 class="hero-6__title mb-4">The one-stop platform for apparel and textile sourcing.
+                                </h1>
                                 <p class="hero-6__para fs-18 mb-10">
-                                    Our Secure & Transparent Bidding Solutions provide a reliable platform where users
-                                    can confidently place bids and achieve the best results with trust and integrity.
+                                    Join the largest tech-enabled network for secure orders and sustainable textile
+                                    production.
                                 </p>
                                 <a
                                     href="
@@ -26,29 +27,12 @@
                                         </span>
                                     </button>
                                 </a>
-
-
-
-
-
                             </div>
                         </div>
-
-
-
                         <div class="hero-6__el-container">
                             <img src="{{ asset('backend/assets/images/home-6/delivery.webp') }}" alt="image"
                                 class="delivery-image" />
-
-                            <img src="{{ asset('backend/assets/images/home-6/hero-el-1.png') }}" alt="image"
-                                class="img-fluid hero-6__el hero-6__el-1" />
-                            <img src="{{ asset('backend/assets/images/home-6/hero-el-3.png') }}" alt="image"
-                                class="img-fluid hero-6__el hero-6__el-3" />
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
