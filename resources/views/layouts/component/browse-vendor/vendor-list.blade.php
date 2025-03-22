@@ -33,15 +33,15 @@
                                             </div>
                                             <h6 class="price text-danger mb-4">Business Name:
                                                 {{ $vendor->business_name }}</h6>
-                                            <a href="#"
-                                                class="btn btn-outline-secondary d-block btn-md add-to-cart">
-                                                View Vendor
-                                            </a>
-
+                                            <div class="d-flex justify-content-between">
+                                                <a href="#" class="btn btn-outline-secondary btn-md me-2">Request
+                                                    Bid</a>
+                                                <a href="#" class="btn btn-outline-secondary btn-md">View
+                                                    Vendor</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
-
                             </div>
                         @endforeach
 
