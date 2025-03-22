@@ -107,6 +107,7 @@ Route::post('/register', [CustomerAuthController::class, 'customerRegisterStore'
 
 
 Route::get('/', [CustomerController::class, 'CustomerIndex'])->name('customer.index');
+Route::get('/browse-vendor', [CustomerController::class, 'customerBrowseVendor'])->name('customer.browse.vendor');
 Route::get('/about-us', [CustomerController::class, 'CustomerAbout'])->name('customer.about');
 Route::get('/contact', [CustomerController::class, 'CustomerContact'])->name('customer.contact');
 Route::get('/bid-request', [CustomerController::class, 'CustomerProduct'])->name('customer.product');

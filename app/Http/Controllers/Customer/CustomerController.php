@@ -61,7 +61,6 @@ class CustomerController extends Controller
         $categories = Category::get();
         $bidRequest = $this->customerService->customerFindBidRequest($id);
         $getBid = $this->customerService->getBid($id);
-        // dd($getBid);
         return view('layouts.pages.bid-details', compact('categories', 'bidRequest', 'getBid'));
     }
 
@@ -75,6 +74,11 @@ class CustomerController extends Controller
         }
     }
 
+    public function customerBrowseVendor()
+    {
+        $vendorList = $this->customerService->activeVendor();
+        return view('layouts.pages.browse-vendor', compact('vendorList'));
+    }
 
     public function CustomerAbout()
     {

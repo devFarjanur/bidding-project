@@ -275,9 +275,27 @@ namespace App\Models {
     /**
      * App\Models\BidTrack
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property int $status
+     * @property float $price
+     * @property string $bid_number
+     * @property int $customer_id
+     * @property int $vendor_id
+     * @property int $bid_request_id
+     * @property int $id
      * @property-read \App\Models\Vendor $vendor
      * @property-read \App\Models\User $customer
      * @property-read \App\Models\BidRequest $bidRequest
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereBidRequestId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereVendorId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereCustomerId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereBidNumber($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack wherePrice($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereStatus($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<BidTrack>|BidTrack query()
@@ -539,6 +557,7 @@ namespace App\Models {
      * @property float|null $target_price
      * @property string $description
      * @property int $subcategory_id
+     * @property int $category_id
      * @property int $customer_id
      * @property int $id
      * @property-read \App\Models\User $customer
@@ -548,6 +567,7 @@ namespace App\Models {
      * @property-read int|null $bids_count
      * @method static \Illuminate\Database\Eloquent\Builder<BidRequest>|BidRequest whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<BidRequest>|BidRequest whereCustomerId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<BidRequest>|BidRequest whereCategoryId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<BidRequest>|BidRequest whereSubcategoryId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<BidRequest>|BidRequest whereDescription($value)
      * @method static \Illuminate\Database\Eloquent\Builder<BidRequest>|BidRequest whereTargetPrice($value)

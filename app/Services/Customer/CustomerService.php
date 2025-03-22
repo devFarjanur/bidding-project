@@ -5,6 +5,7 @@ namespace App\Services\Customer;
 use App\Models\Bid;
 use App\Models\BidRequest;
 use App\Models\BidTrack;
+use App\Models\Vendor;
 use App\Services\Image\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,13 @@ class CustomerService
     public function __construct(ImageService $imageService)
     {
         $this->imageService = $imageService;
+    }
+
+    public function activeVendor()
+    {
+        return Vendor::with(['user'])
+            ->where('status', 1)
+            ->get();
     }
 
     public function bidCustomerRequest(Request $request)
