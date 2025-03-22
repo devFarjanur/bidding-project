@@ -113,7 +113,15 @@
                                         href="
                                     {{ route('customer.product') }}
                                      ">Bid
-                                        Request<span class="ms-1 fs-xs float-end"></span></a>
+                                        Post<span class="ms-1 fs-xs float-end"></span></a>
+
+                                </li>
+
+                                <li class="has-submenu">
+                                    <a
+                                        href="
+                                    {{ route('customer.browse.vendor') }}
+                                     ">Browse Vendor<span class="ms-1 fs-xs float-end"></span></a>
 
                                 </li>
 
