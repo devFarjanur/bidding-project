@@ -33,8 +33,8 @@
                                             </div>
                                             <h6 class="price text-danger mb-4">Business Name:
                                                 {{ $vendor->business_name ?? '--' }}</h6>
-                                            <div class="d-flex justify-content-between">
-                                                <a href="#" class="btn btn-outline-secondary btn-md me-2">Request
+                                            <div class="d-flex justify-content-center gap-1">
+                                                <a href="#" class="btn btn-outline-secondary btn-md">Request
                                                     Bid</a>
                                                 <a href="#" class="btn btn-outline-secondary btn-md">View
                                                     Vendor</a>
@@ -46,7 +46,7 @@
                         @endforeach
 
                     </div>
-                    <ul class="template-pagination d-flex align-items-center mt-6">
+                    <ul class="template-pagination d-flex justify-content-end mt-6">
                         <li><a href="#" class="active">1</a></li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>

@@ -120,7 +120,13 @@ class VendorAuthController extends Controller
     {
         try {
             $id = Auth::user()->id;
-            $profileData = User::find($id);
+            $profileData = Vendor::with('user')->where('user_id', $id)->first();
+    
+            if (!$profileData) {
+                session()->flash('error', 'Vendor profile not found.');
+                return redirect()->route('vendor.dashboard');
+            }
+    
             return view('vendor.vendor-profile-view', compact('profileData'));
         } catch (Exception $e) {
             Log::error('Vendor profile error: ' . $e->getMessage());
@@ -128,27 +134,38 @@ class VendorAuthController extends Controller
             return redirect()->route('vendor.dashboard');
         }
     }
+    
 
     public function vendorProfileStore(Request $request)
     {
         try {
-            $id = Auth::user()->id;
-            $data = User::find($id);
-            $data->name = $request->name;
-            $data->email = $request->email;
-            $data->phone = $request->phone;
+            $userId = Auth::id();
 
-            if ($request->file('photo')) {
+            $user = User::findOrFail($userId);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+
+            if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
-                @unlink(public_path('upload/admin_images/' . $data->photo));
-                $filename = date('YmdHi') . $file->getClientOriginalName();
+                @unlink(public_path('upload/admin_images/' . $user->profile_image));
+                $filename = date('YmdHi') . '_' . $file->getClientOriginalName();
                 $file->move(public_path('upload/admin_images'), $filename);
-                $data->photo = $filename;
+                $user->profile_image = $filename;
             }
 
-            $data->save();
-            session()->flash('success', 'Vendor Profile Updated Successfully');
-            return redirect()->back();
+            $user->save();
+
+            $vendor = Vendor::updateOrCreate(
+                ['user_id' => $userId],
+                [
+                    'business_name' => $request->business_name,
+                    'description' => $request->description,
+                    'location' => $request->location,
+                    'status' => 1,
+                ]
+            );
+            return redirect()->back()->with(notify('update successfully successfully', 'success'));
         } catch (Exception $e) {
             Log::error('Vendor profile update error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred while updating your profile.');
