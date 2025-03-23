@@ -76,8 +76,9 @@ class CustomerController extends Controller
 
     public function customerBrowseVendor()
     {
+        $categories = Category::get();
         $vendorList = $this->customerService->activeVendor();
-        return view('layouts.pages.browse-vendor', compact('vendorList'));
+        return view('layouts.pages.browse-vendor', compact('vendorList', 'categories'));
     }
 
     public function CustomerAbout()
