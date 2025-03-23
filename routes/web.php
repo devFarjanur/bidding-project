@@ -68,7 +68,7 @@ Route::get('vendor/login', [VendorAuthController::class, 'vendorLogin'])->name('
 Route::post('vendor/login/post', [VendorAuthController::class, 'vendorLoginPost'])->name('vendor.login.post');
 
 Route::get('vendor/registration', [VendorAuthController::class, 'vendorRegistration'])->name('vendor.registration');
-Route::get('vendor/registration/post', [VendorAuthController::class, 'vendorRegistrationPost'])->name('vendor.registration.post');
+Route::post('vendor/registration/post', [VendorAuthController::class, 'vendorRegistrationPost'])->name('vendor.registration.post');
 
 
 // Vendor Dashboard (protected route)

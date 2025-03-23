@@ -66,6 +66,20 @@ class VendorAuthController extends Controller
     public function vendorRegistrationPost(Request $request)
     {
         try {
+            $user = User::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'vendor',
+                'status' => 1,
+            ]);
+
+            Vendor::create([
+                'user_id' => $user->id,
+                'business_name' => $request->business_name,
+                'status' => 0,
+            ]);
 
             session()->flash('success', 'Registration successful');
             return redirect()->route('vendor.login');

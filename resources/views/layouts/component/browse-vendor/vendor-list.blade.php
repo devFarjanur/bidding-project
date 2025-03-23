@@ -15,7 +15,7 @@
                                     <div
                                         class="vertical-product-card rounded-2 position-relative border-0 bg-white bg-white">
                                         <div class="thumbnail position-relative text-center p-4">
-                                            <img src="{{ asset('upload/admin_images/' . $product->photo) }}"
+                                            <img src="{{ !empty($profileData->user->profile_image) ? url('upload/admin_images/' . $profileData->user->profile_image) : url('upload/no_image.jpg') }}"
                                                 alt="{{ $product->name }}" class="product-image">
                                         </div>
                                         <div class="card-content">

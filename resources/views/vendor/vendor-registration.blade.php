@@ -10,15 +10,18 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>Vendor Login</title>
+    <title>Vendor Registration</title>
 
     <style type="text/css">
         .authlogin-side-wrapper {
             height: 100%;
             width: 100%;
             background-image: url({{ asset('upload/login.png') }});
+            background-repeat: no-repeat;
+            background-position: center;
         }
     </style>
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,8 +60,7 @@
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="#" class="noble-ui-logo logo-light d-block mb-2">Add
                                             Family<span>Bidding Website</span></a>
-                                        <h5 class="text-muted fw-normal mb-4">Welcome back Vendor! Log in to your
-                                            account.</h5>
+                                        <h5 class="text-muted fw-normal mb-4">Welcome back Vendor! Register Here</h5>
 
                                         <!-- Display validation errors -->
                                         @if ($errors->any())
@@ -83,6 +85,21 @@
                                         <form class="forms-sample" method="POST"
                                             action="{{ route('vendor.registration.post') }}">
                                             @csrf
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                    placeholder="Full Name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">Phone</label>
+                                                <input type="text" class="form-control" id="phone" name="phone"
+                                                    placeholder="Phone">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="business_name" class="form-label">Business Name</label>
+                                                <input type="business_name" class="form-control" id="business_name"
+                                                    name="business_name" placeholder="Business Name">
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email address</label>
                                                 <input type="email" class="form-control" id="email" name="email"
