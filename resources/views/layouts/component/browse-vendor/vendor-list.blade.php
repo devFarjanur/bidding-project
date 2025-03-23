@@ -33,8 +33,9 @@
                                             </div>
                                             <h6 class="price text-danger mb-4">Business Name:
                                                 {{ $vendor->business_name ?? '--' }}</h6>
-                                            <div class="d-flex justify-content-center gap-1">
-                                                <a href="#" class="btn btn-outline-secondary btn-md">Request
+                                            <div class="d-flex justify-content-center gap-2">
+                                                <a href="{{ route('customer.vendor.request', $vendor->id) }}"
+                                                    class="btn btn-outline-secondary btn-md">Request
                                                     Bid</a>
                                                 <a href="#" class="btn btn-outline-secondary btn-md">View
                                                     Vendor</a>

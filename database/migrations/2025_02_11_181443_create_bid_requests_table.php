@@ -13,8 +13,10 @@ return new class extends Migration {
         Schema::create('bid_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('vendor_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id');
+            $table->integer('bid_type');
             $table->text('description');
             $table->decimal('target_price', 10, 2)->nullable();
             $table->string('image')->nullable();
@@ -22,6 +24,7 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
 

@@ -8,8 +8,10 @@ class BidRequest extends Model
 {
     protected $fillable = [
         'customer_id',
+        'vendor_id',
         'category_id',
         'subcategory_id',
+        'bid_type',
         'description',
         'target_price',
         'image',

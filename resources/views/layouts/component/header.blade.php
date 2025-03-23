@@ -68,7 +68,7 @@
                             <a href="javascript:void(0)"
                                 class="category-dropdown-btn fw-bold d-none d-sm-inline-block">Browse Category
                                 <svg width="12" height="17" xmlns="http://www.w3.org/2000/svg" fill="#00b6a9"
-                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    viewBox="0 0 448 512">
                                     <path
                                         d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
                                 </svg>
@@ -98,7 +98,7 @@
 
                             </div>
                         </div>
-                        <nav class="gshop-navmenu ms-3 d-none d-xl-block">
+                        <nav class="gshop-navmenu ms-3 d-none d-md-block">
                             <ul class="d-flex align-itmes-center justify-content-end">
                                 <li class="has-submenu">
                                     <a

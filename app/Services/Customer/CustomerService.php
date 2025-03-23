@@ -57,6 +57,7 @@ class CustomerService
                 'description' => $request->description,
                 'category_id' => $request->category_id,
                 'subcategory_id' => $request->subcategory_id,
+                'bid_type' => 1,
                 'target_price' => $request->price,
                 'image' => $imagePath,
                 'status' => 0,
@@ -135,10 +136,48 @@ class CustomerService
         }
     }
 
-    // public function bidTrack()
-    // {
-    //     return BidTrack::with(['vendor', 'customer', 'bidRequest'])
-    //         ->where('customer_id', Auth::id())
-    //         ->get();
-    // }
+    public function requestVendor(Request $request)
+    {
+        try {
+
+            if (!Auth::check()) {
+                return redirect()->route('login')->with(notify('Please log in to place a bid request.', 'error'));
+            }
+
+            $customer = Auth::user();
+
+            $existingBid = BidRequest::where([
+                'customer_id' => $customer->id,
+            ])->where('status', 0)->first();
+
+            if ($existingBid) {
+                return redirect()->back()->with(notify('You already have a pending bid request', 'error'));
+            }
+
+            $imagePath = $this->imageService->uploadImage($request);
+
+            $bidRequest = BidRequest::create([
+                'customer_id' => $customer->id,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'subcategory_id' => $request->subcategory_id,
+                'vendor_id' => $request->vendor_id,
+                'bid_type' => 1,
+                'target_price' => $request->price,
+                'image' => $imagePath,
+                'status' => 0,
+            ]);
+
+            if (!$bidRequest) {
+                return redirect()->back()->with(notify('Failed to store bid request.', 'error'));
+            }
+
+            return redirect()->back()->with(notify('Your bid request has been placed successfully.', 'success'));
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Bid request Error: ' . $e->getMessage());
+            return redirect()->back()->with(notify('Something went wrong. Please try again.', 'error'));
+        }
+    }
+
 }

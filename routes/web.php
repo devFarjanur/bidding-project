@@ -110,10 +110,11 @@ Route::get('/', [CustomerController::class, 'CustomerIndex'])->name('customer.in
 Route::get('/browse-vendor', [CustomerController::class, 'customerBrowseVendor'])->name('customer.browse.vendor');
 Route::get('/about-us', [CustomerController::class, 'CustomerAbout'])->name('customer.about');
 Route::get('/contact', [CustomerController::class, 'CustomerContact'])->name('customer.contact');
-Route::get('/bid-request', [CustomerController::class, 'CustomerProduct'])->name('customer.product');
+Route::get('/bid-post', [CustomerController::class, 'CustomerProduct'])->name('customer.product');
 Route::get('/get-subcategories/{category_id}', [CustomerController::class, 'getSubcategories'])->name('get.subcategories');
-Route::post('/bid-request-store', [CustomerController::class, 'customerBidRequest'])->name('customer.bid.request');
-
+Route::post('/bid-post-store', [CustomerController::class, 'customerBidRequest'])->name('customer.bid.request');
+Route::get('/request-bid/{id}', [CustomerController::class, 'customerToVendorRequest'])->name('customer.vendor.request');
+Route::post('/request-bid-post', [CustomerController::class, 'customerToVendorRequestPost'])->name('customer.vendor.request.post');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/my-account', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
@@ -121,65 +122,6 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::post('/bid-accept-store/{bidRequestId}/{bidId}', [CustomerController::class, 'customerAcceptBid'])->name('customer.accept.bid');
     Route::post('/logout', [CustomerAuthController::class, 'customerLogout'])->name('customer.logout');
 });
-
-// Route::get('/categories/{id}', [CustomerController::class, 'CustomerCategoryProduct'])->name('customer.category.product');
-// Route::get('/product/{id}', [CustomerController::class, 'CustomerProductDetials'])->name('customer.product.details');
-// Route::get('/about-us', [CustomerController::class, 'CustomerAbout'])->name('customer.about');
-// Route::get('/contact', [CustomerController::class, 'CustomerContact'])->name('customer.contact');
-// Route::get('/wishlist', [CustomerController::class, 'CustomerWishList'])->name('customer.wishlist');
-// Route::get('/cart', [CustomerController::class, 'CustomerCart'])->name('customer.cart');
-
-
-// Route::get('/order/success/{orderNumber}', [CustomerController::class, 'OrderSuccess'])->name('order.success');
-
-
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/checkout', [CustomerController::class, 'CustomerCheckout'])->name('customer.checkout');
-//     Route::post('/checkout/addresses/add', [CustomerController::class, 'addAddress'])->name('address.add');
-//     Route::put('/checkout/addresses/edit/{id}', [CustomerController::class, 'editAddress'])->name('address.edit');
-//     Route::delete('/checkout/addresses/delete/{id}', [CustomerController::class, 'deleteAddress'])->name('address.delete');
-//     Route::post('/order', [CustomerController::class, 'OrderStore'])->name('order.store');
-//     Route::patch('/order/{order}/status', [CustomerController::class, 'updateStatus'])->name('order.updateStatus');
-//     Route::patch('/order/{order}/payment-status', [CustomerController::class, 'updatePaymentStatus'])->name('order.updatePaymentStatus');
-//     Route::get('/invoice', [CustomerController::class, 'CustomerInvoice'])->name('customer.invoice');
-//     Route::get('/myaccount', [CustomerController::class, 'CustomerMyaccount'])->name('customer.myaccount');
-//     Route::post('/update-profile', [CustomerController::class, 'updateProfile'])->name('update.profile');
-//     Route::post('/change-password', [CustomerController::class, 'changePassword'])->name('change.password');
-//     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-//     Route::post('/wishlist/stock', [CustomerController::class, 'getProductStock'])->name('wishlist.stock');
-// });
-
-
-// // SSLCOMMERZ Start
-// Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
-// Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
-
-// Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
-// Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
-
-// Route::post('/success', [SslCommerzPaymentController::class, 'success']);
-
-// Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
-// Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
-
-// Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
-// //SSLCOMMERZ END
-
-
-// Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-// Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-// Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-// Route::post('/register', [RegisteredUserController::class, 'store']);
-
-
-
-
-
-
-
-
-
-
 
 Route::get('/test-log', function () {
     try {
