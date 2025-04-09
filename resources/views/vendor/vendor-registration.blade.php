@@ -50,7 +50,7 @@
         <div class="page-wrapper full-page">
             <div class="page-content d-flex align-items-center justify-content-center">
                 <div class="row w-100 mx-0 auth-page">
-                    <div class="col-md-8 col-xl-6 mx-auto">
+                    <div class="col-md-10 col-xl-8 mx-auto">
                         <div class="card">
                             <div class="row">
                                 <div class="col-md-4 pe-md-0">
@@ -105,6 +105,18 @@
                                                 <input type="email" class="form-control" id="email" name="email"
                                                     placeholder="Email">
                                             </div>
+
+                                            <div class="mb-3">
+                                                <label for="photo" class="form-label">Photo</label>
+                                                <input name="photo" type="file" class="form-control" id="image"
+                                                    autocomplete="off">
+                                            </div>
+                                            <div class="mb-3">
+                                                <img id="showImage" class="wd-70 rounded-circle"
+                                                    src="{{ !empty($profileData->user->profile_image) ? asset('upload/admin_images/' . $profileData->user->profile_image) : asset('upload/no_image.jpg') }}"
+                                                    alt="profile">
+                                            </div>
+
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Password</label>
                                                 <input type="password" class="form-control" id="password"
@@ -127,6 +139,19 @@
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
 
     <!-- core:js -->
     <script src="{{ asset('backend/assets/vendors/core/core.js') }}"></script>

@@ -55,32 +55,20 @@
                                 </div>
                                 <div class="col-md-8 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="#" class="noble-ui-logo logo-light d-block mb-2">Add Family<span> Bidding Website</span></a>
+                                        <a href="#" class="noble-ui-logo logo-light d-block mb-2">Add Family<span>
+                                                Bidding Website</span></a>
                                         <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
-
-                                        <!-- Display validation errors -->
-                                        @if ($errors->any())
-                                            <div class="alert alert-danger">
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
-
-                                        <!-- Display success or error messages -->
-                                        @if (session('success'))
-                                            <div class="alert alert-success">{{ session('success') }}</div>
-                                        @endif
-
-                                        @if (session('error'))
-                                            <div class="alert alert-danger">{{ session('error') }}</div>
-                                        @endif
-
                                         <form class="forms-sample" method="POST"
                                             action="{{ route('admin.login.post') }}">
                                             @csrf
+                                            
+                                            @if (session('success'))
+                                                <div class="alert alert-success">{{ session('success') }}</div>
+                                            @endif
+
+                                            @if (session('error'))
+                                                <div class="alert alert-danger">{{ session('error') }}</div>
+                                            @endif
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email address</label>
                                                 <input type="email" class="form-control" id="email" name="email"

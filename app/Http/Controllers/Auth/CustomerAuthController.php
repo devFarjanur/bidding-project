@@ -37,7 +37,7 @@ class CustomerAuthController extends Controller
             session()->flash('error', 'Invalid credentials');
             return redirect()->back();
         } catch (Exception $e) {
-            Log::error('Admin login error: ' . $e->getMessage());
+            Log::error('login error: ' . $e->getMessage());
             session()->flash('error', 'An error occurred, please try again later.');
             return back()->withInput();
         }

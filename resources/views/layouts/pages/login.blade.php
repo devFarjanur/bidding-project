@@ -48,6 +48,22 @@
                         data-background="{{ asset('backend/assets/images/banner/login.png') }}">
                     </div>
                     <div class="col-lg-5 col-12 bg-white d-flex p-0 tt-login-col shadow">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
                         <form class="tt-login-form-wrap p-3 p-md-6 p-lg-6 py-7 w-100" method="POST"
                             action="{{ route('login.store') }}">
                             @csrf

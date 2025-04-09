@@ -13,6 +13,9 @@ use Exception;
 
 class VendorAuthController extends Controller
 {
+
+    
+
     public function vendorLogin()
     {
         return view('vendor.vendor-login');
